@@ -84,6 +84,13 @@ thead th.c{text-align:center}
 .tl-wrap{display:inline;}
 .tr-today td{background:#FFFBEB !important}
 
+/* ── INFO BAR ── */
+.info-bar{display:flex;flex-wrap:wrap;gap:0;background:var(--surface);border:1px solid var(--border);border-left:4px solid var(--primary);border-radius:var(--r);padding:12px 20px;margin-bottom:22px;box-shadow:var(--sh);align-items:center}
+.info-item{display:flex;align-items:center;gap:6px;font-size:12.5px;color:var(--muted);padding:0 16px 0 0;margin-right:16px;border-right:1px solid var(--border)}
+.info-item:last-child{border-right:none;margin-right:0;padding-right:0}
+.info-item strong{color:var(--text);font-weight:700}
+.info-icon{font-size:14px;flex-shrink:0}
+
 /* ── MOBILE CARDS ── */
 .mobile-list{display:none}
 .mc{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:14px 16px;margin-bottom:8px;box-shadow:var(--sh)}
@@ -158,7 +165,7 @@ thead th.c{text-align:center}
       </div>
     </div>
     <div class="hd-right">
-      <div class="hd-date">수집일시<br>2026-03-26 17:25</div>
+      <div class="hd-date">수집일시<br>2026-03-26 17:28</div>
       <div class="hd-badge">
         <div class="num">39</div>
         <div class="lbl">총 수집 건수</div>
@@ -168,6 +175,26 @@ thead th.c{text-align:center}
 </header>
 
 <main class="body">
+  <!-- 수집 기준 안내 -->
+  <div class="info-bar">
+    <div class="info-item">
+      <span class="info-icon">📅</span>
+      <span><strong>수집 기준</strong>&nbsp;오늘로부터 최근 5일 이내 등록 공고</span>
+    </div>
+    <div class="info-item">
+      <span class="info-icon">🔄</span>
+      <span><strong>업데이트</strong>&nbsp;3시간마다 자동 수집</span>
+    </div>
+    <div class="info-item">
+      <span class="info-icon">🏢</span>
+      <span><strong>수집 기관</strong>&nbsp;IRIS · KIAT · KoAT · SMTECH · NIPA · NIA · iPET</span>
+    </div>
+    <div class="info-item">
+      <span class="info-icon">🔴</span>
+      <span><strong>TODAY</strong>&nbsp;당일 등록 공고</span>
+    </div>
+  </div>
+
   <div class="sec-hd">
     <div class="sec-bar"></div>
     <span class="sec-txt">기관별 수집 현황</span>
@@ -1040,7 +1067,7 @@ thead th.c{text-align:center}
 <footer class="footer">
   <div class="footer-inner">
     <span class="footer-copy">(재)포항테크노파크 경북디지털혁신본부 (Made by 김승모)</span>
-    <span class="footer-ver">사업공고 자동 수집 v6.0 &nbsp;·&nbsp; 2026-03-26 17:25</span>
+    <span class="footer-ver">사업공고 자동 수집 v6.0 &nbsp;·&nbsp; 2026-03-26 17:28</span>
   </div>
 </footer>
 </body>

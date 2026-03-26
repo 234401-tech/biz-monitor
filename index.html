@@ -27,11 +27,12 @@ body{font-family:'Malgun Gothic','Apple SD Gothic Neo',-apple-system,sans-serif;
 .header-inner{max-width:1280px;margin:0 auto;padding:16px 28px;display:flex;align-items:center;justify-content:space-between;gap:20px}
 .logos{display:flex;align-items:center}
 .logo-divider{width:1px;height:38px;background:rgba(255,255,255,.25);margin:0 20px}
+.ptp-logo{height:40px;object-fit:contain;filter:brightness(0) invert(1);opacity:.95}
 .gbsw-logo{height:40px;object-fit:contain;filter:brightness(0) invert(1);opacity:.95}
-.gbsw-logo-fallback{display:flex;align-items:center;gap:10px}
-.gbsw-logo-fallback .icon{width:38px;height:38px;background:rgba(255,255,255,.18);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px}
-.gbsw-logo-fallback .txt .sub{font-size:10px;opacity:.65;margin-bottom:1px}
-.gbsw-logo-fallback .txt .main{font-size:16px;font-weight:700}
+.logo-fallback{display:flex;align-items:center;gap:10px}
+.fb-icon{width:38px;height:38px;background:rgba(255,255,255,.18);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;color:#fff}
+.fb-txt .fb-sub{font-size:10px;opacity:.65;margin-bottom:1px}
+.fb-txt .fb-main{font-size:15px;font-weight:700}
 .hd-right{display:flex;align-items:center;gap:20px}
 .hd-badge{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.22);border-radius:10px;padding:10px 20px;text-align:center}
 .hd-badge .num{font-size:32px;font-weight:800;line-height:1;letter-spacing:-1px}
@@ -132,26 +133,32 @@ thead th.c{text-align:center}
 <header class="header">
   <div class="header-inner">
     <div class="logos">
-      <svg width="136" height="38" viewBox="0 0 136 38" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <rect width="36" height="36" rx="7" fill="rgba(255,255,255,0.18)" y="1"/>
-      <text x="18" y="24" text-anchor="middle" font-family="Arial,sans-serif" font-size="11" font-weight="800" fill="white">PTP</text>
-      <text x="46" y="14" font-family="Malgun Gothic,Arial,sans-serif" font-size="9" fill="rgba(255,255,255,0.65)">재단법인</text>
-      <text x="46" y="28" font-family="Malgun Gothic,Arial,sans-serif" font-size="13" fill="white" font-weight="700">포항테크노파크</text>
-    </svg>
+      <!-- 포항테크노파크 실제 로고 -->
+      <img src="https://www.ptp.or.kr/resources/homepage/main/img/logo_w.png"
+           alt="포항테크노파크" class="ptp-logo"
+           onerror="this.style.display='none';document.getElementById('ptp-fb').style.display='flex'">
+      <div id="ptp-fb" class="logo-fallback" style="display:none">
+        <div class="fb-icon">PTP</div>
+        <div class="fb-txt">
+          <div class="fb-sub">재단법인</div>
+          <div class="fb-main">포항테크노파크</div>
+        </div>
+      </div>
       <div class="logo-divider"></div>
+      <!-- 경북디지털혁신본부 실제 로고 -->
       <img src="http://www.gbsw.or.kr/images/resources/logo_new.png"
            alt="경북디지털혁신본부" class="gbsw-logo"
            onerror="this.style.display='none';document.getElementById('gbsw-fb').style.display='flex'">
-      <div id="gbsw-fb" class="gbsw-logo-fallback" style="display:none">
-        <div class="icon">🏢</div>
-        <div class="txt">
-          <div class="sub">경북디지털혁신본부</div>
-          <div class="main">GBSW</div>
+      <div id="gbsw-fb" class="logo-fallback" style="display:none">
+        <div class="fb-icon">🏢</div>
+        <div class="fb-txt">
+          <div class="fb-sub">경북디지털혁신본부</div>
+          <div class="fb-main">GBSW</div>
         </div>
       </div>
     </div>
     <div class="hd-right">
-      <div class="hd-date">수집일시<br>2026-03-26 16:16</div>
+      <div class="hd-date">수집일시<br>2026-03-26 16:21</div>
       <div class="hd-badge">
         <div class="num">85</div>
         <div class="lbl">총 수집 건수</div>
@@ -1953,7 +1960,7 @@ thead th.c{text-align:center}
 <footer class="footer">
   <div class="footer-inner">
     <span class="footer-copy">(재)포항테크노파크 경북디지털혁신본부 (Made by 김승모)</span>
-    <span class="footer-ver">사업공고 자동 수집 v6.0 &nbsp;·&nbsp; 2026-03-26 16:16</span>
+    <span class="footer-ver">사업공고 자동 수집 v6.0 &nbsp;·&nbsp; 2026-03-26 16:21</span>
   </div>
 </footer>
 </body>

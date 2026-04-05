@@ -4,137 +4,124 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>사업공고 모니터링 — 2026-04-05 | 경북AI혁신본부</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#F4F6FA;--surface:#fff;--surface2:#F8FAFC;
-  --bd:#E3E8F0;--bd2:#CDD5E0;
-  --tx:#1A2332;--tx-2:#5A6A80;--tx-3:#9AAABB;
-  --acc:#2B5CE6;--acc-lt:#EEF3FF;--acc-md:#C7D6FF;
-  --red:#E8384F;--red-lt:#FFF0F2;
-  --grn-dot:#22C78A;
-  --r:8px;--r2:12px;--r3:16px;
-  --sh:0 1px 3px rgba(26,35,50,.06),0 4px 12px rgba(26,35,50,.05);
-  --sh2:0 8px 24px rgba(26,35,50,.10);
+  --primary:#0057B8;--primary-dk:#003D8F;--primary-lt:#EBF3FF;
+  --bg:#F0F5FC;--surface:#fff;--border:#C8D8EE;
+  --text:#0D1B2E;--muted:#4A6080;--subtle:#8099BB;
+  --r:10px;--r-lg:14px;
+  --sh:0 2px 8px rgba(0,90,200,.08);
 }
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Noto Sans KR',-apple-system,sans-serif;background:var(--bg);color:var(--tx);font-size:14px;line-height:1.6;min-height:100vh}
-a{color:inherit;text-decoration:none}
+body{font-family:'Malgun Gothic','Apple SD Gothic Neo',-apple-system,sans-serif;background:var(--bg);color:var(--text);font-size:14px;line-height:1.6;min-height:100vh}
 
 /* ── TOP BAR ── */
-.topbar{background:#fff;border-bottom:1px solid var(--bd);position:sticky;top:0;z-index:100}
-.topbar-inner{max-width:1320px;margin:0 auto;padding:0 28px;height:38px;display:flex;align-items:center;justify-content:space-between}
-.topbar-left{display:flex;align-items:center;gap:8px;font-size:11.5px;color:var(--tx-3);font-weight:500}
-.live-dot{width:6px;height:6px;border-radius:50%;background:var(--grn-dot);box-shadow:0 0 0 2px rgba(34,199,138,.25);animation:pulse 2.5s ease-in-out infinite;flex-shrink:0}
-@keyframes pulse{0%,100%{box-shadow:0 0 0 2px rgba(34,199,138,.25)}50%{box-shadow:0 0 0 4px rgba(34,199,138,.12)}}
-.topbar-links{display:flex;gap:4px}
-.tb-link{font-size:11px;color:var(--tx-3);padding:3px 10px;border-radius:5px;border:1px solid transparent;transition:all .15s;font-weight:500}
-.tb-link:hover{color:var(--acc);background:var(--acc-lt);border-color:var(--acc-md)}
+.topbar{background:var(--primary-dk);color:rgba(255,255,255,.55);font-size:11.5px;padding:5px 0}
+.topbar-inner{max-width:1280px;margin:0 auto;padding:0 28px;display:flex;justify-content:space-between;align-items:center}
+.topbar a{color:rgba(255,255,255,.55);text-decoration:none;transition:color .15s}
+.topbar a:hover{color:#fff}
+.topbar-links{display:flex;gap:18px}
 
 /* ── HEADER ── */
-.header{background:#fff;border-bottom:1px solid var(--bd)}
-.header-inner{max-width:1320px;margin:0 auto;padding:18px 28px 20px;display:flex;align-items:center;justify-content:space-between;gap:20px}
-.brand{display:flex;align-items:center;gap:14px}
-.brand-icon{width:44px;height:44px;border-radius:11px;background:linear-gradient(140deg,#3B6FFF 0%,#1E45CC 100%);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;box-shadow:0 4px 12px rgba(43,92,230,.28)}
-.brand-sub{font-size:10.5px;color:var(--tx-3);font-weight:500;letter-spacing:.4px;margin-bottom:2px}
-.brand-main{font-size:17px;font-weight:800;color:var(--tx);letter-spacing:-.3px}
-.brand-divider{width:1px;height:30px;background:var(--bd);margin:0 18px}
-.brand-org{font-size:13px;font-weight:600;color:var(--tx-2)}
-.brand-org small{display:block;font-size:10px;color:var(--tx-3);font-weight:400;margin-bottom:1px}
-.header-right{display:flex;align-items:center;gap:14px}
-.h-datetime{font-size:11px;color:var(--tx-3);text-align:right;line-height:1.9;font-family:'JetBrains Mono',monospace}
-.h-datetime strong{display:block;font-size:12px;color:var(--tx-2);font-weight:600}
-.h-stat{text-align:center;padding:10px 20px;background:var(--acc-lt);border:1.5px solid var(--acc-md);border-radius:var(--r2);min-width:88px}
-.h-stat-num{font-size:30px;font-weight:900;color:var(--acc);line-height:1;letter-spacing:-1.5px}
-.h-stat-lbl{font-size:10px;color:var(--acc);opacity:.7;margin-top:3px;font-weight:600;letter-spacing:.3px}
-
-/* ── BODY ── */
-.body{max-width:1320px;margin:0 auto;padding:26px 28px 72px}
-
-/* ── INFO BAR ── */
-.info-bar{display:flex;flex-wrap:wrap;align-items:center;gap:7px;margin-bottom:26px;padding:13px 18px;background:#fff;border:1px solid var(--bd);border-radius:var(--r2);border-left:3px solid var(--acc);box-shadow:var(--sh)}
-.info-pill{display:inline-flex;align-items:center;gap:5px;font-size:12px;color:var(--tx-2);padding:4px 11px;background:var(--bg);border:1px solid var(--bd);border-radius:20px;font-weight:500;white-space:nowrap}
-.info-pill strong{color:var(--tx);font-weight:700}
-.info-pill.today{background:var(--red-lt);border-color:#FFC5CC;color:var(--red)}
-.info-pill.today strong{color:var(--red)}
+.header{background:linear-gradient(120deg,var(--primary-dk) 0%,var(--primary) 60%,#1976D2 100%);color:#fff;box-shadow:0 3px 12px rgba(0,50,150,.2)}
+.header-inner{max-width:1280px;margin:0 auto;padding:16px 28px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.logos{display:flex;align-items:center}
+.logo-divider{width:1px;height:38px;background:rgba(255,255,255,.25);margin:0 20px}
+.ptp-logo{height:40px;object-fit:contain;filter:brightness(0) invert(1);opacity:.95}
+.gbsw-logo{height:40px;object-fit:contain;filter:brightness(0) invert(1);opacity:.95}
+.logo-fallback{display:flex;align-items:center;gap:10px}
+.fb-icon{width:38px;height:38px;background:rgba(255,255,255,.18);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;color:#fff}
+.fb-txt .fb-sub{font-size:10px;opacity:.65;margin-bottom:1px}
+.fb-txt .fb-main{font-size:15px;font-weight:700}
+.hd-right{display:flex;align-items:center;gap:20px}
+.hd-badge{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.22);border-radius:10px;padding:10px 20px;text-align:center}
+.hd-badge .num{font-size:32px;font-weight:800;line-height:1;letter-spacing:-1px}
+.hd-badge .lbl{font-size:10px;opacity:.6;margin-top:3px}
+.hd-date{font-size:11px;opacity:.5;text-align:right;line-height:1.7}
 
 /* ── SECTION HEADER ── */
-.sec-hd{display:flex;align-items:center;gap:10px;margin-bottom:13px}
-.sec-chip{font-size:10px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--acc);background:var(--acc-lt);border:1px solid var(--acc-md);padding:2px 9px;border-radius:4px}
-.sec-title{font-size:15px;font-weight:800;color:var(--tx);letter-spacing:-.2px}
-.sec-count{margin-left:auto;font-size:12px;color:var(--tx-3);font-weight:600}
+.sec-hd{display:flex;align-items:center;gap:10px;margin-bottom:16px}
+.sec-bar{width:4px;height:20px;background:var(--primary);border-radius:3px;flex-shrink:0}
+.sec-txt{font-size:15px;font-weight:700;color:var(--primary)}
+.sec-cnt{margin-left:auto;font-size:12px;font-weight:600;color:var(--primary);background:var(--primary-lt);padding:3px 13px;border-radius:20px}
+
+/* ── BODY ── */
+.body{max-width:1280px;margin:0 auto;padding:28px 28px 60px}
 
 /* ── STAT CARDS ── */
-.sc-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:32px}
-.sc{display:block;position:relative;overflow:hidden;background:#fff;border:1.5px solid var(--bd);border-radius:var(--r2);padding:16px 14px 14px;transition:transform .18s,box-shadow .18s,border-color .18s;box-shadow:var(--sh)}
-.sc::after{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--sc-color,var(--acc));border-radius:var(--r2) var(--r2) 0 0}
-.sc:hover{transform:translateY(-4px);box-shadow:var(--sh2);border-color:var(--bd2)}
-.sc-name{font-size:10px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--sc-color,var(--acc));margin-bottom:8px;font-family:'JetBrains Mono',monospace}
-.sc-num{font-size:34px;font-weight:900;color:var(--tx);line-height:1;letter-spacing:-2px}
-.sc-num span{font-size:13px;font-weight:500;color:var(--tx-3);letter-spacing:0;margin-left:1px}
-.sc-arrow{position:absolute;bottom:12px;right:13px;font-size:14px;color:var(--bd2);transition:color .15s,transform .15s}
-.sc:hover .sc-arrow{color:var(--sc-color,var(--acc));transform:translate(2px,-2px)}
+.sc-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:30px}
+.sc{display:block;text-decoration:none;background:var(--surface);border:1.5px solid var(--border);border-left:4px solid var(--ac,var(--primary));border-radius:var(--r-lg);padding:16px 14px 12px;transition:transform .18s,box-shadow .18s;position:relative;overflow:hidden;box-shadow:var(--sh)}
+.sc:hover{transform:translateY(-4px);box-shadow:0 8px 24px rgba(0,87,184,.13)}
+.sc-icon{width:32px;height:32px;background:var(--ibg,#EBF3FF);border-radius:7px;display:flex;align-items:center;justify-content:center;margin-bottom:10px;font-size:14px}
+.sc-label{font-size:11px;font-weight:800;color:var(--ac,var(--primary));letter-spacing:.8px;margin-bottom:5px;text-transform:uppercase}
+.sc-num{font-size:34px;font-weight:900;color:var(--text);line-height:1;margin-bottom:2px;letter-spacing:-1px}
+.sc-sub{font-size:11px;color:var(--muted)}
+.sc-arrow{position:absolute;bottom:12px;right:14px;font-size:15px;color:var(--border);transition:color .15s,transform .15s}
+.sc:hover .sc-arrow{color:var(--ac,var(--primary));transform:translateX(3px)}
 
 /* ── TABLE ── */
-.tw{background:#fff;border:1px solid var(--bd);border-radius:var(--r3);overflow:hidden;box-shadow:var(--sh)}
-table{width:100%;border-collapse:collapse;table-layout:fixed}
-thead tr{background:var(--surface2);border-bottom:1.5px solid var(--bd)}
-thead th{padding:11px 14px;font-size:10.5px;font-weight:700;color:var(--tx-3);letter-spacing:.7px;text-transform:uppercase;text-align:left}
+.tw{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--sh)}
+table{width:100%;border-collapse:collapse;table-layout:auto}
+thead th{background:var(--primary-lt);font-size:11px;font-weight:700;color:var(--primary);letter-spacing:.5px;padding:11px 14px;text-align:left;border-bottom:2px solid var(--border)}
 thead th.c{text-align:center}
-.tr td{padding:12px 14px;border-bottom:1px solid var(--bd);vertical-align:middle}
+.tr td{padding:12px 14px;border-bottom:1px solid #E8EFF8;vertical-align:middle}
 .tr:last-child td{border-bottom:none}
-.tr:hover td{background:#FAFBFE}
-.tr-today td{background:#FFFBF0 !important}
-.c-no{text-align:center;color:var(--tx-3);font-size:11.5px;font-family:'JetBrains Mono',monospace;font-weight:600}
-.c-ag{text-align:center}
-.tag{display:inline-flex;align-items:center;justify-content:center;font-size:10.5px;font-weight:800;padding:3px 8px;border-radius:5px;letter-spacing:.5px;white-space:nowrap;font-family:'JetBrains Mono',monospace}
-.c-tl{font-size:13px;color:var(--tx);line-height:1.55;word-break:keep-all}
-.c-dt,.c-dl{text-align:center;font-size:11.5px;color:var(--tx-3);font-family:'JetBrains Mono',monospace;white-space:nowrap}
-.c-btn{text-align:center}
-.today-badge{display:inline-flex;align-items:center;font-size:9px;font-weight:800;color:#fff;background:var(--red);padding:2px 6px;border-radius:4px;margin-left:7px;vertical-align:middle;letter-spacing:.5px;animation:blink 2.5s ease-in-out infinite}
-@keyframes blink{0%,100%{opacity:1}50%{opacity:.65}}
-.btn-go{display:inline-flex;align-items:center;font-size:11px;font-weight:700;color:var(--acc);background:var(--acc-lt);border:1.5px solid var(--acc-md);padding:5px 11px;border-radius:var(--r);transition:all .15s;white-space:nowrap}
-.btn-go:hover{background:var(--acc);color:#fff;border-color:var(--acc);transform:translateY(-1px);box-shadow:0 4px 12px rgba(43,92,230,.2)}
-.btn-go.sm{font-size:11.5px;padding:6px 14px}
-.no-link{color:var(--tx-3);font-size:12px}
-.empty{text-align:center;padding:60px 20px;color:var(--tx-3)}
+.tr:hover td{background:#F5F9FF}
+.c-no{width:52px;text-align:center;color:var(--subtle);font-size:12px}
+.c-ag{width:86px;text-align:center}
+.tag{display:inline-block;font-size:11px;font-weight:700;padding:3px 9px;border-radius:5px;letter-spacing:.2px;white-space:nowrap}
+.c-tl{font-size:13.5px;line-height:1.5;word-break:keep-all;color:var(--text)}
+.c-dt{width:86px;text-align:center;font-size:12px;color:var(--muted);white-space:nowrap}
+.c-dl{width:148px;text-align:center;font-size:12px;color:var(--muted);white-space:nowrap}
+.c-btn{width:68px;text-align:center;white-space:nowrap}
+.btn-go{display:inline-block;font-size:11px;font-weight:700;color:#fff;background:var(--primary);text-decoration:none;padding:5px 10px;border-radius:6px;transition:all .15s;white-space:nowrap}
+.btn-go:hover{background:var(--primary-dk);transform:translateY(-1px);box-shadow:0 3px 8px rgba(0,87,184,.25)}
+.btn-go.sm{font-size:12px;padding:6px 14px}
+.no-link{color:var(--subtle);font-size:12px}
+.empty{text-align:center;padding:60px 20px;color:var(--subtle)}
+.today-badge{display:inline-block;font-size:10px;font-weight:800;color:#fff;background:#E53E3E;padding:2px 7px;border-radius:4px;margin-left:8px;vertical-align:middle;letter-spacing:.5px;animation:pulse 2s infinite;white-space:nowrap}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.7}}
+.tl-wrap{display:inline;}
+.tr-today td{background:#FFFBEB !important}
+
+/* ── INFO BAR ── */
+.info-bar{display:flex;flex-wrap:wrap;gap:0;background:var(--surface);border:1px solid var(--border);border-left:4px solid var(--primary);border-radius:var(--r);padding:12px 20px;margin-bottom:22px;box-shadow:var(--sh);align-items:center}
+.info-item{display:flex;align-items:center;gap:6px;font-size:12.5px;color:var(--muted);padding:0 16px 0 0;margin-right:16px;border-right:1px solid var(--border)}
+.info-item:last-child{border-right:none;margin-right:0;padding-right:0}
+.info-item strong{color:var(--text);font-weight:700}
+.info-icon{font-size:14px;flex-shrink:0}
 
 /* ── MOBILE CARDS ── */
 .mobile-list{display:none}
-.mc{background:#fff;border:1px solid var(--bd);border-radius:var(--r2);padding:14px 16px;margin-bottom:8px;box-shadow:var(--sh);transition:box-shadow .15s}
-.mc:hover{box-shadow:var(--sh2)}
+.mc{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:14px 16px;margin-bottom:8px;box-shadow:var(--sh)}
 .mc-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
-.mc-date{font-size:11px;color:var(--tx-3);font-family:'JetBrains Mono',monospace;font-weight:600}
-.mc-title{font-size:13.5px;line-height:1.55;margin-bottom:10px;word-break:keep-all;color:var(--tx)}
+.mc-date{font-size:11px;color:var(--muted)}
+.mc-title{font-size:14px;line-height:1.5;margin-bottom:10px;word-break:keep-all}
 .mc-bot{display:flex;align-items:center;justify-content:space-between}
-.mc-dl{font-size:11px;color:var(--tx-3);font-family:'JetBrains Mono',monospace}
+.mc-dl{font-size:11px;color:var(--muted)}
 
 /* ── FOOTER ── */
-.footer{background:#fff;border-top:1px solid var(--bd);padding:18px 0;margin-top:56px}
-.footer-inner{max-width:1320px;margin:0 auto;padding:0 28px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
-.footer-copy{font-size:12px;color:var(--tx-3);font-weight:500}
-.footer-ver{font-size:11px;color:var(--tx-3);font-family:'JetBrains Mono',monospace}
-
-/* ── ANIMATIONS ── */
-@keyframes fade-up{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
-.header{animation:fade-up .35s ease both}
-.info-bar{animation:fade-up .35s .08s ease both}
-.sc-grid{animation:fade-up .35s .13s ease both}
-.tw,.mobile-list{animation:fade-up .35s .18s ease both}
+.footer{background:var(--primary-dk);color:rgba(255,255,255,.45);padding:20px 0;margin-top:48px}
+.footer-inner{max-width:1280px;margin:0 auto;padding:0 28px;display:flex;align-items:center;justify-content:space-between;font-size:12px;gap:12px;flex-wrap:wrap}
+.footer-copy{color:rgba(255,255,255,.75);font-weight:500}
+.footer-ver{color:rgba(255,255,255,.4)}
 
 /* ── RESPONSIVE ── */
-@media(max-width:960px){
-  .header-inner{flex-wrap:wrap;gap:14px}
-  .header-right{width:100%;justify-content:flex-start}
-  .tw{display:none}.mobile-list{display:block}
-  .body{padding:18px 16px 48px}
-  .topbar-links{display:none}
+@media(max-width:1280px){
+  .sc-grid{grid-template-columns:repeat(4,1fr)}
 }
-@media(max-width:640px){
-  .sc-grid{grid-template-columns:repeat(2,1fr);gap:8px}
-  .h-stat-num{font-size:26px}
+@media(max-width:900px){
+  .sc-grid{grid-template-columns:repeat(4,1fr);gap:8px}
+  .header-inner{flex-direction:column;align-items:flex-start;gap:14px}
+  .hd-right{width:100%;justify-content:space-between}
+  .tw{display:none}
+  .mobile-list{display:block}
+  .body{padding:20px 16px 40px}
+  .topbar .topbar-links{display:none}
+}
+@media(max-width:600px){
+  .sc-grid{grid-template-columns:repeat(2,1fr)}
+  .hd-badge .num{font-size:26px}
 }
 </style>
 </head>
@@ -142,119 +129,162 @@ thead th.c{text-align:center}
 
 <div class="topbar">
   <div class="topbar-inner">
-    <div class="topbar-left">
-      <div class="live-dot"></div>
-      사업공고 자동 모니터링 시스템
-    </div>
+    <span>사업공고 자동 모니터링 시스템</span>
     <div class="topbar-links">
-      <a href="https://www.ptp.or.kr" target="_blank" class="tb-link">포항테크노파크</a>
-      <a href="http://www.gbsw.or.kr" target="_blank" class="tb-link">경북AI혁신본부</a>
+      <a href="https://www.ptp.or.kr" target="_blank">포항테크노파크</a>
+      <a href="http://www.gbsw.or.kr" target="_blank">경북AI혁신본부</a>
     </div>
   </div>
 </div>
 
 <header class="header">
   <div class="header-inner">
-    <div class="brand">
-      <div class="brand-icon">📡</div>
-      <div>
-        <div class="brand-sub">Business Announcement Monitor</div>
-        <div class="brand-main">사업공고 모니터링</div>
+    <div class="logos">
+      <!-- 포항테크노파크 실제 로고 -->
+      <img src="https://www.ptp.or.kr/resources/homepage/main/img/logo_w.png"
+           alt="포항테크노파크" class="ptp-logo"
+           onerror="this.style.display='none';document.getElementById('ptp-fb').style.display='flex'">
+      <div id="ptp-fb" class="logo-fallback" style="display:none">
+        <div class="fb-icon">PTP</div>
+        <div class="fb-txt">
+          <div class="fb-sub">재단법인</div>
+          <div class="fb-main">포항테크노파크</div>
+        </div>
       </div>
-      <div class="brand-divider"></div>
-      <div class="brand-org">
-        <small>운영기관</small>
-        경북AI혁신본부
+      <div class="logo-divider"></div>
+      <!-- 경북디지털혁신본부 실제 로고 -->
+      <img src="http://www.gbsw.or.kr/images/resources/logo_new.png"
+           alt="경북AI혁신본부" class="gbsw-logo"
+           onerror="this.style.display='none';document.getElementById('gbsw-fb').style.display='flex'">
+      <div id="gbsw-fb" class="logo-fallback" style="display:none">
+        <div class="fb-icon">🏢</div>
+        <div class="fb-txt">
+          <div class="fb-sub">경북AI혁신본부</div>
+          <div class="fb-main">GBAI</div>
+        </div>
       </div>
     </div>
-    <div class="header-right">
-      <div class="h-datetime">수집일시<strong>2026-04-05 19:59</strong></div>
-      <div class="h-stat">
-        <div class="h-stat-num">38</div>
-        <div class="h-stat-lbl">총 수집 건수</div>
+    <div class="hd-right">
+      <div class="hd-date">수집일시<br>2026-04-05 20:03</div>
+      <div class="hd-badge">
+        <div class="num">38</div>
+        <div class="lbl">총 수집 건수</div>
       </div>
     </div>
   </div>
 </header>
 
 <main class="body">
+  <!-- 수집 기준 안내 -->
   <div class="info-bar">
-    <div class="info-pill">📅 <strong>수집 기준</strong> 오늘로부터 최근 5일 이내 등록 공고</div>
-    <div class="info-pill">🔄 <strong>업데이트</strong> 3시간마다 자동 수집</div>
-    <div class="info-pill">🏢 <strong>수집 기관</strong> IRIS · KIAT · KoAT · SMTECH · NIPA · NIA · IITP · KOSAC · KIRIA · KIAST</div>
-    <div class="info-pill today">🔴 <strong>TODAY</strong> 당일 등록 공고 표시</div>
+    <div class="info-item">
+      <span class="info-icon">📅</span>
+      <span><strong>수집 기준</strong>&nbsp;오늘로부터 최근 5일 이내 등록 공고</span>
+    </div>
+    <div class="info-item">
+      <span class="info-icon">🔄</span>
+      <span><strong>업데이트</strong>&nbsp;3시간마다 자동 수집</span>
+    </div>
+    <div class="info-item">
+      <span class="info-icon">🏢</span>
+      <span><strong>수집 기관</strong>&nbsp;IRIS · KIAT · KoAT · SMTECH · NIPA · NIA · IITP · KOSAC · KIRIA · KIAST</span>
+    </div>
+    <div class="info-item">
+      <span class="info-icon">🔴</span>
+      <span><strong>TODAY</strong>&nbsp;당일 등록 공고</span>
+    </div>
   </div>
 
   <div class="sec-hd">
-    <span class="sec-chip">Agencies</span>
-    <span class="sec-title">기관별 수집 현황</span>
+    <div class="sec-bar"></div>
+    <span class="sec-txt">기관별 수집 현황</span>
   </div>
   <div class="sc-grid">
-        <a href="https://www.iris.go.kr/contents/retrieveBsnsAncmBtinSituListView.do" target="_blank" class="sc" style="--sc-color:#7C4DFF;">
-          <div class="sc-name">IRIS</div>
-          <div class="sc-num">1<span>건</span></div>
-          <div class="sc-arrow">↗</div>
+        <a href="https://www.iris.go.kr/contents/retrieveBsnsAncmBtinSituListView.do" target="_blank" class="sc" style="--ac:#6B21D9;--bg:#F3EEFF;--dk:#4A0FAD;--ibg:#F3EEFF;">
+          <div class="sc-icon">🟣</div>
+          <div class="sc-label">IRIS</div>
+          <div class="sc-num">1</div>
+          <div class="sc-sub">건 수집</div>
+          <div class="sc-arrow">→</div>
         </a>
-        <a href="https://www.kiat.or.kr/front/board/boardContentsListPage.do?board_id=90&MenuId=b159c9dac684471b87256f1e25404f5e" target="_blank" class="sc" style="--sc-color:#E06B00;">
-          <div class="sc-name">KIAT</div>
-          <div class="sc-num">9<span>건</span></div>
-          <div class="sc-arrow">↗</div>
+        <a href="https://www.kiat.or.kr/front/board/boardContentsListPage.do?board_id=90&MenuId=b159c9dac684471b87256f1e25404f5e" target="_blank" class="sc" style="--ac:#C05200;--bg:#FFF0E6;--dk:#8A3900;--ibg:#FFF0E6;">
+          <div class="sc-icon">🟠</div>
+          <div class="sc-label">KIAT</div>
+          <div class="sc-num">9</div>
+          <div class="sc-sub">건 수집</div>
+          <div class="sc-arrow">→</div>
         </a>
-        <a href="https://www.koat.or.kr/board/business/list.do" target="_blank" class="sc" style="--sc-color:#D93452;">
-          <div class="sc-name">KoAT</div>
-          <div class="sc-num">2<span>건</span></div>
-          <div class="sc-arrow">↗</div>
+        <a href="https://www.koat.or.kr/board/business/list.do" target="_blank" class="sc" style="--ac:#9D1239;--bg:#FFF0F3;--dk:#7B0F2E;--ibg:#FFF0F3;">
+          <div class="sc-icon">🔴</div>
+          <div class="sc-label">KoAT</div>
+          <div class="sc-num">2</div>
+          <div class="sc-sub">건 수집</div>
+          <div class="sc-arrow">→</div>
         </a>
-        <a href="https://www.smtech.go.kr/front/ifg/no/notice02_list.do" target="_blank" class="sc" style="--sc-color:#12A259;">
-          <div class="sc-name">SMTECH</div>
-          <div class="sc-num">0<span>건</span></div>
-          <div class="sc-arrow">↗</div>
+        <a href="https://www.smtech.go.kr/front/ifg/no/notice02_list.do" target="_blank" class="sc" style="--ac:#065F46;--bg:#ECFDF5;--dk:#064E3B;--ibg:#ECFDF5;">
+          <div class="sc-icon">🟩</div>
+          <div class="sc-label">SMTECH</div>
+          <div class="sc-num">0</div>
+          <div class="sc-sub">건 수집</div>
+          <div class="sc-arrow">→</div>
         </a>
-        <a href="https://www.nipa.kr/home/2-2" target="_blank" class="sc" style="--sc-color:#2B5CE6;">
-          <div class="sc-name">NIPA</div>
-          <div class="sc-num">8<span>건</span></div>
-          <div class="sc-arrow">↗</div>
+        <a href="https://www.nipa.kr/home/2-2" target="_blank" class="sc" style="--ac:#0057B8;--bg:#EBF3FF;--dk:#003D8F;--ibg:#EBF3FF;">
+          <div class="sc-icon">🔵</div>
+          <div class="sc-label">NIPA</div>
+          <div class="sc-num">8</div>
+          <div class="sc-sub">건 수집</div>
+          <div class="sc-arrow">→</div>
         </a>
-        <a href="https://www.nia.or.kr/site/nia_kor/ex/bbs/List.do?cbIdx=78336" target="_blank" class="sc" style="--sc-color:#009A6C;">
-          <div class="sc-name">NIA</div>
-          <div class="sc-num">10<span>건</span></div>
-          <div class="sc-arrow">↗</div>
+        <a href="https://www.nia.or.kr/site/nia_kor/ex/bbs/List.do?cbIdx=78336" target="_blank" class="sc" style="--ac:#00875A;--bg:#E3F6EF;--dk:#005C3D;--ibg:#E3F6EF;">
+          <div class="sc-icon">🟢</div>
+          <div class="sc-label">NIA</div>
+          <div class="sc-num">10</div>
+          <div class="sc-sub">건 수집</div>
+          <div class="sc-arrow">→</div>
         </a>
-        <a href="https://www.iitp.kr/web/lay1/program/S1T44C51/iris/list.do" target="_blank" class="sc" style="--sc-color:#0288C4;">
-          <div class="sc-name">IITP</div>
-          <div class="sc-num">1<span>건</span></div>
-          <div class="sc-arrow">↗</div>
+        <a href="https://www.iitp.kr/web/lay1/program/S1T44C51/iris/list.do" target="_blank" class="sc" style="--ac:#0369A1;--bg:#E0F2FE;--dk:#075985;--ibg:#E0F2FE;">
+          <div class="sc-icon">🔷</div>
+          <div class="sc-label">IITP</div>
+          <div class="sc-num">1</div>
+          <div class="sc-sub">건 수집</div>
+          <div class="sc-arrow">→</div>
         </a>
-        <a href="https://www.kosac.re.kr/menus/274/bns" target="_blank" class="sc" style="--sc-color:#7B1FA2;">
-          <div class="sc-name">KOSAC</div>
-          <div class="sc-num">6<span>건</span></div>
-          <div class="sc-arrow">↗</div>
+        <a href="https://www.kosac.re.kr/menus/274/bns" target="_blank" class="sc" style="--ac:#7E22CE;--bg:#FAF5FF;--dk:#581C87;--ibg:#FAF5FF;">
+          <div class="sc-icon">🔮</div>
+          <div class="sc-label">KOSAC</div>
+          <div class="sc-num">6</div>
+          <div class="sc-sub">건 수집</div>
+          <div class="sc-arrow">→</div>
         </a>
-        <a href="https://www.kiria.org/portal/info/portalInfoBusinessList.do" target="_blank" class="sc" style="--sc-color:#C07000;">
-          <div class="sc-name">KIRIA</div>
-          <div class="sc-num">1<span>건</span></div>
-          <div class="sc-arrow">↗</div>
+        <a href="https://www.kiria.org/portal/info/portalInfoBusinessList.do" target="_blank" class="sc" style="--ac:#B45309;--bg:#FFFBEB;--dk:#92400E;--ibg:#FFFBEB;">
+          <div class="sc-icon">🤖</div>
+          <div class="sc-label">KIRIA</div>
+          <div class="sc-num">1</div>
+          <div class="sc-sub">건 수집</div>
+          <div class="sc-arrow">→</div>
         </a>
-        <a href="https://www.kiast.or.kr/kr/cop/bbs/BBSMSTR_000000000031/selectBoardList.do" target="_blank" class="sc" style="--sc-color:#0A7D72;">
-          <div class="sc-name">KIAST</div>
-          <div class="sc-num">0<span>건</span></div>
-          <div class="sc-arrow">↗</div>
+        <a href="https://www.kiast.or.kr/kr/cop/bbs/BBSMSTR_000000000031/selectBoardList.do" target="_blank" class="sc" style="--ac:#0F766E;--bg:#F0FDFA;--dk:#0D5E57;--ibg:#F0FDFA;">
+          <div class="sc-icon">✈️</div>
+          <div class="sc-label">KIAST</div>
+          <div class="sc-num">0</div>
+          <div class="sc-sub">건 수집</div>
+          <div class="sc-arrow">→</div>
         </a></div>
 
   <div class="sec-hd">
-    <span class="sec-chip">Announcements</span>
-    <span class="sec-title">공고 목록</span>
-    <span class="sec-count">총 38건</span>
+    <div class="sec-bar"></div>
+    <span class="sec-txt">공고 목록</span>
+    <span class="sec-cnt">총 38건</span>
   </div>
   <div class="tw">
     <table>
       <colgroup>
-        <col style="width:50px">
+        <col style="width:52px">
         <col style="width:86px">
         <col>
-        <col style="width:96px">
-        <col style="width:185px">
-        <col style="width:78px">
+        <col style="width:86px">
+        <col style="width:148px">
+        <col style="width:68px">
       </colgroup>
       <thead>
         <tr>
@@ -262,15 +292,15 @@ thead th.c{text-align:center}
           <th class="c">기관</th>
           <th>공고 제목</th>
           <th class="c">등록일</th>
-          <th class="c">공모기간</th>
+          <th class="c">마감 / 접수기간</th>
           <th class="c">링크</th>
         </tr>
       </thead>
       <tbody>
         <tr class="tr">
           <td class="c-no">1</td>
-          <td class="c-ag"><span class="tag" style="color:#5C2EBF;background:#F0EBFF;">IRIS</span></td>
-          <td class="c-tl">[농촌진흥청] 2026년도 농촌진흥청 농업과학기술 연구개발사업데이터기반 농식품시스템 분야 표준개발협력 연구신규 과제 협약 안내</td>
+          <td class="c-ag"><span class="tag" style="color:#4A0FAD;background:#F3EEFF;">IRIS</span></td>
+          <td class="c-tl"><span class="tl-wrap">[농촌진흥청] 2026년도 농촌진흥청 농업과학기술 연구개발사업데이터기반 농식품시스템 분야 표준개발협력 연구신규 과제 협약 안내</span></td>
           <td class="c-dt">2026-04-01</td>
           <td class="c-dl">2026.04.01 ~ 2026.04.30</td>
           <td class="c-btn"><a href="https://www.iris.go.kr/contents/retrieveBsnsAncmBtinSituView.do?ancmId=020514" target="_blank" class="btn-go">바로가기</a></td>
@@ -278,7 +308,7 @@ thead th.c{text-align:center}
         <tr class="tr">
           <td class="c-no">2</td>
           <td class="c-ag"><span class="tag" style="color:#8A3900;background:#FFF0E6;">KIAT</span></td>
-          <td class="c-tl">2027년도 소부장 미래혁신기반구축사업 신규 수요조사 공고</td>
+          <td class="c-tl"><span class="tl-wrap">2027년도 소부장 미래혁신기반구축사업 신규 수요조사 공고</span></td>
           <td class="c-dt">2026-04-03</td>
           <td class="c-dl">2026-04-03~2026-04-24</td>
           <td class="c-btn"><a href="https://www.kiat.or.kr/front/board/boardContentsView.do?board_id=90&contents_id=403a3c9b1c624016ad252b0da47f6ccf&MenuId=b159c9dac684471b87256f1e25404f5e" target="_blank" class="btn-go">바로가기</a></td>
@@ -286,7 +316,7 @@ thead th.c{text-align:center}
         <tr class="tr">
           <td class="c-no">3</td>
           <td class="c-ag"><span class="tag" style="color:#8A3900;background:#FFF0E6;">KIAT</span></td>
-          <td class="c-tl">2022년 6월 최초지정 산업부 혁신제품 지정기간 연장(2차 연장) 공고</td>
+          <td class="c-tl"><span class="tl-wrap">2022년 6월 최초지정 산업부 혁신제품 지정기간 연장(2차 연장) 공고</span></td>
           <td class="c-dt">2026-04-02</td>
           <td class="c-dl">2026-04-02~2026-04-24</td>
           <td class="c-btn"><a href="https://www.kiat.or.kr/front/board/boardContentsView.do?board_id=90&contents_id=466a9d470cb64bbea788df96d8d87dde&MenuId=b159c9dac684471b87256f1e25404f5e" target="_blank" class="btn-go">바로가기</a></td>
@@ -294,7 +324,7 @@ thead th.c{text-align:center}
         <tr class="tr">
           <td class="c-no">4</td>
           <td class="c-ag"><span class="tag" style="color:#8A3900;background:#FFF0E6;">KIAT</span></td>
-          <td class="c-tl">2026년 유레카 글로벌이노베이션서밋 참가기업(바이오헬스 분야) 모집</td>
+          <td class="c-tl"><span class="tl-wrap">2026년 유레카 글로벌이노베이션서밋 참가기업(바이오헬스 분야) 모집</span></td>
           <td class="c-dt">2026-04-01</td>
           <td class="c-dl">2026-04-01~2026-04-06</td>
           <td class="c-btn"><a href="https://www.kiat.or.kr/front/board/boardContentsView.do?board_id=90&contents_id=2baf97f997bb4a0db3ec874ddd0c289e&MenuId=b159c9dac684471b87256f1e25404f5e" target="_blank" class="btn-go">바로가기</a></td>
@@ -302,7 +332,7 @@ thead th.c{text-align:center}
         <tr class="tr">
           <td class="c-no">5</td>
           <td class="c-ag"><span class="tag" style="color:#8A3900;background:#FFF0E6;">KIAT</span></td>
-          <td class="c-tl">2026년 산업기술국제협력(양자-싱가포르) 접수 안내</td>
+          <td class="c-tl"><span class="tl-wrap">2026년 산업기술국제협력(양자-싱가포르) 접수 안내</span></td>
           <td class="c-dt">2026년 산업기술</td>
           <td class="c-dl">2026-04-01~2026-07-08</td>
           <td class="c-btn"><a href="https://www.kiat.or.kr/front/board/boardContentsView.do?board_id=90&contents_id=eba2e78914c64b0a956ff9d67a9045e8&MenuId=b159c9dac684471b87256f1e25404f5e" target="_blank" class="btn-go">바로가기</a></td>
@@ -310,7 +340,7 @@ thead th.c{text-align:center}
         <tr class="tr">
           <td class="c-no">6</td>
           <td class="c-ag"><span class="tag" style="color:#8A3900;background:#FFF0E6;">KIAT</span></td>
-          <td class="c-tl">2026년 지역산업 균형발전 유공 포상계획 공고</td>
+          <td class="c-tl"><span class="tl-wrap">2026년 지역산업 균형발전 유공 포상계획 공고</span></td>
           <td class="c-dt">2026-03-31</td>
           <td class="c-dl">2026-03-31~2026-04-30</td>
           <td class="c-btn"><a href="https://www.kiat.or.kr/front/board/boardContentsView.do?board_id=90&contents_id=13a0424b167f4c0695d0842df638e61d&MenuId=b159c9dac684471b87256f1e25404f5e" target="_blank" class="btn-go">바로가기</a></td>
@@ -318,7 +348,7 @@ thead th.c{text-align:center}
         <tr class="tr">
           <td class="c-no">7</td>
           <td class="c-ag"><span class="tag" style="color:#8A3900;background:#FFF0E6;">KIAT</span></td>
-          <td class="c-tl">2026년 기술거래사 등록신청 공고</td>
+          <td class="c-tl"><span class="tl-wrap">2026년 기술거래사 등록신청 공고</span></td>
           <td class="c-dt">2026-03-31</td>
           <td class="c-dl">2026-03-31~2026-04-29</td>
           <td class="c-btn"><a href="https://www.kiat.or.kr/front/board/boardContentsView.do?board_id=90&contents_id=cf53d83a4abc4abeb9c48d9fe2304793&MenuId=b159c9dac684471b87256f1e25404f5e" target="_blank" class="btn-go">바로가기</a></td>
@@ -326,7 +356,7 @@ thead th.c{text-align:center}
         <tr class="tr">
           <td class="c-no">8</td>
           <td class="c-ag"><span class="tag" style="color:#8A3900;background:#FFF0E6;">KIAT</span></td>
-          <td class="c-tl">2026년도 한미 첨단분야 청년교류 지원사업 예비장학생 선발 공고</td>
+          <td class="c-tl"><span class="tl-wrap">2026년도 한미 첨단분야 청년교류 지원사업 예비장학생 선발 공고</span></td>
           <td class="c-dt">2026-03-31</td>
           <td class="c-dl">2026-03-31~2026-05-07</td>
           <td class="c-btn"><a href="https://www.kiat.or.kr/front/board/boardContentsView.do?board_id=90&contents_id=7d2136b8580f46f0919f5bedc3311dd7&MenuId=b159c9dac684471b87256f1e25404f5e" target="_blank" class="btn-go">바로가기</a></td>
@@ -334,7 +364,7 @@ thead th.c{text-align:center}
         <tr class="tr">
           <td class="c-no">9</td>
           <td class="c-ag"><span class="tag" style="color:#8A3900;background:#FFF0E6;">KIAT</span></td>
-          <td class="c-tl">첨단소재 특화형 AX플랫폼 구축 및 실증 시행계획 공고</td>
+          <td class="c-tl"><span class="tl-wrap">첨단소재 특화형 AX플랫폼 구축 및 실증 시행계획 공고</span></td>
           <td class="c-dt">2026-03-31</td>
           <td class="c-dl">2026-03-31~2026-04-30</td>
           <td class="c-btn"><a href="https://www.kiat.or.kr/front/board/boardContentsView.do?board_id=90&contents_id=bf171b74a5c34fd192905db237dfcce2&MenuId=b159c9dac684471b87256f1e25404f5e" target="_blank" class="btn-go">바로가기</a></td>
@@ -342,23 +372,23 @@ thead th.c{text-align:center}
         <tr class="tr">
           <td class="c-no">10</td>
           <td class="c-ag"><span class="tag" style="color:#8A3900;background:#FFF0E6;">KIAT</span></td>
-          <td class="c-tl">2026년도 지능형센서 Spin-On 군 적합성 검증 기술지원 시행계획 공고</td>
+          <td class="c-tl"><span class="tl-wrap">2026년도 지능형센서 Spin-On 군 적합성 검증 기술지원 시행계획 공고</span></td>
           <td class="c-dt">2026년도 지능형</td>
           <td class="c-dl">2026-03-23~2026-04-22</td>
           <td class="c-btn"><a href="https://www.kiat.or.kr/front/board/boardContentsView.do?board_id=90&contents_id=3fd10bdfb65b41888ea93d636e7dac60&MenuId=b159c9dac684471b87256f1e25404f5e" target="_blank" class="btn-go">바로가기</a></td>
         </tr>
         <tr class="tr">
           <td class="c-no">11</td>
-          <td class="c-ag"><span class="tag" style="color:#8A1830;background:#FFF0F3;">KoAT</span></td>
-          <td class="c-tl">「2026 종자생명산업 맞춤형 인력양성」  종자산업 분야 상반기(2·3차) 인턴 모집 공고</td>
+          <td class="c-ag"><span class="tag" style="color:#7B0F2E;background:#FFF0F3;">KoAT</span></td>
+          <td class="c-tl"><span class="tl-wrap">「2026 종자생명산업 맞춤형 인력양성」  종자산업 분야 상반기(2·3차) 인턴 모집 공고</span></td>
           <td class="c-dt">2026-04-02</td>
           <td class="c-dl">-</td>
           <td class="c-btn"><a href="https://www.koat.or.kr/board/business/16152/view.do" target="_blank" class="btn-go">바로가기</a></td>
         </tr>
         <tr class="tr">
           <td class="c-no">12</td>
-          <td class="c-ag"><span class="tag" style="color:#8A1830;background:#FFF0F3;">KoAT</span></td>
-          <td class="c-tl">2026년「융복합 기술 오픈이노베이션 지원사업」참여기업 모집 공고</td>
+          <td class="c-ag"><span class="tag" style="color:#7B0F2E;background:#FFF0F3;">KoAT</span></td>
+          <td class="c-tl"><span class="tl-wrap">2026년「융복합 기술 오픈이노베이션 지원사업」참여기업 모집 공고</span></td>
           <td class="c-dt">2026-04-02</td>
           <td class="c-dl">-</td>
           <td class="c-btn"><a href="https://www.koat.or.kr/board/business/16150/view.do" target="_blank" class="btn-go">바로가기</a></td>
@@ -366,7 +396,7 @@ thead th.c{text-align:center}
         <tr class="tr">
           <td class="c-no">13</td>
           <td class="c-ag"><span class="tag" style="color:#003D8F;background:#EBF3FF;">NIPA</span></td>
-          <td class="c-tl">[재공고]2026년 소프트웨어 인재키움 사업 수행지역 및 기관 선정 공고</td>
+          <td class="c-tl"><span class="tl-wrap">[재공고]2026년 소프트웨어 인재키움 사업 수행지역 및 기관 선정 공고</span></td>
           <td class="c-dt">2026-04-03</td>
           <td class="c-dl">D-29</td>
           <td class="c-btn"><a href="https://www.nipa.kr/home/2-2/16672" target="_blank" class="btn-go">바로가기</a></td>
@@ -374,7 +404,7 @@ thead th.c{text-align:center}
         <tr class="tr">
           <td class="c-no">14</td>
           <td class="c-ag"><span class="tag" style="color:#003D8F;background:#EBF3FF;">NIPA</span></td>
-          <td class="c-tl">[재공고]2026년 소프트웨어 인재키움 사업 수행지역 및 기관 선정 공고</td>
+          <td class="c-tl"><span class="tl-wrap">[재공고]2026년 소프트웨어 인재키움 사업 수행지역 및 기관 선정 공고</span></td>
           <td class="c-dt">2026-04-03</td>
           <td class="c-dl">D-29</td>
           <td class="c-btn"><a href="https://www.nipa.kr/home/2-2/16671" target="_blank" class="btn-go">바로가기</a></td>
@@ -382,7 +412,7 @@ thead th.c{text-align:center}
         <tr class="tr">
           <td class="c-no">15</td>
           <td class="c-ag"><span class="tag" style="color:#003D8F;background:#EBF3FF;">NIPA</span></td>
-          <td class="c-tl">2026년 SW IP(지식재산권) 평가보증 지원사업 신청안내</td>
+          <td class="c-tl"><span class="tl-wrap">2026년 SW IP(지식재산권) 평가보증 지원사업 신청안내</span></td>
           <td class="c-dt">2026-04-02</td>
           <td class="c-dl">상시모집</td>
           <td class="c-btn"><a href="https://www.nipa.kr/home/2-2/16669" target="_blank" class="btn-go">바로가기</a></td>
@@ -390,7 +420,7 @@ thead th.c{text-align:center}
         <tr class="tr">
           <td class="c-no">16</td>
           <td class="c-ag"><span class="tag" style="color:#003D8F;background:#EBF3FF;">NIPA</span></td>
-          <td class="c-tl">「첨단 GPU 활용 지원 사업」사용자 수시 모집 공고</td>
+          <td class="c-tl"><span class="tl-wrap">「첨단 GPU 활용 지원 사업」사용자 수시 모집 공고</span></td>
           <td class="c-dt">2026-04-01</td>
           <td class="c-dl">D-239</td>
           <td class="c-btn"><a href="https://www.nipa.kr/home/2-2/16668" target="_blank" class="btn-go">바로가기</a></td>
@@ -398,7 +428,7 @@ thead th.c{text-align:center}
         <tr class="tr">
           <td class="c-no">17</td>
           <td class="c-ag"><span class="tag" style="color:#003D8F;background:#EBF3FF;">NIPA</span></td>
-          <td class="c-tl">「K-테크 파이오니어즈」 글로벌 한국 인재·팀 모집 공고</td>
+          <td class="c-tl"><span class="tl-wrap">「K-테크 파이오니어즈」 글로벌 한국 인재·팀 모집 공고</span></td>
           <td class="c-dt">2026-04-02</td>
           <td class="c-dl">상시모집</td>
           <td class="c-btn"><a href="https://www.nipa.kr/home/2-2/16666" target="_blank" class="btn-go">바로가기</a></td>
@@ -406,7 +436,7 @@ thead th.c{text-align:center}
         <tr class="tr">
           <td class="c-no">18</td>
           <td class="c-ag"><span class="tag" style="color:#003D8F;background:#EBF3FF;">NIPA</span></td>
-          <td class="c-tl">2026년「디지털콘텐츠 융합기업 글로벌 마켓 참가사업(AWE USA 2026) 지원기업 모집 공고</td>
+          <td class="c-tl"><span class="tl-wrap">2026년「디지털콘텐츠 융합기업 글로벌 마켓 참가사업(AWE USA 2026) 지원기업 모집 공고</span></td>
           <td class="c-dt">2026-04-01</td>
           <td class="c-dl">D-25</td>
           <td class="c-btn"><a href="https://www.nipa.kr/home/2-2/16665" target="_blank" class="btn-go">바로가기</a></td>
@@ -414,7 +444,7 @@ thead th.c{text-align:center}
         <tr class="tr">
           <td class="c-no">19</td>
           <td class="c-ag"><span class="tag" style="color:#003D8F;background:#EBF3FF;">NIPA</span></td>
-          <td class="c-tl">2026년도 AI 통합 바우처(클라우드 바우처) 지원 사업 수정공고</td>
+          <td class="c-tl"><span class="tl-wrap">2026년도 AI 통합 바우처(클라우드 바우처) 지원 사업 수정공고</span></td>
           <td class="c-dt">2026-04-01</td>
           <td class="c-dl">D-16</td>
           <td class="c-btn"><a href="https://www.nipa.kr/home/2-2/16664" target="_blank" class="btn-go">바로가기</a></td>
@@ -422,7 +452,7 @@ thead th.c{text-align:center}
         <tr class="tr">
           <td class="c-no">20</td>
           <td class="c-ag"><span class="tag" style="color:#003D8F;background:#EBF3FF;">NIPA</span></td>
-          <td class="c-tl">2026년 KoVAC XR 쇼룸 입주기업 모집 공고</td>
+          <td class="c-tl"><span class="tl-wrap">2026년 KoVAC XR 쇼룸 입주기업 모집 공고</span></td>
           <td class="c-dt">2026-04-01</td>
           <td class="c-dl">D-23</td>
           <td class="c-btn"><a href="https://www.nipa.kr/home/2-2/16662" target="_blank" class="btn-go">바로가기</a></td>
@@ -430,7 +460,7 @@ thead th.c{text-align:center}
         <tr class="tr">
           <td class="c-no">21</td>
           <td class="c-ag"><span class="tag" style="color:#005C3D;background:#E3F6EF;">NIA</span></td>
-          <td class="c-tl">[조달입찰공고] 2026년 공공데이터 품질관리 및 실태평가 용역사업</td>
+          <td class="c-tl"><span class="tl-wrap">[조달입찰공고] 2026년 공공데이터 품질관리 및 실태평가 용역사업</span></td>
           <td class="c-dt">2026-04-03</td>
           <td class="c-dl">-</td>
           <td class="c-btn"><a href="https://www.nia.or.kr/site/nia_kor/ex/bbs/View.do?cbIdx=78336&bcIdx=29231&parentSeq=29231" target="_blank" class="btn-go">바로가기</a></td>
@@ -438,7 +468,7 @@ thead th.c{text-align:center}
         <tr class="tr">
           <td class="c-no">22</td>
           <td class="c-ag"><span class="tag" style="color:#005C3D;background:#E3F6EF;">NIA</span></td>
-          <td class="c-tl">[사전규격공개] 2026년도 AI 모델 벤치마크 데이터셋 구축사업(1차)</td>
+          <td class="c-tl"><span class="tl-wrap">[사전규격공개] 2026년도 AI 모델 벤치마크 데이터셋 구축사업(1차)</span></td>
           <td class="c-dt">2026-04-03</td>
           <td class="c-dl">-</td>
           <td class="c-btn"><a href="https://www.nia.or.kr/site/nia_kor/ex/bbs/View.do?cbIdx=78336&bcIdx=29230&parentSeq=29230" target="_blank" class="btn-go">바로가기</a></td>
@@ -446,7 +476,7 @@ thead th.c{text-align:center}
         <tr class="tr">
           <td class="c-no">23</td>
           <td class="c-ag"><span class="tag" style="color:#005C3D;background:#E3F6EF;">NIA</span></td>
-          <td class="c-tl">[조달입찰공고] 2026년 공공데이터 활용기업 실태조사</td>
+          <td class="c-tl"><span class="tl-wrap">[조달입찰공고] 2026년 공공데이터 활용기업 실태조사</span></td>
           <td class="c-dt">2026-04-03</td>
           <td class="c-dl">-</td>
           <td class="c-btn"><a href="https://www.nia.or.kr/site/nia_kor/ex/bbs/View.do?cbIdx=78336&bcIdx=29229&parentSeq=29229" target="_blank" class="btn-go">바로가기</a></td>
@@ -454,7 +484,7 @@ thead th.c{text-align:center}
         <tr class="tr">
           <td class="c-no">24</td>
           <td class="c-ag"><span class="tag" style="color:#005C3D;background:#E3F6EF;">NIA</span></td>
-          <td class="c-tl">[조달입찰공고] 2026년 인터넷ㆍ스마트폰 과의존 예방콘텐츠 개발</td>
+          <td class="c-tl"><span class="tl-wrap">[조달입찰공고] 2026년 인터넷ㆍ스마트폰 과의존 예방콘텐츠 개발</span></td>
           <td class="c-dt">2026-04-03</td>
           <td class="c-dl">-</td>
           <td class="c-btn"><a href="https://www.nia.or.kr/site/nia_kor/ex/bbs/View.do?cbIdx=78336&bcIdx=29228&parentSeq=29228" target="_blank" class="btn-go">바로가기</a></td>
@@ -462,7 +492,7 @@ thead th.c{text-align:center}
         <tr class="tr">
           <td class="c-no">25</td>
           <td class="c-ag"><span class="tag" style="color:#005C3D;background:#E3F6EF;">NIA</span></td>
-          <td class="c-tl">[입찰공고] 2026년 지능정보화 실행계획 점검 및 분석 지원</td>
+          <td class="c-tl"><span class="tl-wrap">[입찰공고] 2026년 지능정보화 실행계획 점검 및 분석 지원</span></td>
           <td class="c-dt">2026-04-02</td>
           <td class="c-dl">-</td>
           <td class="c-btn"><a href="https://www.nia.or.kr/site/nia_kor/ex/bbs/View.do?cbIdx=78336&bcIdx=29223&parentSeq=29223" target="_blank" class="btn-go">바로가기</a></td>
@@ -470,7 +500,7 @@ thead th.c{text-align:center}
         <tr class="tr">
           <td class="c-no">26</td>
           <td class="c-ag"><span class="tag" style="color:#005C3D;background:#E3F6EF;">NIA</span></td>
-          <td class="c-tl">[공모] 동대구벤처밸리 AI테크포트 구축</td>
+          <td class="c-tl"><span class="tl-wrap">[공모] 동대구벤처밸리 AI테크포트 구축</span></td>
           <td class="c-dt">2026-04-02</td>
           <td class="c-dl">-</td>
           <td class="c-btn"><a href="https://www.nia.or.kr/site/nia_kor/ex/bbs/View.do?cbIdx=78336&bcIdx=29222&parentSeq=29222" target="_blank" class="btn-go">바로가기</a></td>
@@ -478,7 +508,7 @@ thead th.c{text-align:center}
         <tr class="tr">
           <td class="c-no">27</td>
           <td class="c-ag"><span class="tag" style="color:#005C3D;background:#E3F6EF;">NIA</span></td>
-          <td class="c-tl">[조달입찰공고] 2026년 공공데이터 중장기 개방이행 지원 컨설팅</td>
+          <td class="c-tl"><span class="tl-wrap">[조달입찰공고] 2026년 공공데이터 중장기 개방이행 지원 컨설팅</span></td>
           <td class="c-dt">2026-04-02</td>
           <td class="c-dl">-</td>
           <td class="c-btn"><a href="https://www.nia.or.kr/site/nia_kor/ex/bbs/View.do?cbIdx=78336&bcIdx=29221&parentSeq=29221" target="_blank" class="btn-go">바로가기</a></td>
@@ -486,7 +516,7 @@ thead th.c{text-align:center}
         <tr class="tr">
           <td class="c-no">28</td>
           <td class="c-ag"><span class="tag" style="color:#005C3D;background:#E3F6EF;">NIA</span></td>
-          <td class="c-tl">[공모] AI기반 위성정보 활용서비스 확산사업</td>
+          <td class="c-tl"><span class="tl-wrap">[공모] AI기반 위성정보 활용서비스 확산사업</span></td>
           <td class="c-dt">2026-04-02</td>
           <td class="c-dl">-</td>
           <td class="c-btn"><a href="https://www.nia.or.kr/site/nia_kor/ex/bbs/View.do?cbIdx=78336&bcIdx=29220&parentSeq=29220" target="_blank" class="btn-go">바로가기</a></td>
@@ -494,7 +524,7 @@ thead th.c{text-align:center}
         <tr class="tr">
           <td class="c-no">29</td>
           <td class="c-ag"><span class="tag" style="color:#005C3D;background:#E3F6EF;">NIA</span></td>
-          <td class="c-tl">[조달입찰공고] 2026년 국민비서 서비스 확대 및 개선</td>
+          <td class="c-tl"><span class="tl-wrap">[조달입찰공고] 2026년 국민비서 서비스 확대 및 개선</span></td>
           <td class="c-dt">2026-04-01</td>
           <td class="c-dl">-</td>
           <td class="c-btn"><a href="https://www.nia.or.kr/site/nia_kor/ex/bbs/View.do?cbIdx=78336&bcIdx=29219&parentSeq=29219" target="_blank" class="btn-go">바로가기</a></td>
@@ -502,7 +532,7 @@ thead th.c{text-align:center}
         <tr class="tr">
           <td class="c-no">30</td>
           <td class="c-ag"><span class="tag" style="color:#005C3D;background:#E3F6EF;">NIA</span></td>
-          <td class="c-tl">[사전규격공개] 디지털포용 얼라이언스 운영</td>
+          <td class="c-tl"><span class="tl-wrap">[사전규격공개] 디지털포용 얼라이언스 운영</span></td>
           <td class="c-dt">2026-04-01</td>
           <td class="c-dl">-</td>
           <td class="c-btn"><a href="https://www.nia.or.kr/site/nia_kor/ex/bbs/View.do?cbIdx=78336&bcIdx=29218&parentSeq=29218" target="_blank" class="btn-go">바로가기</a></td>
@@ -510,7 +540,7 @@ thead th.c{text-align:center}
         <tr class="tr">
           <td class="c-no">31</td>
           <td class="c-ag"><span class="tag" style="color:#075985;background:#E0F2FE;">IITP</span></td>
-          <td class="c-tl">기술분야별 정보통신·방송 연구개발사업 신규사업 기술수요조사 안내(IRIS접수)</td>
+          <td class="c-tl"><span class="tl-wrap">기술분야별 정보통신·방송 연구개발사업 신규사업 기술수요조사 안내(IRIS접수)</span></td>
           <td class="c-dt">2026-03-31</td>
           <td class="c-dl">2026-04-01 ~ 2026-12-31</td>
           <td class="c-btn"><a href="https://www.iitp.kr/web/lay1/program/S1T44C51/iris/view.do?id=DSP2026004" target="_blank" class="btn-go">바로가기</a></td>
@@ -518,7 +548,7 @@ thead th.c{text-align:center}
         <tr class="tr">
           <td class="c-no">32</td>
           <td class="c-ag"><span class="tag" style="color:#581C87;background:#FAF5FF;">KOSAC</span></td>
-          <td class="c-tl">2026년 과학영재 창의연구(R&E) 지원센터 운영 공고</td>
+          <td class="c-tl"><span class="tl-wrap">2026년 과학영재 창의연구(R&E) 지원센터 운영 공고</span></td>
           <td class="c-dt">2026-04-03</td>
           <td class="c-dl">2026-04-03 ~ 2026-04-16</td>
           <td class="c-btn"><a href="https://www.kosac.re.kr/menus/274/bns/PBANC_00000000000409" target="_blank" class="btn-go">바로가기</a></td>
@@ -526,7 +556,7 @@ thead th.c{text-align:center}
         <tr class="tr">
           <td class="c-no">33</td>
           <td class="c-ag"><span class="tag" style="color:#581C87;background:#FAF5FF;">KOSAC</span></td>
-          <td class="c-tl">2026 클릭온 AI(구 온라인 코딩파티) 프로그램 기획·운영 공모 공고</td>
+          <td class="c-tl"><span class="tl-wrap">2026 클릭온 AI(구 온라인 코딩파티) 프로그램 기획·운영 공모 공고</span></td>
           <td class="c-dt">2026-04-03</td>
           <td class="c-dl">2026-04-03 ~ 2026-04-17</td>
           <td class="c-btn"><a href="https://www.kosac.re.kr/menus/274/bns/PBANC_00000000000408" target="_blank" class="btn-go">바로가기</a></td>
@@ -534,7 +564,7 @@ thead th.c{text-align:center}
         <tr class="tr">
           <td class="c-no">34</td>
           <td class="c-ag"><span class="tag" style="color:#581C87;background:#FAF5FF;">KOSAC</span></td>
-          <td class="c-tl">2026년 과학영재 전문기관 운영 프로그램(Pre-URP, 정서함양, 고경력) 지원사업 공모 공고</td>
+          <td class="c-tl"><span class="tl-wrap">2026년 과학영재 전문기관 운영 프로그램(Pre-URP, 정서함양, 고경력) 지원사업 공모 공고</span></td>
           <td class="c-dt">2026-04-03</td>
           <td class="c-dl">2026-04-03 ~ 2026-04-17</td>
           <td class="c-btn"><a href="https://www.kosac.re.kr/menus/274/bns/PBANC_00000000000406" target="_blank" class="btn-go">바로가기</a></td>
@@ -542,7 +572,7 @@ thead th.c{text-align:center}
         <tr class="tr">
           <td class="c-no">35</td>
           <td class="c-ag"><span class="tag" style="color:#581C87;background:#FAF5FF;">KOSAC</span></td>
-          <td class="c-tl">디지털 기반 문제해결력 평가 도구 기반 AI 동행 프로젝트 교육 효과성 분석 연구 공고</td>
+          <td class="c-tl"><span class="tl-wrap">디지털 기반 문제해결력 평가 도구 기반 AI 동행 프로젝트 교육 효과성 분석 연구 공고</span></td>
           <td class="c-dt">2026-04-02</td>
           <td class="c-dl">2026-04-02 ~ 2026-04-16</td>
           <td class="c-btn"><a href="https://www.kosac.re.kr/menus/274/bns/PBANC_00000000000404" target="_blank" class="btn-go">바로가기</a></td>
@@ -550,7 +580,7 @@ thead th.c{text-align:center}
         <tr class="tr">
           <td class="c-no">36</td>
           <td class="c-ag"><span class="tag" style="color:#581C87;background:#FAF5FF;">KOSAC</span></td>
-          <td class="c-tl">2026년 디지털새싹 주관기관 모집 공고</td>
+          <td class="c-tl"><span class="tl-wrap">2026년 디지털새싹 주관기관 모집 공고</span></td>
           <td class="c-dt">2026-04-02</td>
           <td class="c-dl">2026-03-06 ~ 2026-04-05</td>
           <td class="c-btn"><a href="https://www.kosac.re.kr/menus/274/bns/PBANC_00000000000390" target="_blank" class="btn-go">바로가기</a></td>
@@ -558,7 +588,7 @@ thead th.c{text-align:center}
         <tr class="tr">
           <td class="c-no">37</td>
           <td class="c-ag"><span class="tag" style="color:#581C87;background:#FAF5FF;">KOSAC</span></td>
-          <td class="c-tl">2026년 AI 에듀톤(Edu-thon) 대회 운영기관 공모(재공고)</td>
+          <td class="c-tl"><span class="tl-wrap">2026년 AI 에듀톤(Edu-thon) 대회 운영기관 공모(재공고)</span></td>
           <td class="c-dt">2026-04-01</td>
           <td class="c-dl">2026-04-01 ~ 2026-04-08</td>
           <td class="c-btn"><a href="https://www.kosac.re.kr/menus/274/bns/PBANC_00000000000402" target="_blank" class="btn-go">바로가기</a></td>
@@ -566,7 +596,7 @@ thead th.c{text-align:center}
         <tr class="tr">
           <td class="c-no">38</td>
           <td class="c-ag"><span class="tag" style="color:#92400E;background:#FFFBEB;">KIRIA</span></td>
-          <td class="c-tl">2026년 「서비스로봇 AX(S-M.AX) 실증사업」모집 공고</td>
+          <td class="c-tl"><span class="tl-wrap">2026년 「서비스로봇 AX(S-M.AX) 실증사업」모집 공고</span></td>
           <td class="c-dt">2026-04-02</td>
           <td class="c-dl">2026-04-27 ~ 2026-05-06</td>
           <td class="c-btn"><a href="https://www.kiria.org/portal/info/portalInfoBusinessView.do?ibusId=IBUS_000000000001239" target="_blank" class="btn-go">바로가기</a></td>
@@ -576,9 +606,9 @@ thead th.c{text-align:center}
 
   <div class="mobile-list">
     
-        <div class="mc">
+        <div class="mc" >
           <div class="mc-top">
-            <span class="tag" style="color:#5C2EBF;background:#F0EBFF;">IRIS</span>
+            <span class="tag" style="color:#4A0FAD;background:#F3EEFF;">IRIS</span>
             
             <span class="mc-date">2026-04-01</span>
           </div>
@@ -588,7 +618,7 @@ thead th.c{text-align:center}
             <a href="https://www.iris.go.kr/contents/retrieveBsnsAncmBtinSituView.do?ancmId=020514" target="_blank" class="btn-go sm">바로가기 →</a>
           </div>
         </div>
-        <div class="mc">
+        <div class="mc" >
           <div class="mc-top">
             <span class="tag" style="color:#8A3900;background:#FFF0E6;">KIAT</span>
             
@@ -600,7 +630,7 @@ thead th.c{text-align:center}
             <a href="https://www.kiat.or.kr/front/board/boardContentsView.do?board_id=90&contents_id=403a3c9b1c624016ad252b0da47f6ccf&MenuId=b159c9dac684471b87256f1e25404f5e" target="_blank" class="btn-go sm">바로가기 →</a>
           </div>
         </div>
-        <div class="mc">
+        <div class="mc" >
           <div class="mc-top">
             <span class="tag" style="color:#8A3900;background:#FFF0E6;">KIAT</span>
             
@@ -612,7 +642,7 @@ thead th.c{text-align:center}
             <a href="https://www.kiat.or.kr/front/board/boardContentsView.do?board_id=90&contents_id=466a9d470cb64bbea788df96d8d87dde&MenuId=b159c9dac684471b87256f1e25404f5e" target="_blank" class="btn-go sm">바로가기 →</a>
           </div>
         </div>
-        <div class="mc">
+        <div class="mc" >
           <div class="mc-top">
             <span class="tag" style="color:#8A3900;background:#FFF0E6;">KIAT</span>
             
@@ -624,7 +654,7 @@ thead th.c{text-align:center}
             <a href="https://www.kiat.or.kr/front/board/boardContentsView.do?board_id=90&contents_id=2baf97f997bb4a0db3ec874ddd0c289e&MenuId=b159c9dac684471b87256f1e25404f5e" target="_blank" class="btn-go sm">바로가기 →</a>
           </div>
         </div>
-        <div class="mc">
+        <div class="mc" >
           <div class="mc-top">
             <span class="tag" style="color:#8A3900;background:#FFF0E6;">KIAT</span>
             
@@ -636,7 +666,7 @@ thead th.c{text-align:center}
             <a href="https://www.kiat.or.kr/front/board/boardContentsView.do?board_id=90&contents_id=eba2e78914c64b0a956ff9d67a9045e8&MenuId=b159c9dac684471b87256f1e25404f5e" target="_blank" class="btn-go sm">바로가기 →</a>
           </div>
         </div>
-        <div class="mc">
+        <div class="mc" >
           <div class="mc-top">
             <span class="tag" style="color:#8A3900;background:#FFF0E6;">KIAT</span>
             
@@ -648,7 +678,7 @@ thead th.c{text-align:center}
             <a href="https://www.kiat.or.kr/front/board/boardContentsView.do?board_id=90&contents_id=13a0424b167f4c0695d0842df638e61d&MenuId=b159c9dac684471b87256f1e25404f5e" target="_blank" class="btn-go sm">바로가기 →</a>
           </div>
         </div>
-        <div class="mc">
+        <div class="mc" >
           <div class="mc-top">
             <span class="tag" style="color:#8A3900;background:#FFF0E6;">KIAT</span>
             
@@ -660,7 +690,7 @@ thead th.c{text-align:center}
             <a href="https://www.kiat.or.kr/front/board/boardContentsView.do?board_id=90&contents_id=cf53d83a4abc4abeb9c48d9fe2304793&MenuId=b159c9dac684471b87256f1e25404f5e" target="_blank" class="btn-go sm">바로가기 →</a>
           </div>
         </div>
-        <div class="mc">
+        <div class="mc" >
           <div class="mc-top">
             <span class="tag" style="color:#8A3900;background:#FFF0E6;">KIAT</span>
             
@@ -672,7 +702,7 @@ thead th.c{text-align:center}
             <a href="https://www.kiat.or.kr/front/board/boardContentsView.do?board_id=90&contents_id=7d2136b8580f46f0919f5bedc3311dd7&MenuId=b159c9dac684471b87256f1e25404f5e" target="_blank" class="btn-go sm">바로가기 →</a>
           </div>
         </div>
-        <div class="mc">
+        <div class="mc" >
           <div class="mc-top">
             <span class="tag" style="color:#8A3900;background:#FFF0E6;">KIAT</span>
             
@@ -684,7 +714,7 @@ thead th.c{text-align:center}
             <a href="https://www.kiat.or.kr/front/board/boardContentsView.do?board_id=90&contents_id=bf171b74a5c34fd192905db237dfcce2&MenuId=b159c9dac684471b87256f1e25404f5e" target="_blank" class="btn-go sm">바로가기 →</a>
           </div>
         </div>
-        <div class="mc">
+        <div class="mc" >
           <div class="mc-top">
             <span class="tag" style="color:#8A3900;background:#FFF0E6;">KIAT</span>
             
@@ -696,9 +726,9 @@ thead th.c{text-align:center}
             <a href="https://www.kiat.or.kr/front/board/boardContentsView.do?board_id=90&contents_id=3fd10bdfb65b41888ea93d636e7dac60&MenuId=b159c9dac684471b87256f1e25404f5e" target="_blank" class="btn-go sm">바로가기 →</a>
           </div>
         </div>
-        <div class="mc">
+        <div class="mc" >
           <div class="mc-top">
-            <span class="tag" style="color:#8A1830;background:#FFF0F3;">KoAT</span>
+            <span class="tag" style="color:#7B0F2E;background:#FFF0F3;">KoAT</span>
             
             <span class="mc-date">2026-04-02</span>
           </div>
@@ -708,9 +738,9 @@ thead th.c{text-align:center}
             <a href="https://www.koat.or.kr/board/business/16152/view.do" target="_blank" class="btn-go sm">바로가기 →</a>
           </div>
         </div>
-        <div class="mc">
+        <div class="mc" >
           <div class="mc-top">
-            <span class="tag" style="color:#8A1830;background:#FFF0F3;">KoAT</span>
+            <span class="tag" style="color:#7B0F2E;background:#FFF0F3;">KoAT</span>
             
             <span class="mc-date">2026-04-02</span>
           </div>
@@ -720,7 +750,7 @@ thead th.c{text-align:center}
             <a href="https://www.koat.or.kr/board/business/16150/view.do" target="_blank" class="btn-go sm">바로가기 →</a>
           </div>
         </div>
-        <div class="mc">
+        <div class="mc" >
           <div class="mc-top">
             <span class="tag" style="color:#003D8F;background:#EBF3FF;">NIPA</span>
             
@@ -732,7 +762,7 @@ thead th.c{text-align:center}
             <a href="https://www.nipa.kr/home/2-2/16672" target="_blank" class="btn-go sm">바로가기 →</a>
           </div>
         </div>
-        <div class="mc">
+        <div class="mc" >
           <div class="mc-top">
             <span class="tag" style="color:#003D8F;background:#EBF3FF;">NIPA</span>
             
@@ -744,7 +774,7 @@ thead th.c{text-align:center}
             <a href="https://www.nipa.kr/home/2-2/16671" target="_blank" class="btn-go sm">바로가기 →</a>
           </div>
         </div>
-        <div class="mc">
+        <div class="mc" >
           <div class="mc-top">
             <span class="tag" style="color:#003D8F;background:#EBF3FF;">NIPA</span>
             
@@ -756,7 +786,7 @@ thead th.c{text-align:center}
             <a href="https://www.nipa.kr/home/2-2/16669" target="_blank" class="btn-go sm">바로가기 →</a>
           </div>
         </div>
-        <div class="mc">
+        <div class="mc" >
           <div class="mc-top">
             <span class="tag" style="color:#003D8F;background:#EBF3FF;">NIPA</span>
             
@@ -768,7 +798,7 @@ thead th.c{text-align:center}
             <a href="https://www.nipa.kr/home/2-2/16668" target="_blank" class="btn-go sm">바로가기 →</a>
           </div>
         </div>
-        <div class="mc">
+        <div class="mc" >
           <div class="mc-top">
             <span class="tag" style="color:#003D8F;background:#EBF3FF;">NIPA</span>
             
@@ -780,7 +810,7 @@ thead th.c{text-align:center}
             <a href="https://www.nipa.kr/home/2-2/16666" target="_blank" class="btn-go sm">바로가기 →</a>
           </div>
         </div>
-        <div class="mc">
+        <div class="mc" >
           <div class="mc-top">
             <span class="tag" style="color:#003D8F;background:#EBF3FF;">NIPA</span>
             
@@ -792,7 +822,7 @@ thead th.c{text-align:center}
             <a href="https://www.nipa.kr/home/2-2/16665" target="_blank" class="btn-go sm">바로가기 →</a>
           </div>
         </div>
-        <div class="mc">
+        <div class="mc" >
           <div class="mc-top">
             <span class="tag" style="color:#003D8F;background:#EBF3FF;">NIPA</span>
             
@@ -804,7 +834,7 @@ thead th.c{text-align:center}
             <a href="https://www.nipa.kr/home/2-2/16664" target="_blank" class="btn-go sm">바로가기 →</a>
           </div>
         </div>
-        <div class="mc">
+        <div class="mc" >
           <div class="mc-top">
             <span class="tag" style="color:#003D8F;background:#EBF3FF;">NIPA</span>
             
@@ -816,7 +846,7 @@ thead th.c{text-align:center}
             <a href="https://www.nipa.kr/home/2-2/16662" target="_blank" class="btn-go sm">바로가기 →</a>
           </div>
         </div>
-        <div class="mc">
+        <div class="mc" >
           <div class="mc-top">
             <span class="tag" style="color:#005C3D;background:#E3F6EF;">NIA</span>
             
@@ -828,7 +858,7 @@ thead th.c{text-align:center}
             <a href="https://www.nia.or.kr/site/nia_kor/ex/bbs/View.do?cbIdx=78336&bcIdx=29231&parentSeq=29231" target="_blank" class="btn-go sm">바로가기 →</a>
           </div>
         </div>
-        <div class="mc">
+        <div class="mc" >
           <div class="mc-top">
             <span class="tag" style="color:#005C3D;background:#E3F6EF;">NIA</span>
             
@@ -840,7 +870,7 @@ thead th.c{text-align:center}
             <a href="https://www.nia.or.kr/site/nia_kor/ex/bbs/View.do?cbIdx=78336&bcIdx=29230&parentSeq=29230" target="_blank" class="btn-go sm">바로가기 →</a>
           </div>
         </div>
-        <div class="mc">
+        <div class="mc" >
           <div class="mc-top">
             <span class="tag" style="color:#005C3D;background:#E3F6EF;">NIA</span>
             
@@ -852,7 +882,7 @@ thead th.c{text-align:center}
             <a href="https://www.nia.or.kr/site/nia_kor/ex/bbs/View.do?cbIdx=78336&bcIdx=29229&parentSeq=29229" target="_blank" class="btn-go sm">바로가기 →</a>
           </div>
         </div>
-        <div class="mc">
+        <div class="mc" >
           <div class="mc-top">
             <span class="tag" style="color:#005C3D;background:#E3F6EF;">NIA</span>
             
@@ -864,7 +894,7 @@ thead th.c{text-align:center}
             <a href="https://www.nia.or.kr/site/nia_kor/ex/bbs/View.do?cbIdx=78336&bcIdx=29228&parentSeq=29228" target="_blank" class="btn-go sm">바로가기 →</a>
           </div>
         </div>
-        <div class="mc">
+        <div class="mc" >
           <div class="mc-top">
             <span class="tag" style="color:#005C3D;background:#E3F6EF;">NIA</span>
             
@@ -876,7 +906,7 @@ thead th.c{text-align:center}
             <a href="https://www.nia.or.kr/site/nia_kor/ex/bbs/View.do?cbIdx=78336&bcIdx=29223&parentSeq=29223" target="_blank" class="btn-go sm">바로가기 →</a>
           </div>
         </div>
-        <div class="mc">
+        <div class="mc" >
           <div class="mc-top">
             <span class="tag" style="color:#005C3D;background:#E3F6EF;">NIA</span>
             
@@ -888,7 +918,7 @@ thead th.c{text-align:center}
             <a href="https://www.nia.or.kr/site/nia_kor/ex/bbs/View.do?cbIdx=78336&bcIdx=29222&parentSeq=29222" target="_blank" class="btn-go sm">바로가기 →</a>
           </div>
         </div>
-        <div class="mc">
+        <div class="mc" >
           <div class="mc-top">
             <span class="tag" style="color:#005C3D;background:#E3F6EF;">NIA</span>
             
@@ -900,7 +930,7 @@ thead th.c{text-align:center}
             <a href="https://www.nia.or.kr/site/nia_kor/ex/bbs/View.do?cbIdx=78336&bcIdx=29221&parentSeq=29221" target="_blank" class="btn-go sm">바로가기 →</a>
           </div>
         </div>
-        <div class="mc">
+        <div class="mc" >
           <div class="mc-top">
             <span class="tag" style="color:#005C3D;background:#E3F6EF;">NIA</span>
             
@@ -912,7 +942,7 @@ thead th.c{text-align:center}
             <a href="https://www.nia.or.kr/site/nia_kor/ex/bbs/View.do?cbIdx=78336&bcIdx=29220&parentSeq=29220" target="_blank" class="btn-go sm">바로가기 →</a>
           </div>
         </div>
-        <div class="mc">
+        <div class="mc" >
           <div class="mc-top">
             <span class="tag" style="color:#005C3D;background:#E3F6EF;">NIA</span>
             
@@ -924,7 +954,7 @@ thead th.c{text-align:center}
             <a href="https://www.nia.or.kr/site/nia_kor/ex/bbs/View.do?cbIdx=78336&bcIdx=29219&parentSeq=29219" target="_blank" class="btn-go sm">바로가기 →</a>
           </div>
         </div>
-        <div class="mc">
+        <div class="mc" >
           <div class="mc-top">
             <span class="tag" style="color:#005C3D;background:#E3F6EF;">NIA</span>
             
@@ -936,7 +966,7 @@ thead th.c{text-align:center}
             <a href="https://www.nia.or.kr/site/nia_kor/ex/bbs/View.do?cbIdx=78336&bcIdx=29218&parentSeq=29218" target="_blank" class="btn-go sm">바로가기 →</a>
           </div>
         </div>
-        <div class="mc">
+        <div class="mc" >
           <div class="mc-top">
             <span class="tag" style="color:#075985;background:#E0F2FE;">IITP</span>
             
@@ -948,7 +978,7 @@ thead th.c{text-align:center}
             <a href="https://www.iitp.kr/web/lay1/program/S1T44C51/iris/view.do?id=DSP2026004" target="_blank" class="btn-go sm">바로가기 →</a>
           </div>
         </div>
-        <div class="mc">
+        <div class="mc" >
           <div class="mc-top">
             <span class="tag" style="color:#581C87;background:#FAF5FF;">KOSAC</span>
             
@@ -960,7 +990,7 @@ thead th.c{text-align:center}
             <a href="https://www.kosac.re.kr/menus/274/bns/PBANC_00000000000409" target="_blank" class="btn-go sm">바로가기 →</a>
           </div>
         </div>
-        <div class="mc">
+        <div class="mc" >
           <div class="mc-top">
             <span class="tag" style="color:#581C87;background:#FAF5FF;">KOSAC</span>
             
@@ -972,7 +1002,7 @@ thead th.c{text-align:center}
             <a href="https://www.kosac.re.kr/menus/274/bns/PBANC_00000000000408" target="_blank" class="btn-go sm">바로가기 →</a>
           </div>
         </div>
-        <div class="mc">
+        <div class="mc" >
           <div class="mc-top">
             <span class="tag" style="color:#581C87;background:#FAF5FF;">KOSAC</span>
             
@@ -984,7 +1014,7 @@ thead th.c{text-align:center}
             <a href="https://www.kosac.re.kr/menus/274/bns/PBANC_00000000000406" target="_blank" class="btn-go sm">바로가기 →</a>
           </div>
         </div>
-        <div class="mc">
+        <div class="mc" >
           <div class="mc-top">
             <span class="tag" style="color:#581C87;background:#FAF5FF;">KOSAC</span>
             
@@ -996,7 +1026,7 @@ thead th.c{text-align:center}
             <a href="https://www.kosac.re.kr/menus/274/bns/PBANC_00000000000404" target="_blank" class="btn-go sm">바로가기 →</a>
           </div>
         </div>
-        <div class="mc">
+        <div class="mc" >
           <div class="mc-top">
             <span class="tag" style="color:#581C87;background:#FAF5FF;">KOSAC</span>
             
@@ -1008,7 +1038,7 @@ thead th.c{text-align:center}
             <a href="https://www.kosac.re.kr/menus/274/bns/PBANC_00000000000390" target="_blank" class="btn-go sm">바로가기 →</a>
           </div>
         </div>
-        <div class="mc">
+        <div class="mc" >
           <div class="mc-top">
             <span class="tag" style="color:#581C87;background:#FAF5FF;">KOSAC</span>
             
@@ -1020,7 +1050,7 @@ thead th.c{text-align:center}
             <a href="https://www.kosac.re.kr/menus/274/bns/PBANC_00000000000402" target="_blank" class="btn-go sm">바로가기 →</a>
           </div>
         </div>
-        <div class="mc">
+        <div class="mc" >
           <div class="mc-top">
             <span class="tag" style="color:#92400E;background:#FFFBEB;">KIRIA</span>
             
@@ -1037,8 +1067,8 @@ thead th.c{text-align:center}
 
 <footer class="footer">
   <div class="footer-inner">
-    <span class="footer-copy">(재)포항테크노파크 경북AI혁신본부 · Made by 김승모</span>
-    <span class="footer-ver">사업공고 자동 수집 v6.0 · 2026-04-05 19:59</span>
+    <span class="footer-copy">(재)포항테크노파크 경북AI혁신본부 (Made by 김승모)</span>
+    <span class="footer-ver">사업공고 자동 수집 v6.0 &nbsp;·&nbsp; 2026-04-05 20:03</span>
   </div>
 </footer>
 </body>

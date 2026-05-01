@@ -8,16 +8,31 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;500;600;700;800;900&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
+
 :root{
-  --ink:#0A0E1A;--ink-2:#1F2937;
-  --tx:#111827;--tx-2:#4B5563;--tx-3:#6B7280;--tx-4:#9CA3AF;
-  --line:#EAECEF;--line-2:#D9DCE2;--line-3:#C4C9D2;
-  --bg:#F4F5F7;--bg-2:#FAFAFA;--paper:#FFFFFF;
-  --accent:#1B3B5F;--accent-2:#2A5586;--accent-soft:#EEF1F6;
-  --gold:#A88842;--gold-soft:#F7F3EA;
-  --red:#B42318;--red-soft:#FEF3F2;
-  --amber:#9A6700;--amber-soft:#FFFBEB;
-  --green:#0E7C56;--green-soft:#ECFDF3;
+  --ink:#0A0E1A;
+  --ink-2:#1F2937;
+  --tx:#111827;
+  --tx-2:#4B5563;
+  --tx-3:#6B7280;
+  --tx-4:#9CA3AF;
+  --line:#EAECEF;
+  --line-2:#D9DCE2;
+  --line-3:#C4C9D2;
+  --bg:#F4F5F7;
+  --bg-2:#FAFAFA;
+  --paper:#FFFFFF;
+  --accent:#1B3B5F;     /* deep ink-blue, Korean public */
+  --accent-2:#2A5586;
+  --accent-soft:#EEF1F6;
+  --gold:#A88842;       /* premium accent — restrained */
+  --gold-soft:#F7F3EA;
+  --red:#B42318;
+  --red-soft:#FEF3F2;
+  --amber:#9A6700;
+  --amber-soft:#FFFBEB;
+  --green:#0E7C56;
+  --green-soft:#ECFDF3;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html,body{font-family:'Pretendard','Apple SD Gothic Neo','Noto Sans KR',sans-serif;background:var(--bg);color:var(--tx);font-size:14px;line-height:1.55;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;font-feature-settings:"ss01","ss02","tnum"}
@@ -25,7 +40,7 @@ a{color:inherit;text-decoration:none}
 button{font-family:inherit;cursor:pointer;border:0;background:none;color:inherit}
 .mono{font-family:'IBM Plex Mono','SF Mono',ui-monospace,monospace;font-feature-settings:"tnum"}
 
-/* TOP UTILITY */
+/* ─── TOP UTILITY ─── */
 .util{background:var(--ink);color:#fff;padding:0 48px;height:36px;display:flex;align-items:center;justify-content:space-between;font-size:12px}
 .util-left{display:flex;align-items:center;gap:18px;color:rgba(255,255,255,.8)}
 .live{display:inline-flex;align-items:center;gap:8px;font-family:'IBM Plex Mono',monospace;letter-spacing:.5px;font-size:11px;font-weight:500}
@@ -37,11 +52,12 @@ button{font-family:inherit;cursor:pointer;border:0;background:none;color:inherit
 .util-right a{transition:color .15s}
 .util-right a:hover{color:#fff}
 
-/* MASTHEAD */
+/* ─── MASTHEAD ─── */
 .masthead{background:var(--paper);border-bottom:1px solid var(--line)}
 .masthead-inner{max-width:1320px;margin:0 auto;padding:32px 48px 28px;display:flex;align-items:flex-end;justify-content:space-between;gap:40px}
-.brand{display:flex;align-items:center;gap:16px}
-.brand-icon{width:56px;height:56px;background:linear-gradient(135deg,#1B3B5F,#2A5586);display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0}
+.brand{display:flex;align-items:center;gap:8px}
+.crest{height:78px;width:auto;display:block;flex-shrink:0;margin-right:-26px;margin-left:-14px}
+.crest img{height:100%;width:auto;display:block;object-fit:contain}
 .brand-text .org{font-size:11px;color:var(--tx-3);letter-spacing:1.5px;font-weight:600;margin-bottom:6px;text-transform:uppercase}
 .brand-text .title{font-size:24px;font-weight:800;color:var(--ink);letter-spacing:-.8px;line-height:1}
 .brand-text .ko-sub{font-size:12px;color:var(--tx-2);margin-top:6px;letter-spacing:.2px}
@@ -50,10 +66,10 @@ button{font-family:inherit;cursor:pointer;border:0;background:none;color:inherit
 .mast-meta-item .lbl{font-size:10px;color:var(--tx-4);letter-spacing:1.5px;font-weight:600;text-transform:uppercase;margin-bottom:4px}
 .mast-meta-item .val{font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--ink);font-weight:500;letter-spacing:.3px}
 
-/* PAGE */
+/* ─── PAGE BODY ─── */
 .page{max-width:1320px;margin:0 auto;padding:40px 48px 80px}
 
-/* HERO */
+/* ─── HERO STATS — premium ─── */
 .hero{background:var(--paper);border:1px solid var(--line);margin-bottom:32px;display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr 1fr;overflow:hidden}
 .hero-headline{padding:28px 32px;border-right:1px solid var(--line);background:linear-gradient(135deg,var(--ink) 0%,#15203A 100%);color:#fff;display:flex;flex-direction:column;justify-content:space-between;min-height:140px;position:relative;overflow:hidden}
 .hero-headline::after{content:'';position:absolute;right:-30px;bottom:-30px;width:180px;height:180px;border:1px solid rgba(255,255,255,.06);border-radius:50%}
@@ -74,7 +90,7 @@ button{font-family:inherit;cursor:pointer;border:0;background:none;color:inherit
 .delta.urgent{color:var(--red);background:var(--red-soft)}
 .delta.warn{color:var(--amber);background:var(--amber-soft)}
 
-/* SECTION */
+/* ─── SECTION CHROME ─── */
 .section{margin-bottom:40px}
 .sec-hd{display:flex;align-items:flex-end;justify-content:space-between;padding-bottom:14px;border-bottom:1px solid var(--line-2);margin-bottom:20px}
 .sec-hd-l{display:flex;align-items:baseline;gap:14px}
@@ -91,16 +107,21 @@ button{font-family:inherit;cursor:pointer;border:0;background:none;color:inherit
 .tool-btn:hover{background:#15203A}
 .tool-btn.ghost{background:var(--paper);color:var(--ink);border:1px solid var(--line-2)}
 .tool-btn.ghost:hover{background:var(--bg-2);border-color:var(--line-3)}
+.tool-btn .arrow{font-family:'IBM Plex Mono',monospace;font-weight:500}
 
-/* BOARD */
+/* ─── DEADLINE BOARD ─── */
 .board{background:var(--paper);border:1px solid var(--line)}
-.board-head{display:grid;grid-template-columns:96px 110px 1fr 130px 130px 110px;padding:18px 28px;background:var(--bg-2);border-bottom:1px solid var(--line-2);font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--ink);letter-spacing:1.8px;font-weight:800;text-transform:uppercase}
 .board-row{display:grid;grid-template-columns:96px 110px 1fr 130px 130px 110px;align-items:center;padding:0 28px;min-height:78px;border-bottom:1px solid var(--line);transition:background .15s;position:relative}
 .board-row:last-child{border-bottom:none}
 .board-row:hover{background:var(--bg-2)}
 .board-row.is-today{background:#FBFBFE}
 .board-row.is-today:hover{background:#F5F6FB}
 .board-row.is-urgent::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--red)}
+
+/* head */
+.board-head{display:grid;grid-template-columns:96px 110px 1fr 130px 130px 110px;padding:18px 28px;background:var(--bg-2);border-bottom:1px solid var(--line-2);font-family:'IBM Plex Mono',monospace;font-size:14px;color:var(--ink);letter-spacing:1.8px;font-weight:800;text-transform:uppercase}
+
+/* d-day cell */
 .dday{display:flex;flex-direction:column;align-items:flex-start;gap:2px}
 .dday-num{font-family:'IBM Plex Mono',monospace;font-size:26px;font-weight:700;line-height:1;letter-spacing:-1px;color:var(--ink)}
 .dday-num.urgent{color:var(--red)}
@@ -110,7 +131,7 @@ button{font-family:inherit;cursor:pointer;border:0;background:none;color:inherit
 .dday-end{font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--tx-3);letter-spacing:.3px}
 .dday-open{font-size:11px;color:var(--tx-3);font-weight:500;padding:4px 9px;border:1px solid var(--line-2);display:inline-block;letter-spacing:.5px;background:var(--paper)}
 
-/* 기관별 컬러 태그 */
+/* agency tag — base, color set per-agency via .tag.ag-XXX */
 .tag{display:inline-flex;align-items:center;justify-content:center;font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:700;padding:4px 10px;letter-spacing:.5px;border-radius:0;min-width:72px;border:1px solid currentColor;background:transparent}
 .tag.ag-IRIS{color:#6B21D9;background:#F4EFFF}
 .tag.ag-KIAT{color:#C05200;background:#FFF1E6}
@@ -123,33 +144,49 @@ button{font-family:inherit;cursor:pointer;border:0;background:none;color:inherit
 .tag.ag-KIRIA{color:#B45309;background:#FFF7E0}
 .tag.ag-KIAST{color:#0F766E;background:#E6FBF7}
 
+/* source card accent dot */
+.src-dot{width:8px;height:8px;border-radius:50%;display:inline-block;margin-right:6px;vertical-align:1px}
+.src-bar i.ag-IRIS{background:#6B21D9}
+.src-bar i.ag-KIAT{background:#C05200}
+.src-bar i.ag-KoAT{background:#9D1239}
+.src-bar i.ag-SMTECH{background:#065F46}
+.src-bar i.ag-NIPA{background:#0057B8}
+.src-bar i.ag-NIA{background:#00875A}
+.src-bar i.ag-IITP{background:#0369A1}
+.src-bar i.ag-KOSAC{background:#7E22CE}
+.src-bar i.ag-KIRIA{background:#B45309}
+.src-bar i.ag-KIAST{background:#0F766E}
+
+/* title */
 .title-cell{padding-right:16px}
 .title-text{font-size:14.5px;color:var(--ink);font-weight:500;line-height:1.5;word-break:keep-all;display:inline}
 .today-pill{display:inline-flex;align-items:center;gap:4px;font-family:'IBM Plex Mono',monospace;font-size:9.5px;font-weight:700;letter-spacing:.8px;color:#fff;background:var(--red);padding:2px 7px;margin-left:8px;vertical-align:1px;border-radius:2px}
 .today-pill::before{content:'';width:5px;height:5px;border-radius:50%;background:#fff;animation:pulse 2s ease-in-out infinite}
 .row-meta{margin-top:6px;display:flex;align-items:center;gap:10px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--tx-4);letter-spacing:.2px}
 .row-meta-sep{opacity:.5}
+
 .cell-c{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--tx-2);letter-spacing:.2px}
 .cell-c.muted{color:var(--tx-4)}
+.cell-c .label{font-size:10px;color:var(--tx-4);letter-spacing:.5px;display:block;margin-bottom:2px}
+
 .go{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:600;color:var(--ink);padding:7px 12px;border:1px solid var(--line-2);background:var(--paper);transition:all .15s;letter-spacing:.2px}
 .go:hover{border-color:var(--accent);color:var(--accent);background:var(--accent-soft)}
 .go .arr{font-family:'IBM Plex Mono',monospace;font-weight:500;transition:transform .15s}
 .go:hover .arr{transform:translateX(2px)}
 
-/* SOURCES */
+/* ─── SOURCES ─── */
 .src-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
 .src{padding:18px 20px;background:var(--paper);transition:background .15s;display:flex;flex-direction:column;justify-content:space-between;min-height:108px;position:relative}
 .src:hover{background:var(--bg-2)}
 .src::after{content:'→';position:absolute;top:14px;right:14px;font-family:'IBM Plex Mono',monospace;font-size:14px;color:var(--tx-4);transition:all .15s;opacity:0}
 .src:hover::after{color:var(--accent);opacity:1;transform:translate(2px,-2px)}
-.src-code{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--tx-3);letter-spacing:1.2px;font-weight:600;display:flex;align-items:center;gap:6px}
-.src-dot{width:8px;height:8px;border-radius:50%;display:inline-block;flex-shrink:0}
+.src-code{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--tx-3);letter-spacing:1.2px;font-weight:600}
 .src-num{font-family:'IBM Plex Mono',monospace;font-size:30px;font-weight:700;color:var(--ink);letter-spacing:-1px;line-height:1;margin-top:8px}
 .src-num small{font-size:11px;color:var(--tx-3);font-weight:500;letter-spacing:0;margin-left:3px}
 .src-bar{height:3px;background:var(--line);margin-top:14px;position:relative;overflow:hidden}
-.src-bar i{position:absolute;left:0;top:0;bottom:0;transition:width .3s}
+.src-bar i{position:absolute;left:0;top:0;bottom:0;background:var(--accent);transition:width .3s}
 
-/* FOOTER */
+/* ─── FOOTER ─── */
 .foot{margin-top:64px;padding:28px 0 0;border-top:1px solid var(--line-2);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
 .foot-l{display:flex;align-items:center;gap:14px}
 .foot-mark{width:28px;height:28px;border:1px solid var(--line-3);display:flex;align-items:center;justify-content:center;font-family:'IBM Plex Mono',monospace;font-size:9px;color:var(--tx-3);letter-spacing:1px;font-weight:700}
@@ -158,22 +195,22 @@ button{font-family:inherit;cursor:pointer;border:0;background:none;color:inherit
 .foot-r{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--tx-4);letter-spacing:.3px}
 
 @media(max-width:1100px){
-  .hero{grid-template-columns:1fr 1fr}
+  .hero{grid-template-columns:1fr 1fr;}
   .hero-headline{grid-column:1/3;border-right:none;border-bottom:1px solid var(--line)}
   .src-grid{grid-template-columns:repeat(3,1fr)}
   .board-head,.board-row{grid-template-columns:80px 90px 1fr 100px}
   .board-head .h-reg,.board-row .c-reg,.board-head .h-act,.board-row .c-act{display:none}
-  .page,.masthead-inner,.util{padding-left:20px;padding-right:20px}
 }
+
 </style>
 </head>
 <body>
-
+<!-- Top utility bar -->
 <div class="util">
   <div class="util-left">
     <span class="live"><span class="live-dot"></span>LIVE</span>
     <span class="util-sep"></span>
-    <span class="visitors mono">VISITORS &nbsp; <span id="hit">—</span></span>
+    <span class="visitors">VISITORS &nbsp; <span id="hit">—</span></span>
   </div>
   <div class="util-right">
     <a href="https://www.ptp.or.kr" target="_blank">포항테크노파크</a>
@@ -181,10 +218,11 @@ button{font-family:inherit;cursor:pointer;border:0;background:none;color:inherit
   </div>
 </div>
 
+<!-- Masthead -->
 <header class="masthead">
   <div class="masthead-inner">
     <div class="brand">
-      <div class="brand-icon">📡</div>
+      <div class="crest"><img src="assets/ptp-logo.png" alt="포항테크노파크"></div>
       <div class="brand-text">
         <div class="org">포항테크노파크 · 경북AI혁신본부</div>
         <div class="title">사업공고 모니터링</div>
@@ -194,11 +232,11 @@ button{font-family:inherit;cursor:pointer;border:0;background:none;color:inherit
     <div class="mast-meta">
       <div class="mast-meta-item">
         <div class="lbl">Issue Date</div>
-        <div class="val">2026-05-01 (금)</div>
+        <div class="val">2026.05.01 (금)</div>
       </div>
       <div class="mast-meta-item">
         <div class="lbl">Last Sync</div>
-        <div class="val">20:17:23 KST</div>
+        <div class="val">20:21:28 KST</div>
       </div>
     </div>
   </div>
@@ -206,21 +244,22 @@ button{font-family:inherit;cursor:pointer;border:0;background:none;color:inherit
 
 <main class="page">
 
+  <!-- HERO -->
   <section class="hero">
     <div class="hero-headline">
-      <div class="hero-eyebrow">— DAILY BRIEFING · AI혁신본부</div>
+      <div class="hero-eyebrow">— DAILY BRIEFING / VOL. 142</div>
       <div>
         <div class="hero-h1">금일 신규 공고 <span class="mono" style="opacity:.85">0건</span><br>마감 임박 <span class="mono" style="color:#FFB4A8">0건</span></div>
       </div>
       <div class="hero-date">
-        <span>2026-05-01 — (금)</span>
-        <strong>UPDATED 20:17</strong>
+        <span>2026-05-01 — FRIDAY</span>
+        <strong>UPDATED 20:21</strong>
       </div>
     </div>
     <div class="stat">
       <div class="stat-lbl">총 수집</div>
       <div class="stat-num">44<small>건</small></div>
-      <div class="stat-foot">최근 5일 이내</div>
+      <div class="stat-foot">최근 5일 <span class="delta up">+2</span></div>
     </div>
     <div class="stat">
       <div class="stat-lbl">오늘 신규</div>
@@ -235,10 +274,11 @@ button{font-family:inherit;cursor:pointer;border:0;background:none;color:inherit
     <div class="stat">
       <div class="stat-lbl">모니터링</div>
       <div class="stat-num">10<small>기관</small></div>
-      <div class="stat-foot">자동 수집 / 3h</div>
+      <div class="stat-foot">자동 수집 / 1h</div>
     </div>
   </section>
 
+  <!-- DEADLINES -->
   <section class="section">
     <div class="sec-hd">
       <div class="sec-hd-l">
@@ -251,10 +291,11 @@ button{font-family:inherit;cursor:pointer;border:0;background:none;color:inherit
           <span class="tool-search-icon">⌕</span>
           <input id="q" type="text" placeholder="기관 · 공고명 검색" oninput="filterRows()">
         </div>
-        <button class="tool-btn ghost" onclick="toggleFilter()">필터</button>
-        <button class="tool-btn" onclick="downloadExcel()"><span>↓</span> XLSX 다운로드</button>
+        <button class="tool-btn ghost" onclick="alert('필터')">필터</button>
+        <button class="tool-btn" onclick="downloadExcel()"><span class="arrow">↓</span> XLSX 다운로드</button>
       </div>
     </div>
+
     <div class="board">
       <div class="board-head">
         <div>D-DAY</div>
@@ -268,12 +309,13 @@ button{font-family:inherit;cursor:pointer;border:0;background:none;color:inherit
     </div>
   </section>
 
+  <!-- SOURCES -->
   <section class="section">
     <div class="sec-hd">
       <div class="sec-hd-l">
         <span class="sec-num">02 / SOURCES</span>
         <h2 class="sec-title">기관별 수집 현황</h2>
-        <span class="sec-sub">10개 출처 · 3시간마다 자동 수집</span>
+        <span class="sec-sub">10개 출처 · 매시간 자동 수집</span>
       </div>
       <div class="sec-tools">
         <span class="cell-c muted">총 <strong style="color:var(--ink)">44</strong>건 수집됨</span>
@@ -282,50 +324,60 @@ button{font-family:inherit;cursor:pointer;border:0;background:none;color:inherit
     <div class="src-grid" id="srcs"></div>
   </section>
 
+  <!-- FOOTER -->
   <footer class="foot">
     <div class="foot-l">
       <div class="foot-mark">PTP</div>
       <div class="foot-text"><strong>(재)포항테크노파크 경북AI혁신본부</strong> · AI융합산업팀 운영 · 본 페이지의 정보는 자동 수집된 자료로 정확성·완전성을 보장하지 않습니다.</div>
     </div>
-    <div class="foot-r">v7.2 · BUILD 2026-05-01 20:17 KST</div>
+    <div class="foot-r">v7.2 · BUILD 2026-05-01 20:21 KST</div>
   </footer>
 
 </main>
-
 <script>
 const DATA = [{"agency": "IRIS", "title": "[한국산업기술기획평가원] 2026년도 수요맞춤형산업별배터리소재및셀기술개발 사업 신규 지원대상 연구개발과제 재공고", "reg": "2026-04-30", "end": "2026-05-14", "dday": 13, "today": false, "link": "https://www.iris.go.kr/contents/retrieveBsnsAncmBtinSituView.do?ancmId=021454"}, {"agency": "IRIS", "title": "[한국연구재단] 2026년도 제2차 과학기술분야 연구기획과제 공모", "reg": "2026-04-30", "end": "2026-05-13", "dday": 12, "today": false, "link": "https://www.iris.go.kr/contents/retrieveBsnsAncmBtinSituView.do?ancmId=021436"}, {"agency": "IRIS", "title": "[한국산업기술진흥원] 2026년도 기업수요기반 1% MVP 프로젝트 사업 공동연구기관 추가 모집 공고", "reg": "2026-04-30", "end": "2026-05-11", "dday": 10, "today": false, "link": "https://www.iris.go.kr/contents/retrieveBsnsAncmBtinSituView.do?ancmId=021414"}, {"agency": "IRIS", "title": "[한국보건산업진흥원] 2026년도 제2차 식품의약품안전처 출연연구개발사업 신규지원 대상과제  공고", "reg": "2026-04-30", "end": "2026-05-14", "dday": 13, "today": false, "link": "https://www.iris.go.kr/contents/retrieveBsnsAncmBtinSituView.do?ancmId=021356"}, {"agency": "IRIS", "title": "[한국연구재단] 2026년도 바이오·의료기술개발 사업 신규과제 제4차 공모", "reg": "2026-04-29", "end": "2026-05-29", "dday": 28, "today": false, "link": "https://www.iris.go.kr/contents/retrieveBsnsAncmBtinSituView.do?ancmId=021254"}, {"agency": "IRIS", "title": "[한국연구재단] 2026년도 바이오·의료기술개발 사업 제1차 신규과제 3차 재공모", "reg": "2026-04-28", "end": "2026-05-28", "dday": 27, "today": false, "link": "https://www.iris.go.kr/contents/retrieveBsnsAncmBtinSituView.do?ancmId=021338"}, {"agency": "IRIS", "title": "[한국연구재단] 2026년도 치매의료기술연구개발사업 1차 신규과제 재공모", "reg": "2026-04-28", "end": "2026-05-28", "dday": 27, "today": false, "link": "https://www.iris.go.kr/contents/retrieveBsnsAncmBtinSituView.do?ancmId=021335"}, {"agency": "IRIS", "title": "[한국보건산업진흥원] 2026년도 첨단바이오 융합인재 양성사업 신규지원 대상과제 공고", "reg": "2026-04-27", "end": "2026-05-27", "dday": 26, "today": false, "link": "https://www.iris.go.kr/contents/retrieveBsnsAncmBtinSituView.do?ancmId=021294"}, {"agency": "KIAT", "title": "2026년도 산업통상협력개발지원(ODA)사업 사전타당성조사 공고", "reg": "2026-04-30", "end": "2026-06-05", "dday": 35, "today": false, "link": "https://www.kiat.or.kr/front/board/boardContentsView.do?board_id=90&contents_id=12c9493c527041cdb8aa641a0f0c61f7&MenuId=b159c9dac684471b87256f1e25404f5e"}, {"agency": "KIAT", "title": "2026년도 기업수요기반 1% MVP 프로젝트 사업 공동연구기관 추가 모집 공고", "reg": "2026-04-30", "end": "2026-05-11", "dday": 10, "today": false, "link": "https://www.kiat.or.kr/front/board/boardContentsView.do?board_id=90&contents_id=fd3e8eb52ccc4d66a6685bb1726fb469&MenuId=b159c9dac684471b87256f1e25404f5e"}, {"agency": "KIAT", "title": "2026년 지역산업 균형발전 유공 포상계획 재공고", "reg": "2026-04-30", "end": "2026-05-14", "dday": 13, "today": false, "link": "https://www.kiat.or.kr/front/board/boardContentsView.do?board_id=90&contents_id=67a9a66f961f4d75b871d4ebd4f3ddb0&MenuId=b159c9dac684471b87256f1e25404f5e"}, {"agency": "KIAT", "title": "2026년 청년도약 인재양성 부트캠프 사업 공고", "reg": "2026-04-29", "end": "2026-06-01", "dday": 31, "today": false, "link": "https://www.kiat.or.kr/front/board/boardContentsView.do?board_id=90&contents_id=4bedd081452040e88f884f5c217c5637&MenuId=b159c9dac684471b87256f1e25404f5e"}, {"agency": "KIAT", "title": "첨단분야 글로벌 교육과정 프로그램 참여 모집 3차 공고", "reg": "2026-04-28", "end": "2026-05-13", "dday": 12, "today": false, "link": "https://www.kiat.or.kr/front/board/boardContentsView.do?board_id=90&contents_id=8ad8e859019b440dbd575ed4d3689ff5&MenuId=b159c9dac684471b87256f1e25404f5e"}, {"agency": "KIAT", "title": "「혁신 프리미어 1000」산업통상부 선정계획 연장 공고", "reg": "2026-04-27", "end": "2026-05-06", "dday": 5, "today": false, "link": "https://www.kiat.or.kr/front/board/boardContentsView.do?board_id=90&contents_id=cb32ff7d95d04166a17db9e2683464dc&MenuId=b159c9dac684471b87256f1e25404f5e"}, {"agency": "KIAT", "title": "2026년 유레카 네트워크 전략공고(첨단바이오 분야)", "reg": "2026-04-27", "end": "2026-09-28", "dday": 150, "today": false, "link": "https://www.kiat.or.kr/front/board/boardContentsView.do?board_id=90&contents_id=0d95ab4b466b4e4f943b73468ebe4109&MenuId=b159c9dac684471b87256f1e25404f5e"}, {"agency": "KIAT", "title": "2026년도 소재부품장비-뿌리 산업 발전 유공 포상계획 연장공고", "reg": "2026년도 소재부", "end": "2026-05-21", "dday": 20, "today": false, "link": "https://www.kiat.or.kr/front/board/boardContentsView.do?board_id=90&contents_id=ba1c3443edfd4beaa1e1e8deaf367ed6&MenuId=b159c9dac684471b87256f1e25404f5e"}, {"agency": "KIAT", "title": "2026년 산업기술국제협력(양자-체코) 접수 안내", "reg": "2026년 산업기술", "end": "2026-06-24", "dday": 54, "today": false, "link": "https://www.kiat.or.kr/front/board/boardContentsView.do?board_id=90&contents_id=1e54f14a32194edb8286d101c5a96007&MenuId=b159c9dac684471b87256f1e25404f5e"}, {"agency": "KIAT", "title": "2026년도 한국형Manufacturing-X플랫폼표준모델개발및실증(R&D) 신규지원 대상과제 공고", "reg": "2026년도 한국형", "end": "2026-05-11", "dday": 10, "today": false, "link": "https://www.kiat.or.kr/front/board/boardContentsView.do?board_id=90&contents_id=bce3ba3a628c4cda97ce0d96edad9b0b&MenuId=b159c9dac684471b87256f1e25404f5e"}, {"agency": "KoAT", "title": "「인도 바이어매칭 수출상담회」 참가기업 추가모집 공고", "reg": "2026-04-30", "end": null, "dday": null, "today": false, "link": "https://www.koat.or.kr/board/business/16208/view.do"}, {"agency": "KoAT", "title": "스마트팜 청년창업 보육센터 2026년 9기 교육생 모집 공고", "reg": "2026-04-30", "end": null, "dday": null, "today": false, "link": "https://www.koat.or.kr/board/business/16207/view.do"}, {"agency": "KoAT", "title": "2026년 제1차 전북 김제 스마트팜 혁신밸리 실증단지 입주대상 모집 선정 결과 알림", "reg": "2026-04-28", "end": null, "dday": null, "today": false, "link": "https://www.koat.or.kr/board/business/16203/view.do"}, {"agency": "KoAT", "title": "「2026 종자생명산업 맞춤형 인력양성」 종자산업 분야 상반기(3차) 인턴 모집 공고", "reg": "2026-04-27", "end": null, "dday": null, "today": false, "link": "https://www.koat.or.kr/board/business/16202/view.do"}, {"agency": "KoAT", "title": "「2026 종자생명산업 맞춤형 인력양성」 종자산업 분야 인턴십 인턴(2차) 선정 결과 알림", "reg": "2026-04-27", "end": null, "dday": null, "today": false, "link": "https://www.koat.or.kr/board/business/16201/view.do"}, {"agency": "SMTECH", "title": "2026년도 제2차 중소벤처기업부 혁신제품 지정기간 연장(1차연장) 공고", "reg": "2026-04-29", "end": null, "dday": null, "today": false, "link": "https://www.smtech.go.kr/front/ifg/no/notice02_detail.do?buclYy=&ancmId=S02863&buclCd=S9112&dtlAncmSn=1&schdSe=MO5005&aplySn=1&searchCondition=&searchKeyword=&pageIndex=1"}, {"agency": "SMTECH", "title": "2026년도 기술사업화 패키지 지원사업 제2차 시행계획 공고(기술거래플랫폼 연계)", "reg": "2026-04-27", "end": null, "dday": null, "today": false, "link": "https://www.smtech.go.kr/front/ifg/no/notice02_detail.do?buclYy=&ancmId=S02860&buclCd=S9H01&dtlAncmSn=2&schdSe=MO5005&aplySn=1&searchCondition=&searchKeyword=&pageIndex=1"}, {"agency": "SMTECH", "title": "2026년도 기술사업화 패키지 지원사업 제2차 시행계획 공고(R&D 수행 창업기업)", "reg": "2026-04-27", "end": null, "dday": null, "today": false, "link": "https://www.smtech.go.kr/front/ifg/no/notice02_detail.do?buclYy=&ancmId=S02862&buclCd=S9H01&dtlAncmSn=1&schdSe=MO5005&aplySn=1&searchCondition=&searchKeyword=&pageIndex=1"}, {"agency": "SMTECH", "title": "2026년도 기술사업화 패키지 지원사업 제2차 시행계획 공고(규제혁신 연계)", "reg": "2026-04-27", "end": null, "dday": null, "today": false, "link": "https://www.smtech.go.kr/front/ifg/no/notice02_detail.do?buclYy=&ancmId=S02861&buclCd=S9H01&dtlAncmSn=1&schdSe=MO5005&aplySn=1&searchCondition=&searchKeyword=&pageIndex=1"}, {"agency": "SMTECH", "title": "2026년도 기술사업화 패키지 지원사업 제2차 시행계획 공고(정부 R&D 우수과제)", "reg": "2026-04-27", "end": null, "dday": null, "today": false, "link": "https://www.smtech.go.kr/front/ifg/no/notice02_detail.do?buclYy=&ancmId=S02859&buclCd=S9H01&dtlAncmSn=1&schdSe=MO5005&aplySn=1&searchCondition=&searchKeyword=&pageIndex=1"}, {"agency": "NIPA", "title": "2026년 소형 데이터센터 기반 AI산업 성장 지원 사업 공고", "reg": "2026-04-30", "end": null, "dday": null, "today": false, "link": "https://www.nipa.kr/home/2-2/16750"}, {"agency": "NIA", "title": "[공모] 2026년 AI허브 인공지능 학습용 데이터 업사이클링 사업 공고", "reg": "2026-04-30", "end": null, "dday": null, "today": false, "link": "https://www.nia.or.kr/site/nia_kor/ex/bbs/View.do?cbIdx=78336&bcIdx=29342&parentSeq=29342"}, {"agency": "NIA", "title": "[조달입찰공고] 과의존 청소년 대상 디지털 디톡스 기획 및 운영", "reg": "2026-04-30", "end": null, "dday": null, "today": false, "link": "https://www.nia.or.kr/site/nia_kor/ex/bbs/View.do?cbIdx=78336&bcIdx=29341&parentSeq=29341"}, {"agency": "NIA", "title": "[입찰공고_재공고]  2026년 공공데이터 활용앱 민간 중복·유사 서비스 실태조사 용역", "reg": "2026-04-30", "end": null, "dday": null, "today": false, "link": "https://www.nia.or.kr/site/nia_kor/ex/bbs/View.do?cbIdx=78336&bcIdx=29340&parentSeq=29340"}, {"agency": "NIA", "title": "[조달입찰공고] 제주특별자치도교육청 학내망 고도화 예정학교 대상 실시설계 용역", "reg": "2026-04-30", "end": null, "dday": null, "today": false, "link": "https://www.nia.or.kr/site/nia_kor/ex/bbs/View.do?cbIdx=78336&bcIdx=29339&parentSeq=29339"}, {"agency": "NIA", "title": "[입찰공고] (신규) 디지털포용 얼라이언스 운영", "reg": "2026-04-29", "end": null, "dday": null, "today": false, "link": "https://www.nia.or.kr/site/nia_kor/ex/bbs/View.do?cbIdx=78336&bcIdx=29337&parentSeq=29337"}, {"agency": "NIA", "title": "[입찰공고] 스마트시티 세종국가시범도시 스마트 IoT 구축 지원 위탁감리", "reg": "2026-04-29", "end": null, "dday": null, "today": false, "link": "https://www.nia.or.kr/site/nia_kor/ex/bbs/View.do?cbIdx=78336&bcIdx=29336&parentSeq=29336"}, {"agency": "NIA", "title": "[조달입찰 재공고] 2026년 공공 재해복구시스템(DR) 구축 ISP 사업(5차)(긴급)", "reg": "2026-04-29", "end": null, "dday": null, "today": false, "link": "https://www.nia.or.kr/site/nia_kor/ex/bbs/View.do?cbIdx=78336&bcIdx=29334&parentSeq=29334"}, {"agency": "NIA", "title": "[사전공개] 2026년 KOREN기반 AI NETWORK 장비 시범도입 실증 공모", "reg": "2026-04-28", "end": null, "dday": null, "today": false, "link": "https://www.nia.or.kr/site/nia_kor/ex/bbs/View.do?cbIdx=78336&bcIdx=29333&parentSeq=29333"}, {"agency": "NIA", "title": "[조달입찰공고] Agentic AI Alliance 운영지원", "reg": "2026-04-28", "end": null, "dday": null, "today": false, "link": "https://www.nia.or.kr/site/nia_kor/ex/bbs/View.do?cbIdx=78336&bcIdx=29331&parentSeq=29331"}, {"agency": "NIA", "title": "[조달입찰공고] 2026년 통신서비스 품질측정 환경구축 및 커버리지 점검지원", "reg": "2026-04-28", "end": null, "dday": null, "today": false, "link": "https://www.nia.or.kr/site/nia_kor/ex/bbs/View.do?cbIdx=78336&bcIdx=29330&parentSeq=29330"}, {"agency": "KOSAC", "title": "2026년도 『차세대 공학자 양성사업』 지원단 선정 공고", "reg": "2026-04-29", "end": "2026-06-07", "dday": 37, "today": false, "link": "https://www.kosac.re.kr/menus/274/bns/PBANC_00000000000438"}, {"agency": "KOSAC", "title": "2026년도 『차세대 공학자 양성사업』 사업단 선정 공고", "reg": "2026-04-29", "end": "2026-06-07", "dday": 37, "today": false, "link": "https://www.kosac.re.kr/menus/274/bns/PBANC_00000000000437"}, {"agency": "KOSAC", "title": "AI 인재 저변 확대를 위한 참여형 프로그램 성과지표 및 확산모델 연구 공고", "reg": "2026-04-29", "end": "2026-05-13", "dday": 12, "today": false, "link": "https://www.kosac.re.kr/menus/274/bns/PBANC_00000000000440"}, {"agency": "KOSAC", "title": "2026 모두의 AI 챌린지 기획 운영사업 프로그램 운영기관 공모 공고", "reg": "2026-04-28", "end": "2026-05-18", "dday": 17, "today": false, "link": "https://www.kosac.re.kr/menus/274/bns/PBANC_00000000000431"}, {"agency": "KIRIA", "title": "로봇분야 예비창업자 및 재창업자를 위한 창업 성장 프로그램 참가자 모집", "reg": "2026-04-28", "end": "2026-06-19", "dday": 49, "today": false, "link": "https://www.kiria.org/portal/info/portalInfoBusinessView.do?ibusId=IBUS_000000000001248"}];
 const SOURCES = [{"code": "KIAT", "count": 10, "color": "#C05200"}, {"code": "NIA", "count": 10, "color": "#00875A"}, {"code": "IRIS", "count": 8, "color": "#6B21D9"}, {"code": "KoAT", "count": 5, "color": "#9D1239"}, {"code": "SMTECH", "count": 5, "color": "#065F46"}, {"code": "KOSAC", "count": 4, "color": "#7E22CE"}, {"code": "NIPA", "count": 1, "color": "#0057B8"}, {"code": "KIRIA", "count": 1, "color": "#B45309"}];
+function ddayClass(d) {
+  if (d === null) return 'open';
+  if (d < 0) return 'past';
+  if (d <= 3) return 'urgent';
+  if (d <= 7) return 'soon';
+  return 'safe';
+}
 
 function ddayCell(d, end) {
   if (d === null) return '<span class="dday-open">상시 모집</span>';
-  if (d < 0) return `<div class="dday"><div class="dday-num" style="color:var(--tx-4);text-decoration:line-through">D-${Math.abs(d)}</div><div class="dday-end">${end||'-'}</div></div>`;
+  if (d < 0) return `<div class="dday"><div class="dday-num" style="color:var(--tx-4);text-decoration:line-through">D-${Math.abs(d)}</div><div class="dday-end">${end || '-'}</div></div>`;
   const cls = d <= 3 ? 'urgent' : (d <= 7 ? 'soon' : 'safe');
   return `<div class="dday"><div class="dday-num ${cls}"><span class="pre">D-</span>${d}</div><div class="dday-end">${end}</div></div>`;
 }
 
-function renderRows(filter) {
-  const sorted = [...DATA].sort((a,b) => {
-    const ax = a.dday===null ? 9000 : (a.dday<0 ? 9999 : a.dday);
-    const bx = b.dday===null ? 9000 : (b.dday<0 ? 9999 : b.dday);
+function renderRows(filter='') {
+  // sort: dated by dday asc, open last; past at very end
+  const sorted = [...DATA].sort((a, b) => {
+    const ax = a.dday === null ? 9000 : (a.dday < 0 ? 9999 : a.dday);
+    const bx = b.dday === null ? 9000 : (b.dday < 0 ? 9999 : b.dday);
     return ax - bx;
   });
-  const q = (filter||'').trim().toLowerCase();
-  const filtered = !q ? sorted : sorted.filter(r => (r.agency+' '+r.title).toLowerCase().includes(q));
+  const q = filter.trim().toLowerCase();
+  const filtered = !q ? sorted : sorted.filter(r => (r.agency + ' ' + r.title).toLowerCase().includes(q));
   const html = filtered.map(r => {
-    const isUrgent = r.dday!==null && r.dday>=0 && r.dday<=3;
-    return `<div class="board-row ${r.today?'is-today':''} ${isUrgent?'is-urgent':''}">
+    const isToday = r.today;
+    const isUrgent = r.dday !== null && r.dday >= 0 && r.dday <= 3;
+    return `
+    <div class="board-row ${isToday ? 'is-today' : ''} ${isUrgent ? 'is-urgent' : ''}">
       <div>${ddayCell(r.dday, r.end)}</div>
       <div><span class="tag ag-${r.agency}">${r.agency}</span></div>
       <div class="title-cell">
-        <a href="${r.link}" target="_blank" class="title-text">${r.title}</a>${r.today?'<span class="today-pill">NEW</span>':''}
+        <a href="${r.link}" target="_blank" class="title-text">${r.title}</a>${isToday ? '<span class="today-pill">NEW</span>' : ''}
         <div class="row-meta">
           <span>등록 ${r.reg}</span>
           <span class="row-meta-sep">·</span>
-          <span>${r.end?'마감 '+r.end:'상시 모집 / 정원 충원시 마감'}</span>
+          <span>${r.end ? '마감 ' + r.end : '상시 모집 / 정원 충원시 마감'}</span>
         </div>
       </div>
       <div class="cell-c c-reg">${r.reg}</div>
-      <div class="cell-c">${r.end||'<span class="muted">상시</span>'}</div>
+      <div class="cell-c">${r.end || '<span class="muted">상시</span>'}</div>
       <div class="c-act" style="text-align:right">
         <a href="${r.link}" target="_blank" class="go">바로가기 <span class="arr">→</span></a>
       </div>
@@ -336,39 +388,37 @@ function renderRows(filter) {
 }
 
 function renderSources() {
-  const max = Math.max(...SOURCES.map(s=>s.count),1);
-  document.getElementById('srcs').innerHTML = SOURCES.map(s=>`
-    <div class="src">
+  const max = Math.max(...SOURCES.map(s => s.count));
+  document.getElementById('srcs').innerHTML = SOURCES.map(s => `
+    <a class="src" href="#" target="_blank">
       <div>
         <div class="src-code"><span class="src-dot" style="background:${s.color}"></span>${s.code}</div>
         <div class="src-num">${s.count}<small>건</small></div>
       </div>
-      <div class="src-bar"><i style="width:${(s.count/max)*100}%;background:${s.color}"></i></div>
-    </div>`).join('');
+      <div class="src-bar"><i class="ag-${s.code}" style="width:${(s.count/max)*100}%"></i></div>
+    </a>
+  `).join('');
 }
 
 function filterRows() { renderRows(document.getElementById('q').value); }
-function toggleFilter() { alert('필터 기능은 준비 중입니다'); }
 
 function downloadExcel() {
   const hdrs = ['No','기관','공고 제목','등록일','공모기간 종료','D-Day','링크'];
-  let t = '<table border="1"><tr>' + hdrs.map(h=>`<th style="background:#0A0E1A;color:white">${h}</th>`).join('') + '</tr>';
-  DATA.forEach((r,i)=>{
-    const dd = r.dday===null?'상시':(r.dday<0?'마감':'D-'+r.dday);
-    t+=`<tr><td>${i+1}</td><td>${r.agency}</td><td>${r.title}</td><td>${r.reg}</td><td>${r.end||'-'}</td><td>${dd}</td><td><a href="${r.link}">${r.link}</a></td></tr>`;
+  let t = '<table border="1"><tr>' + hdrs.map(h => `<th style="background:#0A0E1A;color:white">${h}</th>`).join('') + '</tr>';
+  DATA.forEach((r, i) => {
+    const dd = r.dday === null ? '상시' : (r.dday < 0 ? '마감' : 'D-' + r.dday);
+    t += `<tr><td>${i+1}</td><td>${r.agency}</td><td>${r.title}</td><td>${r.reg}</td><td>${r.end || '-'}</td><td>${dd}</td><td><a href="${r.link}">${r.link}</a></td></tr>`;
   });
-  t+='</table>';
-  const a=document.createElement('a');
-  a.href='data:application/vnd.ms-excel;charset=utf-8,'+encodeURIComponent('<html><head><meta charset="UTF-8"></head><body>'+t+'</body></html>');
-  a.download='사업공고_'+new Date().toISOString().slice(0,10).replace(/-/g,'')+'.xls';
-  document.body.appendChild(a);a.click();document.body.removeChild(a);
+  t += '</table>';
+  const html = '<html><head><meta charset="UTF-8"></head><body>' + t + '</body></html>';
+  const a = document.createElement('a');
+  a.href = 'data:application/vnd.ms-excel;charset=utf-8,' + encodeURIComponent(html);
+  a.download = '사업공고_' + new Date().toISOString().slice(0,10).replace(/-/g,'') + '.xls';
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
 }
 
-// 접속자 카운터
-fetch('https://api.countapi.xyz/hit/234401-tech.github.io/biz-monitor')
-  .then(r=>r.json()).then(d=>{if(d.value)document.getElementById('hit').textContent=d.value.toLocaleString();})
-  .catch(()=>{});
-
+renderRows();
+renderSources();
 renderRows();
 renderSources();
 </script>

@@ -187,9 +187,9 @@ thead th.c{text-align:center}
       <div class="brand-org"><small>운영기관</small>경북AI혁신본부</div>
     </div>
     <div class="header-right">
-      <div class="h-datetime">수집일시<strong>2026-06-25 17:00</strong></div>
+      <div class="h-datetime">수집일시<strong>2026-06-25 18:00</strong></div>
       <div class="h-stat-today"><div class="h-stat-num">1</div><div class="h-stat-lbl">오늘 신규</div></div>
-      <div class="h-stat"><div class="h-stat-num">15</div><div class="h-stat-lbl">총 수집 건수</div></div>
+      <div class="h-stat"><div class="h-stat-num">14</div><div class="h-stat-lbl">총 수집 건수</div></div>
     </div>
   </div>
 </header>
@@ -250,7 +250,7 @@ thead th.c{text-align:center}
         <a href="https://www.iitp.kr/web/lay1/program/S1T44C51/iris/list.do" target="_blank" class="sc" style="--ac:#0369A1;--bg:#E0F2FE;--dk:#075985;--ibg:#E0F2FE;">
           <div class="sc-icon">🔷</div>
           <div class="sc-label">IITP</div>
-          <div class="sc-num">1</div>
+          <div class="sc-num">0</div>
           <div class="sc-sub">건 수집</div>
           <div class="sc-arrow">→</div>
         </a>
@@ -278,7 +278,7 @@ thead th.c{text-align:center}
   <div class="sec-hd">
     <span class="sec-chip">Announcements</span>
     <span class="sec-title">공고 목록</span>
-    <span class="sec-count">· 15 results</span>
+    <span class="sec-count">· 14 results</span>
     <div class="search-wrap">
       <span class="search-icon">🔍</span>
       <input class="search-input" id="searchInput" type="text" placeholder="기관명, 공고 제목 검색..." oninput="filterTable()">
@@ -407,14 +407,6 @@ thead th.c{text-align:center}
         </tr>
         <tr class="tr">
           <td class="c-no">14</td>
-          <td class="c-ag"><span class="tag" style="color:#075985;background:#E0F2FE;">IITP</span></td>
-          <td class="c-tl"><span class="tl-wrap">보안 점검</span></td>
-          <td class="c-dt">2026-06-23</td>
-          <td class="c-dl">2022-06-01 ~ 2026-06-26</td>
-          <td class="c-btn"><a href="https://www.iitp.kr/web/lay1/program/S1T44C51/iris/view.do?id=PBD202600000079" target="_blank" class="btn-go">바로가기</a></td>
-        </tr>
-        <tr class="tr">
-          <td class="c-no">15</td>
           <td class="c-ag"><span class="tag" style="color:#581C87;background:#FAF5FF;">KOSAC</span></td>
           <td class="c-tl"><span class="tl-wrap">[재공고] ｢2026년 AI·SW 기술 기반 시뮬레이션 콘텐츠 기획｣   수행기관 모집 공고</span></td>
           <td class="c-dt">2026-06-24</td>
@@ -583,18 +575,6 @@ thead th.c{text-align:center}
         </div>
         <div class="mc" >
           <div class="mc-top">
-            <span class="tag" style="color:#075985;background:#E0F2FE;">IITP</span>
-            
-            <span class="mc-date">2026-06-23</span>
-          </div>
-          <div class="mc-title">보안 점검</div>
-          <div class="mc-bot">
-            <span class="mc-dl">2022-06-01 ~ 2026-06-26</span>
-            <a href="https://www.iitp.kr/web/lay1/program/S1T44C51/iris/view.do?id=PBD202600000079" target="_blank" class="btn-go sm">바로가기 →</a>
-          </div>
-        </div>
-        <div class="mc" >
-          <div class="mc-top">
             <span class="tag" style="color:#581C87;background:#FAF5FF;">KOSAC</span>
             
             <span class="mc-date">2026-06-24</span>
@@ -610,7 +590,7 @@ thead th.c{text-align:center}
 <footer class="footer">
   <div class="footer-inner">
     <span class="footer-copy">(재)포항테크노파크 경북AI혁신본부 · Made by AI융합산업팀</span>
-    <span class="footer-ver">사업공고 자동 수집 v7.0 · 2026-06-25 17:00</span>
+    <span class="footer-ver">사업공고 자동 수집 v7.0 · 2026-06-25 18:00</span>
   </div>
 </footer>
 <script>
@@ -631,7 +611,7 @@ function filterTable() {
     const text = c.innerText.toLowerCase();
     c.style.display = !q || text.includes(q) ? '' : 'none';
   });
-  document.querySelector('.sec-count').innerText = q ? '· ' + count + ' results' : '· 15 results';
+  document.querySelector('.sec-count').innerText = q ? '· ' + count + ' results' : '· 14 results';
 }
 function clearSearch() {
   document.getElementById('searchInput').value = '';

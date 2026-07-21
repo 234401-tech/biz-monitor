@@ -187,9 +187,9 @@ thead th.c{text-align:center}
       <div class="brand-org"><small>운영기관</small>경북AI혁신본부</div>
     </div>
     <div class="header-right">
-      <div class="h-datetime">수집일시<strong>2026-07-21 13:00</strong></div>
-      <div class="h-stat-today"><div class="h-stat-num">3</div><div class="h-stat-lbl">오늘 신규</div></div>
-      <div class="h-stat"><div class="h-stat-num">12</div><div class="h-stat-lbl">총 수집 건수</div></div>
+      <div class="h-datetime">수집일시<strong>2026-07-21 14:00</strong></div>
+      <div class="h-stat-today"><div class="h-stat-num">4</div><div class="h-stat-lbl">오늘 신규</div></div>
+      <div class="h-stat"><div class="h-stat-num">13</div><div class="h-stat-lbl">총 수집 건수</div></div>
     </div>
   </div>
 </header>
@@ -257,7 +257,7 @@ thead th.c{text-align:center}
         <a href="https://www.kosac.re.kr/menus/274/bns" target="_blank" class="sc" style="--ac:#7E22CE;--bg:#FAF5FF;--dk:#581C87;--ibg:#FAF5FF;">
           <div class="sc-icon">🔮</div>
           <div class="sc-label">KOSAC</div>
-          <div class="sc-num">0</div>
+          <div class="sc-num">1</div>
           <div class="sc-sub">건 수집</div>
           <div class="sc-arrow">→</div>
         </a>
@@ -278,7 +278,7 @@ thead th.c{text-align:center}
   <div class="sec-hd">
     <span class="sec-chip">Announcements</span>
     <span class="sec-title">공고 목록</span>
-    <span class="sec-count">· 12 results</span>
+    <span class="sec-count">· 13 results</span>
     <div class="search-wrap">
       <span class="search-icon">🔍</span>
       <input class="search-input" id="searchInput" type="text" placeholder="기관명, 공고 제목 검색..." oninput="filterTable()">
@@ -389,8 +389,16 @@ thead th.c{text-align:center}
           <td class="c-dl">-</td>
           <td class="c-btn"><a href="https://www.nia.or.kr/site/nia_kor/ex/bbs/View.do?cbIdx=78336&bcIdx=29677&parentSeq=29677" target="_blank" class="btn-go">바로가기</a></td>
         </tr>
-        <tr class="tr">
+        <tr class="tr tr-today">
           <td class="c-no">12</td>
+          <td class="c-ag"><span class="tag" style="color:#581C87;background:#FAF5FF;">KOSAC</span></td>
+          <td class="c-tl"><span class="tl-wrap">2026년 STEAM 클럽 프로그램 개발·보급 과제 공고<span class="today-badge">TODAY</span></span></td>
+          <td class="c-dt">2026-07-21</td>
+          <td class="c-dl">2026-07-10 ~ 2026-07-30</td>
+          <td class="c-btn"><a href="https://www.kosac.re.kr/menus/274/bns/PBANC_00000000000491" target="_blank" class="btn-go">바로가기</a></td>
+        </tr>
+        <tr class="tr">
+          <td class="c-no">13</td>
           <td class="c-ag"><span class="tag" style="color:#92400E;background:#FFFBEB;">KIRIA</span></td>
           <td class="c-tl"><span class="tl-wrap">2026년도 「한-체코 첨단로봇산업 협력센터 구축사업」 지원과제 모집 공고</span></td>
           <td class="c-dt">2026-07-20</td>
@@ -533,6 +541,18 @@ thead th.c{text-align:center}
             <a href="https://www.nia.or.kr/site/nia_kor/ex/bbs/View.do?cbIdx=78336&bcIdx=29677&parentSeq=29677" target="_blank" class="btn-go sm">바로가기 →</a>
           </div>
         </div>
+        <div class="mc" style="background:#FFFBEB;border-color:#F6C76A;">
+          <div class="mc-top">
+            <span class="tag" style="color:#581C87;background:#FAF5FF;">KOSAC</span>
+            <span class="today-badge">TODAY</span>
+            <span class="mc-date">2026-07-21</span>
+          </div>
+          <div class="mc-title">2026년 STEAM 클럽 프로그램 개발·보급 과제 공고</div>
+          <div class="mc-bot">
+            <span class="mc-dl">2026-07-10 ~ 2026-07-30</span>
+            <a href="https://www.kosac.re.kr/menus/274/bns/PBANC_00000000000491" target="_blank" class="btn-go sm">바로가기 →</a>
+          </div>
+        </div>
         <div class="mc" >
           <div class="mc-top">
             <span class="tag" style="color:#92400E;background:#FFFBEB;">KIRIA</span>
@@ -550,7 +570,7 @@ thead th.c{text-align:center}
 <footer class="footer">
   <div class="footer-inner">
     <span class="footer-copy">(재)포항테크노파크 경북AI혁신본부 · Made by AI융합산업팀</span>
-    <span class="footer-ver">사업공고 자동 수집 v7.0 · 2026-07-21 13:00</span>
+    <span class="footer-ver">사업공고 자동 수집 v7.0 · 2026-07-21 14:00</span>
   </div>
 </footer>
 <script>
@@ -571,7 +591,7 @@ function filterTable() {
     const text = c.innerText.toLowerCase();
     c.style.display = !q || text.includes(q) ? '' : 'none';
   });
-  document.querySelector('.sec-count').innerText = q ? '· ' + count + ' results' : '· 12 results';
+  document.querySelector('.sec-count').innerText = q ? '· ' + count + ' results' : '· 13 results';
 }
 function clearSearch() {
   document.getElementById('searchInput').value = '';

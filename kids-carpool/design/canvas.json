@@ -1,0 +1,13 @@
+{
+  "artboards": [
+    { "file": "Onboarding.dc.html", "x": 0, "y": 0, "w": 390, "h": 844, "title": "1. 온보딩" },
+    { "file": "Main.dc.html", "x": 510, "y": 0, "w": 390, "h": 844, "title": "2. 홈" },
+    { "file": "LiveTracking.dc.html", "x": 1020, "y": 0, "w": 390, "h": 844, "title": "3. 실시간 위치" },
+    { "file": "Schedule.dc.html", "x": 1530, "y": 0, "w": 390, "h": 844, "title": "4. 주간 당번표" },
+    { "file": "DriverProfile.dc.html", "x": 2040, "y": 0, "w": 390, "h": 844, "title": "5. 이웃 프로필" }
+  ],
+  "annotations": [
+    { "id": "direction-note", "x": 0, "y": -220, "w": 420, "text": "같이타요 — 아이 등하원 카풀 앱 (앱 이름은 가칭)\n부모 간 품앗이 카풀 모델(GoKid 방식) 기준의 정적 목업 5장.\n핵심 가치: 신원 인증된 이웃 · 실시간 위치 · 승하차 알림 · 당번 스케줄.\n컬러: 딥 그린(신뢰) + 스쿨버스 옐로우(아이·안전) / 서체: Jua + IBM Plex Sans KR" }
+  ],
+  "launch": { "view": "canvas" }
+}

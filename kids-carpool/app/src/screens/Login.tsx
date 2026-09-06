@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import type { FormEvent } from 'react'
 import { useStore } from '../store'
 import type { RegisterForm } from '../store'
 
@@ -14,7 +15,8 @@ export function Login() {
     inviteCode: '', phone: '', password: '', name: '', label: '', children: '', vehicle: '', apt: '',
   })
 
-  const submitLogin = async () => {
+  const submitLogin = async (e: FormEvent) => {
+    e.preventDefault()
     setBusy(true)
     try {
       await auth.login(phone, password)
@@ -25,7 +27,8 @@ export function Login() {
     }
   }
 
-  const submitRegister = async () => {
+  const submitRegister = async (e: FormEvent) => {
+    e.preventDefault()
     setBusy(true)
     try {
       await auth.register(form)
@@ -61,23 +64,23 @@ export function Login() {
       </div>
 
       {tabMode === 'login' ? (
-        <div className="card" style={{ margin: '20px 24px 0', padding: 20, display: 'flex', flexDirection: 'column', gap: 12 }}>
-          <input placeholder="전화번호" inputMode="tel" value={phone} onChange={(e) => setPhone(e.target.value)} />
-          <input placeholder="비밀번호" type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
-          <button className="btn btn-primary" disabled={busy} onClick={submitLogin}>로그인</button>
-        </div>
+        <form className="card" style={{ margin: '20px 24px 0', padding: 20, display: 'flex', flexDirection: 'column', gap: 12 }} onSubmit={submitLogin}>
+          <input placeholder="전화번호" inputMode="tel" autoComplete="tel" value={phone} onChange={(e) => setPhone(e.target.value)} />
+          <input placeholder="비밀번호" type="password" autoComplete="current-password" value={password} onChange={(e) => setPassword(e.target.value)} />
+          <button className="btn btn-primary" type="submit" disabled={busy}>로그인</button>
+        </form>
       ) : (
-        <div className="card" style={{ margin: '20px 24px 0', padding: 20, display: 'flex', flexDirection: 'column', gap: 12 }}>
+        <form className="card" style={{ margin: '20px 24px 0', padding: 20, display: 'flex', flexDirection: 'column', gap: 12 }} onSubmit={submitRegister}>
           <input placeholder="초대 코드" value={form.inviteCode} onChange={(e) => setForm({ ...form, inviteCode: e.target.value })} />
-          <input placeholder="이름" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} />
+          <input placeholder="이름" autoComplete="name" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} />
           <input placeholder="호칭 (예: 민준 어머니)" value={form.label} onChange={(e) => setForm({ ...form, label: e.target.value })} />
           <input placeholder="아이 (예: 김민준(초2), 김소윤(6세))" value={form.children} onChange={(e) => setForm({ ...form, children: e.target.value })} />
           <input placeholder="차량 (예: 기아 카니발 · 32루 4568)" value={form.vehicle} onChange={(e) => setForm({ ...form, vehicle: e.target.value })} />
           <input placeholder="동 (예: 102동)" value={form.apt} onChange={(e) => setForm({ ...form, apt: e.target.value })} />
-          <input placeholder="전화번호" inputMode="tel" value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} />
-          <input placeholder="비밀번호 (8자 이상)" type="password" value={form.password} onChange={(e) => setForm({ ...form, password: e.target.value })} />
-          <button className="btn btn-primary" disabled={busy} onClick={submitRegister}>가입하기</button>
-        </div>
+          <input placeholder="전화번호" inputMode="tel" autoComplete="tel" value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} />
+          <input placeholder="비밀번호 (8자 이상)" type="password" autoComplete="new-password" value={form.password} onChange={(e) => setForm({ ...form, password: e.target.value })} />
+          <button className="btn btn-primary" type="submit" disabled={busy}>가입하기</button>
+        </form>
       )}
     </div>
   )

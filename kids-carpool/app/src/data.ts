@@ -28,27 +28,27 @@ export const parents: Record<string, Parent> = {
   jisu: {
     id: 'jisu', name: '김은정', label: '지수 어머니', initial: '지',
     bg: 'var(--green-tint)', fg: 'var(--green)', apt: '같은 아파트 102동', verified: true,
-    vehicle: '기아 카니발 · 32루 4568 · 카시트 2개',
+    vehicle: '기아 카니발 · 32루 4568 · 카시트 2개 · 7인승',
   },
   doyun: {
     id: 'doyun', name: '박성호', label: '도윤 아버지', initial: '도',
     bg: 'var(--yellow-tint)', fg: 'var(--amber)', apt: '같은 아파트 105동', verified: true,
-    vehicle: '현대 팰리세이드 · 17도 8214 · 주니어시트 2개',
+    vehicle: '현대 팰리세이드 · 17도 8214 · 주니어시트 2개 · 7인승',
   },
   seoyeon: {
     id: 'seoyeon', name: '이수진', label: '서연 어머니', initial: '서',
     bg: '#E8E3F4', fg: '#6B5CA8', apt: '같은 아파트 102동', verified: true,
-    vehicle: '기아 쏘렌토 · 45마 1027 · 카시트 1개',
+    vehicle: '기아 쏘렌토 · 45마 1027 · 카시트 1개 · 5인승',
   },
   me: {
     id: 'me', name: '나 (민준 어머니)', label: '민준 어머니', initial: '민',
     bg: 'var(--yellow)', fg: 'var(--ink)', apt: '102동', verified: true,
-    vehicle: '기아 쏘렌토 · 52너 3391 · 카시트 1개', children: '김민준(초2), 김소윤(6세)',
+    vehicle: '기아 쏘렌토 · 52너 3391 · 카시트 1개 · 5인승', children: '김민준(초2), 김소윤(6세)',
   },
   haram: {
     id: 'haram', name: '최유나', label: '하람 어머니', initial: '하',
     bg: 'var(--green-tint)', fg: 'var(--green)', apt: '같은 아파트 103동', verified: true,
-    vehicle: '기아 스포티지 · 28수 7745 · 주니어시트 1개',
+    vehicle: '기아 스포티지 · 28수 7745 · 주니어시트 1개 · 5인승',
   },
 }
 

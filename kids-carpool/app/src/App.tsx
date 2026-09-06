@@ -18,7 +18,7 @@ const tabs: { id: Tab; label: string; icon: typeof HomeIcon }[] = [
 ]
 
 function Shell() {
-  const { tab, setTab, onboarded, loggedIn, loading, profileId, toastMsg } = useStore()
+  const { tab, setTab, onboarded, loggedIn, loading, loadError, retryLoad, profileId, toastMsg } = useStore()
 
   if (!onboarded) {
     return (
@@ -42,6 +42,16 @@ function Shell() {
     return (
       <div className="phone" style={{ alignItems: 'center', justifyContent: 'center' }}>
         <div style={{ color: 'var(--muted)', fontSize: 14 }}>불러오는 중…</div>
+      </div>
+    )
+  }
+
+  if (loadError) {
+    return (
+      <div className="phone" style={{ alignItems: 'center', justifyContent: 'center', gap: 12 }}>
+        <div style={{ color: 'var(--muted)', fontSize: 14 }}>불러오지 못했어요</div>
+        <button className="btn btn-primary" onClick={retryLoad}>다시 로드</button>
+        {toastMsg && <div className="toast">{toastMsg}</div>}
       </div>
     )
   }

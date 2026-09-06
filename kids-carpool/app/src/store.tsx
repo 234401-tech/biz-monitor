@@ -30,6 +30,8 @@ type Store = {
   finishOnboarding: () => void
   loggedIn: boolean
   loading: boolean
+  loadError: string | null
+  retryLoad: () => void
   me: Parent
   parents: Record<string, Parent>
   groupName: string
@@ -101,9 +103,12 @@ function formatDate(weekStart: string, dow: number): string {
   return `${date.getUTCMonth() + 1}월 ${date.getUTCDate()}일`
 }
 
-function toPlans(weekStart: string, plans: Plan[], swaps: Swap[], myId: string, today: number): DayPlan[] {
+function toPlans(weekStart: string, plans: Plan[], swaps: Swap[], myId: string, today: number | null): DayPlan[] {
+  const canAccept = (s: Swap) => String(plans.find((q) => q.dow === s.to_dow)?.driver_id) === myId
   return plans.map((p) => {
-    const swap = swaps.find((s) => s.from_dow === p.dow)
+    // 같은 요일에 pending 교환이 여러 건이면 내가 수락 가능한 요청을 우선 고른다 (무효 잔재가 정상 요청을 가리지 않도록)
+    const candidates = swaps.filter((s) => s.from_dow === p.dow)
+    const swap = candidates.find(canAccept) ?? candidates[0]
     const to = swap ? plans.find((q) => q.dow === swap.to_dow) : undefined
     return {
       day: DOW_DAY[p.dow - 1] ?? String(p.dow),
@@ -167,9 +172,12 @@ export function StoreProvider({ children }: { children: ReactNode }) {
   const [liveWeekStart, setLiveWeekStart] = useState('')
   const [livePlans, setLivePlans] = useState<Plan[]>([])
   const [liveSwaps, setLiveSwaps] = useState<Swap[]>([])
+  const [liveTodayDow, setLiveTodayDow] = useState<number | null | undefined>(undefined) // 서버가 알려준 오늘 요일(1~5/null). 아직 못 받았으면 undefined → 기기 시계로 대체
   const [liveTrip, setLiveTrip] = useState<Trip | null>(null)
   const [liveEvents, setLiveEvents] = useState<TripEvent[]>([])
   const [track, setTrack] = useState<TrackPoint[]>([])
+  const [loadError, setLoadError] = useState<string | null>(null)
+  const [loadNonce, setLoadNonce] = useState(0)
   const socketSend = useRef<((m: unknown) => void) | null>(null)
 
   const handleError = (e: unknown, fallback: string) => {
@@ -186,6 +194,7 @@ export function StoreProvider({ children }: { children: ReactNode }) {
       setLiveWeekStart(w.weekStart)
       setLivePlans(w.plans)
       setLiveSwaps(w.swaps)
+      setLiveTodayDow(w.todayDow) // undefined(필드 없음)면 이후 폴백, null(주말)이면 그대로 유지
     } catch (e) {
       handleError(e, '당번표를 불러오지 못했어요')
     }
@@ -202,11 +211,12 @@ export function StoreProvider({ children }: { children: ReactNode }) {
     }
   }
 
-  // 로그인 상태가 되면 초기 데이터를 불러온다
+  // 로그인 상태가 되면 초기 데이터를 불러온다. 실패 시(401 제외) 화면에 재시도 UI를 보여준다 — retryLoad()가 loadNonce를 올려 재실행
   useEffect(() => {
     if (!LIVE || !loggedIn) return
     let cancelled = false
     setLoading(true)
+    setLoadError(null)
     ;(async () => {
       try {
         const [me, group, week, trip] = await Promise.all([api.me(), api.group(), api.week(), api.activeTrip()])
@@ -217,10 +227,16 @@ export function StoreProvider({ children }: { children: ReactNode }) {
         setLiveWeekStart(week.weekStart)
         setLivePlans(week.plans)
         setLiveSwaps(week.swaps)
+        setLiveTodayDow(week.todayDow)
         setLiveTrip(trip.trip)
         setLiveEvents(trip.events)
       } catch (e) {
-        handleError(e, '정보를 불러오지 못했어요')
+        if (cancelled) return
+        if (!getToken()) {
+          setLoggedIn(false) // 401: 로그인 화면으로
+          return
+        }
+        setLoadError(e instanceof Error ? e.message : '정보를 불러오지 못했어요')
       } finally {
         if (!cancelled) setLoading(false)
       }
@@ -229,7 +245,7 @@ export function StoreProvider({ children }: { children: ReactNode }) {
       cancelled = true
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [loggedIn])
+  }, [loggedIn, loadNonce])
 
   // 실시간 갱신 소켓: 끊기면 3초 후 자동 재접속
   useEffect(() => {
@@ -245,7 +261,9 @@ export function StoreProvider({ children }: { children: ReactNode }) {
   }, [loggedIn])
 
   const myId = liveMe ? String(liveMe.id) : ''
-  const isDriver = LIVE ? livePlans.find((p) => p.dow === todayDow())?.driver_id === liveMe?.id : false
+  // 서버가 알려준 오늘 요일을 우선 쓰고, 아직 없으면(구버전 서버) 기기 시계로 대체
+  const resolvedTodayDow = liveTodayDow !== undefined ? liveTodayDow : todayDow()
+  const isDriver = LIVE ? livePlans.find((p) => p.dow === resolvedTodayDow)?.driver_id === liveMe?.id : false
   const tripActive = LIVE ? !!liveTrip : true
 
   // 운전자 기기: 운행 중일 때만 위치를 관찰해 소켓으로 전송
@@ -269,7 +287,7 @@ export function StoreProvider({ children }: { children: ReactNode }) {
 
   const parentsMap = LIVE ? liveParents : demoParents
   const me = LIVE ? (liveMe ? memberToParent(liveMe, liveMembers.findIndex((m) => m.id === liveMe.id)) : demoParents.me) : demoParents.me
-  const week = LIVE ? toPlans(liveWeekStart, livePlans, liveSwaps, myId, todayDow()) : demoWeek
+  const week = LIVE ? toPlans(liveWeekStart, livePlans, liveSwaps, myId, resolvedTodayDow) : demoWeek
   const school = LIVE ? (liveGroup?.school ?? '') : '한빛초등학교'
   const groupName = LIVE ? (liveGroup?.name ?? '') : '한빛초 카풀'
 
@@ -290,6 +308,8 @@ export function StoreProvider({ children }: { children: ReactNode }) {
     },
     loggedIn: LIVE ? loggedIn : true,
     loading,
+    loadError,
+    retryLoad: () => setLoadNonce((n) => n + 1),
     me,
     parents: parentsMap,
     groupName,
@@ -374,7 +394,7 @@ export function StoreProvider({ children }: { children: ReactNode }) {
     toast: showToast,
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }), [
-    tab, profileId, onboarded, loggedIn, loading, me, parentsMap, groupName, school, week,
+    tab, profileId, onboarded, loggedIn, loading, loadError, me, parentsMap, groupName, school, week,
     stops, tripDone, tripActive, isDriver, track, toastMsg, liveTrip, liveEvents,
   ])
 

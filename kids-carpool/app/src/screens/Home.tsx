@@ -13,7 +13,8 @@ function parseChildren(children?: string): { name: string; grade: string }[] {
 export function Home() {
   const { week, parents, me, tripDone, tripActive, isDriver, stops, mode, startTrip, setTab, openProfile, toast } = useStore()
   const today = week.find((d) => d.today) ?? week[0]
-  const driver = parents[today.driverId]
+  const driver = today ? parents[today.driverId] : undefined
+  if (!today || !driver) return null
   const mine = week.find((d) => d.mine)
   const arrived = tripActive && tripDone >= stops.length
   const kids = parseChildren(me.children)

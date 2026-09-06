@@ -1,17 +1,26 @@
-import { parents, tripStops } from '../data'
 import { BellIcon, CalendarIcon, ChatIcon, CheckIcon, ClockIcon, PinIcon } from '../icons'
 import { useStore } from '../store'
 
+// "김민준(초2), 김소윤(6세)" 형태의 문자열을 칩 목록으로 바꾼다
+function parseChildren(children?: string): { name: string; grade: string }[] {
+  if (!children) return []
+  return children.split(',').map((s) => s.trim()).filter(Boolean).map((s) => {
+    const m = s.match(/^(.*?)\((.*?)\)$/)
+    return m ? { name: m[1], grade: m[2] } : { name: s, grade: '' }
+  })
+}
+
 export function Home() {
-  const { week, tripDone, setTab, openProfile, toast } = useStore()
+  const { week, parents, me, tripDone, tripActive, isDriver, stops, mode, startTrip, setTab, openProfile, toast } = useStore()
   const today = week.find((d) => d.today) ?? week[0]
   const driver = parents[today.driverId]
   const mine = week.find((d) => d.mine)
-  const arrived = tripDone >= tripStops.length
+  const arrived = tripActive && tripDone >= stops.length
+  const kids = parseChildren(me.children)
 
   const steps = [
     { label: '배차 확정', state: 'done' },
-    { label: arrived ? '탑승 완료' : '탑승 중', state: arrived ? 'done' : 'now' },
+    { label: !tripActive ? '출발 전' : arrived ? '탑승 완료' : '탑승 중', state: !tripActive ? 'todo' : arrived ? 'done' : 'now' },
     { label: '학교 도착', state: arrived ? 'done' : 'todo' },
   ]
 
@@ -19,8 +28,8 @@ export function Home() {
     <div className="screen">
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '28px 24px 0' }}>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
-          <div style={{ fontSize: 14, color: 'var(--muted)' }}>9월 7일 월요일</div>
-          <div className="jua" style={{ fontSize: 24, letterSpacing: -0.3 }}>민준이네, 좋은 아침이에요</div>
+          <div style={{ fontSize: 14, color: 'var(--muted)' }}>{today.date} {today.day}요일</div>
+          <div className="jua" style={{ fontSize: 24, letterSpacing: -0.3 }}>오늘도 좋은 아침이에요</div>
         </div>
         <button
           aria-label="알림"
@@ -33,27 +42,28 @@ export function Home() {
       </div>
 
       <div style={{ display: 'flex', gap: 8, padding: '18px 24px 0' }}>
-        <div style={{
-          height: 44, padding: '0 18px', borderRadius: 22, background: 'var(--green)', color: '#fff',
-          display: 'flex', alignItems: 'center', gap: 8, fontSize: 14, fontWeight: 600,
-        }}>
-          <div className="avatar" style={{ width: 24, height: 24, borderRadius: 12, background: 'var(--yellow)', color: 'var(--ink)', fontSize: 12 }}>민</div>
-          김민준 · 초2
-        </div>
-        <div className="card" style={{
-          height: 44, padding: '0 18px', borderRadius: 22, color: 'var(--muted)',
-          display: 'flex', alignItems: 'center', gap: 8, fontSize: 14, fontWeight: 600,
-        }}>
-          <div className="avatar" style={{ width: 24, height: 24, borderRadius: 12, background: 'var(--green-tint)', color: 'var(--green)', fontSize: 12 }}>소</div>
-          김소윤 · 6세
-        </div>
+        {kids.map((k, i) => (
+          <div key={k.name} style={i === 0 ? {
+            height: 44, padding: '0 18px', borderRadius: 22, background: 'var(--green)', color: '#fff',
+            display: 'flex', alignItems: 'center', gap: 8, fontSize: 14, fontWeight: 600,
+          } : {
+            height: 44, padding: '0 18px', borderRadius: 22, color: 'var(--muted)', background: 'var(--surface)', border: '1px solid var(--line)',
+            display: 'flex', alignItems: 'center', gap: 8, fontSize: 14, fontWeight: 600,
+          }}>
+            <div className="avatar" style={{
+              width: 24, height: 24, borderRadius: 12, fontSize: 12,
+              background: i === 0 ? 'var(--yellow)' : 'var(--green-tint)', color: i === 0 ? 'var(--ink)' : 'var(--green)',
+            }}>{k.name.length >= 3 ? k.name.charAt(1) : k.name.charAt(0)}</div>
+            {k.name}{k.grade && ` · ${k.grade}`}
+          </div>
+        ))}
       </div>
 
       <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: '20px 24px 0' }}>
         <div className="card" style={{ padding: 20, display: 'flex', flexDirection: 'column', gap: 16, boxShadow: '0 6px 18px rgba(38,49,44,0.05)' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
             <div className="badge" style={{ background: 'var(--yellow-tint)', color: 'var(--amber)', fontSize: 12, padding: '5px 10px' }}>오늘 등원</div>
-            <div style={{ fontSize: 14, color: 'var(--muted)' }}>{arrived ? '운행 완료' : '07:50 출발'}</div>
+            <div style={{ fontSize: 14, color: 'var(--muted)' }}>{arrived ? '운행 완료' : tripActive ? '07:50 출발' : '출발 전'}</div>
           </div>
 
           <button style={{ display: 'flex', alignItems: 'center', gap: 14 }} onClick={() => openProfile(driver.id)}>
@@ -62,9 +72,7 @@ export function Home() {
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
               <div style={{ fontSize: 16, fontWeight: 700 }}>오늘 운전: {driver.label}</div>
-              <div style={{ fontSize: 13, color: 'var(--muted)' }}>
-                {driver.vehicle?.model} · {driver.vehicle?.plate} · {driver.vehicle?.seats}
-              </div>
+              <div style={{ fontSize: 13, color: 'var(--muted)' }}>{driver.vehicle}</div>
             </div>
           </button>
 
@@ -78,6 +86,13 @@ export function Home() {
             <PinIcon color="#fff" size={18} />
             실시간 위치 보기
           </button>
+
+          {mode === 'live' && isDriver && !tripActive && (
+            <div style={{ display: 'flex', gap: 10 }}>
+              <button className="btn btn-outline" style={{ flex: 1 }} onClick={() => startTrip('등원')}>등원 운행 시작</button>
+              <button className="btn btn-outline" style={{ flex: 1 }} onClick={() => startTrip('하원')}>하원 운행 시작</button>
+            </div>
+          )}
         </div>
 
         {mine && (

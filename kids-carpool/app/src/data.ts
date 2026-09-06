@@ -6,7 +6,9 @@ export type Parent = {
   bg: string
   fg: string
   apt: string
-  vehicle?: { model: string; plate: string; seats: string }
+  vehicle?: string
+  children?: string
+  verified?: boolean
 }
 
 export type DayPlan = {
@@ -17,7 +19,7 @@ export type DayPlan = {
   today?: boolean
   mine?: boolean
   note?: string
-  swap?: { reason: string; proposal: string }
+  swap?: { id: string; reason: string; proposal: string; canAccept?: boolean }
 }
 
 export const SCHOOL = '한빛초등학교'
@@ -25,28 +27,28 @@ export const SCHOOL = '한빛초등학교'
 export const parents: Record<string, Parent> = {
   jisu: {
     id: 'jisu', name: '김은정', label: '지수 어머니', initial: '지',
-    bg: 'var(--green-tint)', fg: 'var(--green)', apt: '같은 아파트 102동',
-    vehicle: { model: '기아 카니발', plate: '32루 4568', seats: '카시트 2개 · 7인승' },
+    bg: 'var(--green-tint)', fg: 'var(--green)', apt: '같은 아파트 102동', verified: true,
+    vehicle: '기아 카니발 · 32루 4568 · 카시트 2개',
   },
   doyun: {
     id: 'doyun', name: '박성호', label: '도윤 아버지', initial: '도',
-    bg: 'var(--yellow-tint)', fg: 'var(--amber)', apt: '같은 아파트 105동',
-    vehicle: { model: '현대 팰리세이드', plate: '17도 8214', seats: '주니어시트 2개 · 7인승' },
+    bg: 'var(--yellow-tint)', fg: 'var(--amber)', apt: '같은 아파트 105동', verified: true,
+    vehicle: '현대 팰리세이드 · 17도 8214 · 주니어시트 2개',
   },
   seoyeon: {
     id: 'seoyeon', name: '이수진', label: '서연 어머니', initial: '서',
-    bg: '#E8E3F4', fg: '#6B5CA8', apt: '같은 아파트 102동',
-    vehicle: { model: '기아 쏘렌토', plate: '45마 1027', seats: '카시트 1개 · 5인승' },
+    bg: '#E8E3F4', fg: '#6B5CA8', apt: '같은 아파트 102동', verified: true,
+    vehicle: '기아 쏘렌토 · 45마 1027 · 카시트 1개',
   },
   me: {
     id: 'me', name: '나 (민준 어머니)', label: '민준 어머니', initial: '민',
-    bg: 'var(--yellow)', fg: 'var(--ink)', apt: '102동',
-    vehicle: { model: '기아 쏘렌토', plate: '52너 3391', seats: '카시트 1개 · 5인승' },
+    bg: 'var(--yellow)', fg: 'var(--ink)', apt: '102동', verified: true,
+    vehicle: '기아 쏘렌토 · 52너 3391 · 카시트 1개', children: '김민준(초2), 김소윤(6세)',
   },
   haram: {
     id: 'haram', name: '최유나', label: '하람 어머니', initial: '하',
-    bg: 'var(--green-tint)', fg: 'var(--green)', apt: '같은 아파트 103동',
-    vehicle: { model: '기아 스포티지', plate: '28수 7745', seats: '주니어시트 1개 · 5인승' },
+    bg: 'var(--green-tint)', fg: 'var(--green)', apt: '같은 아파트 103동', verified: true,
+    vehicle: '기아 스포티지 · 28수 7745 · 주니어시트 1개',
   },
 }
 
@@ -55,7 +57,7 @@ export const initialWeek: DayPlan[] = [
   { day: '화', date: '9월 8일', driverId: 'doyun', riders: ['도윤', '민준', '서연'] },
   {
     day: '수', date: '9월 9일', driverId: 'seoyeon', riders: ['서연', '민준', '지수'],
-    swap: { reason: '병원 일정', proposal: '목요일 당번과 맞바꾸기를 제안했어요' },
+    swap: { id: 'demo-swap', reason: '병원 일정', proposal: '목요일 당번과 맞바꾸기를 제안했어요' },
   },
   { day: '목', date: '9월 10일', driverId: 'me', riders: ['민준', '서연', '하람'], mine: true },
   { day: '금', date: '9월 11일', driverId: 'haram', riders: ['하람', '민준'], note: '금요일은 단축수업 · 하원 13:30' },

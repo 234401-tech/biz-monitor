@@ -1,10 +1,8 @@
-import { parents } from '../data'
 import { CarIcon, ShieldIcon } from '../icons'
 import { useStore } from '../store'
 
 export function MyPage() {
-  const { week } = useStore()
-  const me = parents.me
+  const { week, me, mode, auth } = useStore()
   const myDays = week.filter((d) => d.mine).map((d) => `${d.day}요일`).join(', ')
 
   return (
@@ -17,8 +15,8 @@ export function MyPage() {
         <div className="card" style={{ padding: 20, display: 'flex', alignItems: 'center', gap: 14 }}>
           <div className="avatar" style={{ width: 56, height: 56, borderRadius: 18, background: me.bg, color: me.fg, fontSize: 22 }}>{me.initial}</div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
-            <div style={{ fontSize: 17, fontWeight: 700 }}>민준 어머니</div>
-            <div style={{ fontSize: 13, color: 'var(--muted)' }}>김민준(초2) · 김소윤(6세)</div>
+            <div style={{ fontSize: 17, fontWeight: 700 }}>{me.label}</div>
+            <div style={{ fontSize: 13, color: 'var(--muted)' }}>{me.children?.split(',').map((s) => s.trim()).join(' · ')}</div>
           </div>
         </div>
 
@@ -36,10 +34,7 @@ export function MyPage() {
           <div style={{ width: 44, height: 44, borderRadius: 12, background: 'var(--bg)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
             <CarIcon size={20} />
           </div>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-            <div style={{ fontSize: 14, fontWeight: 700 }}>{me.vehicle?.model} · {me.vehicle?.plate}</div>
-            <div style={{ fontSize: 12, color: 'var(--muted)' }}>{me.vehicle?.seats}</div>
-          </div>
+          <div style={{ fontSize: 14, fontWeight: 700 }}>{me.vehicle}</div>
         </div>
 
         <div style={{
@@ -48,6 +43,10 @@ export function MyPage() {
         }}>
           이번 주 운전 당번: <b>{myDays || '없음'}</b>
         </div>
+
+        {mode === 'live' && (
+          <button className="btn btn-outline" onClick={auth.logout}>로그아웃</button>
+        )}
       </div>
     </div>
   )

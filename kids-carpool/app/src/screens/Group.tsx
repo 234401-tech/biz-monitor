@@ -1,16 +1,15 @@
-import { parents } from '../data'
 import { ChevronIcon, ShieldIcon } from '../icons'
 import { useStore } from '../store'
 
 export function Group() {
-  const { openProfile } = useStore()
-  const members = Object.values(parents).filter((p) => p.id !== 'me')
+  const { parents, me, groupName, openProfile } = useStore()
+  const members = Object.values(parents).filter((p) => p.id !== me.id)
 
   return (
     <div className="screen">
       <div style={{ display: 'flex', flexDirection: 'column', gap: 4, padding: '28px 24px 0' }}>
-        <div className="jua" style={{ fontSize: 24 }}>한빛초 카풀</div>
-        <div style={{ fontSize: 14, color: 'var(--muted)' }}>5가족 · 아이 6명 · 같은 아파트 단지</div>
+        <div className="jua" style={{ fontSize: 24 }}>{groupName}</div>
+        <div style={{ fontSize: 14, color: 'var(--muted)' }}>{Object.keys(parents).length}가족 · 같은 아파트 단지</div>
       </div>
 
       <div style={{ display: 'flex', flexDirection: 'column', gap: 10, padding: '20px 24px 0' }}>

@@ -1,10 +1,16 @@
-import { parents, SCHOOL, stopPoints, tripStops } from '../data'
+import type { Stop, TrackPoint } from '../store'
+import { parents as demoParents, SCHOOL, stopPoints, tripStops } from '../data'
 import { BackIcon, CheckIcon, PhoneIcon } from '../icons'
 import { useStore } from '../store'
 
 export function Tracking() {
+  const { mode } = useStore()
+  return mode === 'live' ? <LiveTracking /> : <DemoTracking />
+}
+
+function DemoTracking() {
   const { tripDone, setTab, openProfile, toast } = useStore()
-  const driver = parents.jisu
+  const driver = demoParents.jisu
   const arrived = tripDone >= tripStops.length
   const busPos = stopPoints[Math.min(tripDone, stopPoints.length - 1)]
   const etaMin = Math.max(0, (tripStops.length - tripDone) * 3)
@@ -95,7 +101,7 @@ export function Tracking() {
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
               <div style={{ fontSize: 15, fontWeight: 700 }}>{driver.label} · {driver.name}</div>
-              <div style={{ fontSize: 12, color: 'var(--muted)' }}>{driver.vehicle?.model} · {driver.vehicle?.plate}</div>
+              <div style={{ fontSize: 12, color: 'var(--muted)' }}>{driver.vehicle}</div>
             </div>
           </button>
           <button
@@ -107,35 +113,180 @@ export function Tracking() {
           </button>
         </div>
 
-        <div>
-          {tripStops.map((s, i) => {
-            const done = i < tripDone
-            const next = i === tripDone
-            return (
-              <div key={s.label} style={{ display: 'flex', alignItems: 'flex-start', gap: 12 }}>
-                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: 26 }}>
-                  {done ? (
-                    <div style={{ width: 22, height: 22, borderRadius: 11, background: 'var(--green)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                      <CheckIcon color="#fff" size={12} strokeWidth={3} />
-                    </div>
-                  ) : (
-                    <div style={{
-                      width: 22, height: 22, borderRadius: 11, flexShrink: 0,
-                      background: next ? 'var(--yellow-tint)' : '#fff',
-                      border: next ? '2px solid var(--yellow)' : '2px solid var(--line)',
-                    }} />
-                  )}
-                  {i < tripStops.length - 1 && <div style={{ width: 2, height: 22, background: 'var(--line)' }} />}
-                </div>
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexGrow: 1, paddingTop: 2 }}>
-                  <div style={{ fontSize: 14, fontWeight: 600, color: done ? 'var(--ink)' : 'var(--muted)' }}>{s.label}</div>
-                  <div style={{ fontSize: 12, color: 'var(--muted)' }}>{done ? s.time : `${s.time} 예정`}</div>
-                </div>
-              </div>
-            )
-          })}
+        <StopList stops={tripStops} tripDone={tripDone} />
+      </div>
+    </div>
+  )
+}
+
+// 라이브 전용: 실제 좌표(위경도) 궤적을 정사각형 여백을 둔 390x520 뷰박스에 등축척으로 투영한다
+function projectTrack(track: TrackPoint[]): { x: number; y: number }[] {
+  const W = 390, H = 520, PAD = 50
+  if (track.length === 0) return []
+  const lats = track.map((p) => p.lat)
+  const lngs = track.map((p) => p.lng)
+  const spanLat = Math.max(Math.max(...lats) - Math.min(...lats), 1e-6)
+  const spanLng = Math.max(Math.max(...lngs) - Math.min(...lngs), 1e-6)
+  const midLat = (Math.max(...lats) + Math.min(...lats)) / 2
+  const midLng = (Math.max(...lngs) + Math.min(...lngs)) / 2
+  const scale = Math.min((W - 2 * PAD) / spanLng, (H - 2 * PAD) / spanLat)
+  return track.map((p) => ({ x: W / 2 + (p.lng - midLng) * scale, y: H / 2 - (p.lat - midLat) * scale }))
+}
+
+function LiveTracking() {
+  const {
+    school, week, parents, stops, tripDone, tripActive, isDriver, track,
+    markNextStop, endTrip, setTab, openProfile, toast,
+  } = useStore()
+  const today = week.find((d) => d.today)
+  const driver = today ? parents[today.driverId] : undefined
+  const arrived = tripActive && tripDone >= stops.length
+  const points = projectTrack(track)
+  const path = points.map((p) => `${p.x},${p.y}`).join(' ')
+  const last = points[points.length - 1]
+
+  return (
+    <div className="screen" style={{ background: 'var(--map)', paddingBottom: 0, minHeight: '100dvh' }}>
+      <div style={{ position: 'relative', flexGrow: 1, minHeight: 380, overflow: 'hidden' }}>
+        <svg viewBox="0 0 390 520" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%' }} preserveAspectRatio="xMidYMid slice">
+          <rect width="390" height="520" fill="var(--map)" />
+          {Array.from({ length: 14 }, (_, i) => (
+            <path key={`v${i}`} d={`M${i * 30} 0 V520`} stroke="var(--map-block)" strokeWidth="1" />
+          ))}
+          {Array.from({ length: 18 }, (_, i) => (
+            <path key={`h${i}`} d={`M0 ${i * 30} H390`} stroke="var(--map-block)" strokeWidth="1" />
+          ))}
+          {points.length > 1 && (
+            <polyline points={path} fill="none" stroke="var(--green)" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
+          )}
+          {last && (
+            <g className="bus-marker" transform={`translate(${last.x}, ${last.y})`}>
+              <circle r="26" fill="var(--yellow)" opacity="0.35" />
+              <circle r="17" fill="var(--yellow)" stroke="#fff" strokeWidth="3" />
+              <g transform="translate(-8, -7)">
+                <path d="M1 10V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v5z" fill="none" stroke="var(--ink)" strokeWidth="1.7" strokeLinejoin="round" />
+                <path d="M0 10h16v2h-16z" fill="var(--ink)" />
+                <circle cx="4" cy="13.5" r="1.4" fill="var(--ink)" />
+                <circle cx="12" cy="13.5" r="1.4" fill="var(--ink)" />
+              </g>
+            </g>
+          )}
+        </svg>
+
+        {!tripActive ? (
+          <div style={{
+            position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center',
+            fontSize: 15, fontWeight: 700, color: 'var(--muted)', textAlign: 'center', padding: '0 40px',
+          }}>
+            지금은 운행 중이 아니에요
+          </div>
+        ) : points.length === 0 ? (
+          <div style={{
+            position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center',
+            fontSize: 15, fontWeight: 700, color: 'var(--muted)', textAlign: 'center', padding: '0 40px',
+          }}>
+            운전자 위치를 기다리는 중
+          </div>
+        ) : null}
+
+        <div style={{ position: 'relative', display: 'flex', alignItems: 'center', gap: 12, padding: '28px 24px 0' }}>
+          <button
+            aria-label="뒤로"
+            style={{ width: 44, height: 44, borderRadius: 14, background: '#fff', boxShadow: '0 4px 12px rgba(38,49,44,0.12)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+            onClick={() => setTab('home')}
+          >
+            <BackIcon size={20} />
+          </button>
+          <div style={{
+            height: 44, padding: '0 18px', borderRadius: 22, background: '#fff',
+            boxShadow: '0 4px 12px rgba(38,49,44,0.12)', display: 'flex', alignItems: 'center', gap: 8,
+            fontSize: 14, fontWeight: 700,
+          }}>
+            <div style={{ width: 8, height: 8, borderRadius: 4, background: arrived ? 'var(--faint)' : tripActive ? '#2E9E6B' : 'var(--faint)' }} />
+            {arrived ? '운행 종료' : tripActive ? '운행 중' : '운행 대기'}
+          </div>
         </div>
       </div>
+
+      <div style={{
+        position: 'relative', background: '#fff', borderRadius: '24px 24px 0 0',
+        boxShadow: '0 -10px 30px rgba(38,49,44,0.12)', padding: '12px 24px calc(96px + env(safe-area-inset-bottom))',
+        display: 'flex', flexDirection: 'column', gap: 18,
+      }}>
+        <div style={{ width: 44, height: 5, borderRadius: 3, background: 'var(--line)', alignSelf: 'center' }} />
+
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+          <div style={{ fontSize: 13, color: 'var(--muted)' }}>{school}</div>
+          <div style={{ padding: '8px 14px', borderRadius: 12, background: 'var(--green-tint)', color: 'var(--green)', fontSize: 13, fontWeight: 700 }}>
+            {arrived ? '도착 완료' : tripActive ? `${tripDone}/${stops.length} 완료` : '대기 중'}
+          </div>
+        </div>
+
+        {driver && (
+          <div style={{ display: 'flex', alignItems: 'center', gap: 14, background: 'var(--bg)', borderRadius: 16, padding: '14px 16px' }}>
+            <button style={{ display: 'flex', alignItems: 'center', gap: 14, flexGrow: 1 }} onClick={() => openProfile(driver.id)}>
+              <div className="avatar" style={{ width: 48, height: 48, borderRadius: 16, background: driver.bg, color: driver.fg, fontSize: 18 }}>
+                {driver.initial}
+              </div>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+                <div style={{ fontSize: 15, fontWeight: 700 }}>{driver.label} · {driver.name}</div>
+                <div style={{ fontSize: 12, color: 'var(--muted)' }}>{driver.vehicle}</div>
+              </div>
+            </button>
+            <button
+              aria-label="전화하기"
+              style={{ width: 48, height: 48, borderRadius: 16, background: 'var(--green)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}
+              onClick={() => toast('아직 전화 연결 기능은 없어요')}
+            >
+              <PhoneIcon color="#fff" size={20} />
+            </button>
+          </div>
+        )}
+
+        {tripActive && <StopList stops={stops} tripDone={tripDone} />}
+
+        {tripActive && isDriver && (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+            {tripDone < stops.length && (
+              <button className="btn btn-primary" onClick={markNextStop}>다음: {stops[tripDone].label}</button>
+            )}
+            <button className="btn btn-outline" onClick={endTrip}>운행 종료</button>
+          </div>
+        )}
+      </div>
+    </div>
+  )
+}
+
+function StopList({ stops, tripDone }: { stops: Stop[]; tripDone: number }) {
+  return (
+    <div>
+      {stops.map((s, i) => {
+        const done = i < tripDone
+        const next = i === tripDone
+        return (
+          <div key={s.label} style={{ display: 'flex', alignItems: 'flex-start', gap: 12 }}>
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: 26 }}>
+              {done ? (
+                <div style={{ width: 22, height: 22, borderRadius: 11, background: 'var(--green)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                  <CheckIcon color="#fff" size={12} strokeWidth={3} />
+                </div>
+              ) : (
+                <div style={{
+                  width: 22, height: 22, borderRadius: 11, flexShrink: 0,
+                  background: next ? 'var(--yellow-tint)' : '#fff',
+                  border: next ? '2px solid var(--yellow)' : '2px solid var(--line)',
+                }} />
+              )}
+              {i < stops.length - 1 && <div style={{ width: 2, height: 22, background: 'var(--line)' }} />}
+            </div>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexGrow: 1, paddingTop: 2 }}>
+              <div style={{ fontSize: 14, fontWeight: 600, color: done ? 'var(--ink)' : 'var(--muted)' }}>{s.label}</div>
+              <div style={{ fontSize: 12, color: 'var(--muted)' }}>{done ? s.time : s.time ? `${s.time} 예정` : '대기 중'}</div>
+            </div>
+          </div>
+        )
+      })}
     </div>
   )
 }

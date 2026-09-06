@@ -1,9 +1,8 @@
-import { parents } from '../data'
 import { BackIcon, CarIcon, ChatIcon, CheckIcon, PhoneIcon, ShieldIcon } from '../icons'
 import { useStore } from '../store'
 
 export function Profile({ id }: { id: string }) {
-  const { openProfile, toast } = useStore()
+  const { parents, groupName, openProfile, toast } = useStore()
   const p = parents[id]
   if (!p) return null
 
@@ -36,7 +35,7 @@ export function Profile({ id }: { id: string }) {
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4 }}>
               <div style={{ fontSize: 20, fontWeight: 700 }}>{p.name} <span style={{ fontSize: 15, fontWeight: 500, color: 'var(--muted)' }}>{p.label}</span></div>
-              <div style={{ fontSize: 13, color: 'var(--muted)' }}>한빛초 카풀 · {p.apt}</div>
+              <div style={{ fontSize: 13, color: 'var(--muted)' }}>{groupName} · {p.apt}</div>
             </div>
             <div style={{ display: 'flex', alignItems: 'center', gap: 8, background: 'var(--green-tint)', borderRadius: 12, padding: '10px 16px' }}>
               <ShieldIcon size={18} color="var(--green)" strokeWidth={2} />
@@ -49,10 +48,7 @@ export function Profile({ id }: { id: string }) {
               <div style={{ width: 48, height: 48, borderRadius: 14, background: 'var(--bg)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
                 <CarIcon size={24} />
               </div>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-                <div style={{ fontSize: 14, fontWeight: 700 }}>{p.vehicle.model} · {p.vehicle.plate}</div>
-                <div style={{ fontSize: 12, color: 'var(--muted)' }}>{p.vehicle.seats}</div>
-              </div>
+              <div style={{ fontSize: 14, fontWeight: 700 }}>{p.vehicle}</div>
             </div>
           )}
         </div>

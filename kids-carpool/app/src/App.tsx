@@ -1,5 +1,6 @@
 import { StoreProvider, Tab, useStore } from './store'
 import { Onboarding } from './screens/Onboarding'
+import { Login } from './screens/Login'
 import { Home } from './screens/Home'
 import { Tracking } from './screens/Tracking'
 import { Schedule } from './screens/Schedule'

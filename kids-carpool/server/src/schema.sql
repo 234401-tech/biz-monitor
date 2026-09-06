@@ -53,6 +53,9 @@ CREATE TABLE IF NOT EXISTS trips (
   ended_at   timestamptz
 );
 
+-- 그룹당 active 운행은 하나만 허용 (동시 시작 레이스 방지)
+CREATE UNIQUE INDEX IF NOT EXISTS trips_one_active_per_group ON trips (group_id) WHERE status = 'active';
+
 -- 승하차 기록: 운행 종료 후에도 남는 요약. 위치 좌표는 저장하지 않는다(운행 중 중계만).
 CREATE TABLE IF NOT EXISTS trip_events (
   id      serial PRIMARY KEY,

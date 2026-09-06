@@ -78,7 +78,9 @@ api.get('/week', wrap(async (req, res) => {
     "SELECT * FROM swap_requests WHERE group_id = $1 AND week_start = $2 AND status = 'pending'",
     [gid, start],
   )
-  res.json({ weekStart: start, plans, swaps })
+  const rawDow = ((new Date().getDay() + 6) % 7) + 1
+  const todayDow = rawDow <= 5 ? rawDow : null // 주말이면 null — 클라이언트가 기기 시계 대신 서버 기준으로 '오늘'을 판단
+  res.json({ weekStart: start, plans, swaps, todayDow })
 }))
 
 // 당번 교환 요청: 내 당번(from)을 다른 요일(to) 당번과 바꾸자고 제안
@@ -193,10 +195,16 @@ api.post('/trips/start', wrap(async (req, res) => {
     return res.status(403).json({ error: '오늘 운전 당번만 운행을 시작할 수 있어요' })
   }
   const kind = req.body?.kind === '하원' ? '하원' : '등원'
-  const [trip] = await q(
-    'INSERT INTO trips (group_id, driver_id, kind) VALUES ($1,$2,$3) RETURNING *',
-    [gid, req.user.id, kind],
-  )
+  let trip
+  try {
+    ;[trip] = await q(
+      'INSERT INTO trips (group_id, driver_id, kind) VALUES ($1,$2,$3) RETURNING *',
+      [gid, req.user.id, kind],
+    )
+  } catch (e) {
+    if (e.code === '23505') return res.status(409).json({ error: '이미 진행 중인 운행이 있어요' })
+    throw e
+  }
   broadcast(gid, { type: 'trip' })
   res.json(trip)
 }))

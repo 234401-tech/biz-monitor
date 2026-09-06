@@ -3,6 +3,7 @@
 이웃 학부모 품앗이 카풀을 조율하는 모바일 앱 기획 자료.
 
 - `research.md` — 해외/국내 상용 솔루션 리서치 (HopSkipDrive, Zum, GoKid, 스쿨버스, 옐로우버스 등), 모델 비교와 MVP 제안
+- `app/` — MVP 웹앱 (React + Vite + TypeScript). `npm install && npm run dev`로 실행, `npm run build`로 단일 HTML 번들 생성
 - `design/` — 모바일 UI 목업 소스 (5개 화면 플로우 아트보드)
   - `Onboarding.dc.html` — 온보딩 (가치 제안, 4단계 안전 인증 안내)
   - `Main.dc.html` — 홈 (오늘의 카풀 상태, 운전 당번 알림)

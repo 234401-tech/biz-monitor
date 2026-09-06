@@ -52,6 +52,10 @@ Write-Host "=== 4/5 www에 배포 ===" -ForegroundColor Cyan
 if (-not (Test-Path -LiteralPath $DistDir)) {
     StepFail "빌드 결과 폴더가 없습니다: $DistDir"
 }
+# dist가 비어있으면 robocopy /MIR이 www를 통째로 비워버리므로, 실제 산출물이 있는지 확인 후 진행
+if (-not (Test-Path -LiteralPath (Join-Path $DistDir 'index.html'))) {
+    StepFail "빌드 결과에 index.html이 없습니다: $DistDir (빈 dist로 www를 지우는 사고를 막기 위해 중단합니다)"
+}
 # /MIR은 대상에만 있는 파일을 삭제하므로, 대상 경로가 의도한 www 폴더인지 확인 후 실행
 if ($WwwDir -ne 'C:\gachitayo\www') {
     StepFail 'WwwDir이 예상 경로(C:\gachitayo\www)가 아닙니다. 중단합니다.'
@@ -68,6 +72,7 @@ $ok = $false
 for ($i = 0; $i -lt 10; $i++) {
     Start-Sleep -Seconds 1
     try {
+        # .env의 PORT를 3000에서 바꿨다면 이 줄도 함께 수정할 것
         $resp = Invoke-WebRequest -Uri 'http://127.0.0.1:3000/api/health' -UseBasicParsing -TimeoutSec 3
         if ($resp.StatusCode -eq 200) { $ok = $true; break }
     } catch {

@@ -34,7 +34,7 @@ $BackupDir  = 'C:\gachitayo\backups'
 $RetentionDays = 30
 
 function Fail($msg) {
-    Write-Error $msg
+    Write-Host $msg -ForegroundColor Red
     exit 1
 }
 

@@ -50,7 +50,7 @@ foreach ($svcName in $Services) {
     $exePath = Join-Path $SvcDir ($svcName + '.exe')
 
     if (-not (Test-Path -LiteralPath $xmlPath)) {
-        Write-Error "설정 파일이 없습니다: $xmlPath (deploy\windows 의 xml을 이 이름으로 복사하세요)"
+        Write-Host "설정 파일이 없습니다: $xmlPath (deploy\windows 의 xml을 이 이름으로 복사하세요)" -ForegroundColor Red
         continue
     }
 
@@ -76,14 +76,14 @@ foreach ($svcName in $Services) {
     Write-Host "설치 중..."
     & $exePath install
     if ($LASTEXITCODE -ne 0) {
-        Write-Error "$svcName install 실패 (exit $LASTEXITCODE)"
+        Write-Host "$svcName install 실패 (exit $LASTEXITCODE)" -ForegroundColor Red
         continue
     }
 
     Write-Host "시작 중..."
     & $exePath start
     if ($LASTEXITCODE -ne 0) {
-        Write-Error "$svcName start 실패 (exit $LASTEXITCODE). C:\gachitayo\svc\logs 의 로그를 확인하세요."
+        Write-Host "$svcName start 실패 (exit $LASTEXITCODE). C:\gachitayo\svc\logs 의 로그를 확인하세요." -ForegroundColor Red
         continue
     }
 

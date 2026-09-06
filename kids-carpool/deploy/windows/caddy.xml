@@ -10,7 +10,7 @@
   <description>같이타요 카풀 앱 앞단 Caddy(HTTPS, 정적 파일, 리버스 프록시)</description>
 
   <executable>C:\gachitayo\caddy\caddy.exe</executable>
-  <arguments>run --environ --config C:\gachitayo\caddy\Caddyfile</arguments>
+  <arguments>run --config C:\gachitayo\caddy\Caddyfile</arguments>
 
   <workingdirectory>C:\gachitayo\caddy</workingdirectory>
 

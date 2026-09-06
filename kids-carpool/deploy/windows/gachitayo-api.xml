@@ -16,8 +16,10 @@
   <executable>%ProgramFiles%\nodejs\node.exe</executable>
   <arguments>src\index.js</arguments>
 
-  <!-- server\.env 를 dotenv가 여기서 읽는다 (process.cwd() 기준) -->
-  <workingdirectory>C:\gachitayo\repo\server</workingdirectory>
+  <!-- server\.env 를 dotenv가 여기서 읽는다 (process.cwd() 기준).
+       레포(biz-monitor) 최상위를 C:\gachitayo\repo 에 클론했을 때의 경로 —
+       kids-carpool 서브폴더 안에 server가 있다는 점에 주의. -->
+  <workingdirectory>C:\gachitayo\repo\kids-carpool\server</workingdirectory>
 
   <logpath>C:\gachitayo\svc\logs</logpath>
   <logmode>roll-by-size</logmode>

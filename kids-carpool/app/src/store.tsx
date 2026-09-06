@@ -79,7 +79,7 @@ function todayDow(): number {
 }
 
 function memberToParent(m: Member, index: number): Parent {
-  const pal = PALETTE[index % PALETTE.length]
+  const pal = PALETTE[((index % PALETTE.length) + PALETTE.length) % PALETTE.length]
   return {
     id: String(m.id),
     name: m.name,
@@ -94,10 +94,11 @@ function memberToParent(m: Member, index: number): Parent {
   }
 }
 
+// weekStart("YYYY-MM-DD")는 UTC 자정 기준으로 파싱되므로, 로컬 시간대에 영향받지 않도록 UTC 계산만 쓴다
 function formatDate(weekStart: string, dow: number): string {
-  const d = new Date(weekStart)
-  d.setDate(d.getDate() + (dow - 1))
-  return `${d.getMonth() + 1}월 ${d.getDate()}일`
+  const [y, m, d] = weekStart.split('-').map(Number)
+  const date = new Date(Date.UTC(y, m - 1, d + (dow - 1)))
+  return `${date.getUTCMonth() + 1}월 ${date.getUTCDate()}일`
 }
 
 function toPlans(weekStart: string, plans: Plan[], swaps: Swap[], myId: string, today: number): DayPlan[] {

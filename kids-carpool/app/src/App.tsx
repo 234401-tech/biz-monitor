@@ -18,13 +18,30 @@ const tabs: { id: Tab; label: string; icon: typeof HomeIcon }[] = [
 ]
 
 function Shell() {
-  const { tab, setTab, onboarded, profileId, toastMsg } = useStore()
+  const { tab, setTab, onboarded, loggedIn, loading, profileId, toastMsg } = useStore()
 
   if (!onboarded) {
     return (
       <div className="phone">
         <Onboarding />
         {toastMsg && <div className="toast">{toastMsg}</div>}
+      </div>
+    )
+  }
+
+  if (!loggedIn) {
+    return (
+      <div className="phone">
+        <Login />
+        {toastMsg && <div className="toast">{toastMsg}</div>}
+      </div>
+    )
+  }
+
+  if (loading) {
+    return (
+      <div className="phone" style={{ alignItems: 'center', justifyContent: 'center' }}>
+        <div style={{ color: 'var(--muted)', fontSize: 14 }}>불러오는 중…</div>
       </div>
     )
   }

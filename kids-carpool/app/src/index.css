@@ -176,3 +176,17 @@ button {
 }
 
 .bus-marker { transition: transform 1.8s ease-in-out; }
+
+input, textarea {
+  font-family: inherit;
+  font-size: 15px;
+  color: var(--ink);
+  background: var(--surface);
+  border: 1.5px solid var(--line);
+  border-radius: 12px;
+  padding: 0 14px;
+  min-height: 48px;
+  outline: none;
+}
+input:focus, textarea:focus { border-color: var(--green); }
+input::placeholder, textarea::placeholder { color: var(--faint); }

@@ -7,6 +7,8 @@ import { register, login } from './auth.js'
 import { api } from './routes.js'
 import { attachWs } from './ws.js'
 
+process.on('unhandledRejection', (e) => console.error(e))
+
 const app = express()
 app.disable('x-powered-by')
 app.use(express.json({ limit: '64kb' }))

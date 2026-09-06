@@ -5,18 +5,30 @@ import { broadcast } from './ws.js'
 
 export const api = Router()
 
+function wrap(fn) {
+  return (req, res, next) => Promise.resolve(fn(req, res)).catch(next)
+}
+
+// :id 파라미터가 정수가 아니면 400으로 즉시 응답
+function requireIntParam(name) {
+  return (req, res, next) => {
+    if (!/^\d+$/.test(req.params[name])) return res.status(400).json({ error: '잘못된 요청이에요' })
+    next()
+  }
+}
+
 api.use(requireAuth)
 
 api.get('/me', (req, res) => res.json(req.user))
 
-api.get('/group', async (req, res) => {
+api.get('/group', wrap(async (req, res) => {
   const [group] = await q('SELECT id, name, school, invite_code FROM groups WHERE id = $1', [req.user.group_id])
   const members = await q(
     'SELECT id, name, label, children, vehicle, apt, verified FROM users WHERE group_id = $1 ORDER BY id',
     [req.user.group_id],
   )
   res.json({ group, members })
-})
+}))
 
 // 이번 주 월요일 (서버 로컬 시간 기준)
 export function weekStart(d = new Date()) {
@@ -27,7 +39,7 @@ export function weekStart(d = new Date()) {
 }
 
 // 이번 주 당번표. 없으면 그룹 멤버 순환(라운드로빈)으로 자동 생성 → 공평 배분
-api.get('/week', async (req, res) => {
+api.get('/week', wrap(async (req, res) => {
   const gid = req.user.group_id
   const start = /^\d{4}-\d{2}-\d{2}$/.test(req.query.start ?? '') ? req.query.start : weekStart()
 
@@ -56,10 +68,10 @@ api.get('/week', async (req, res) => {
     [gid, start],
   )
   res.json({ weekStart: start, plans, swaps })
-})
+}))
 
 // 당번 교환 요청: 내 당번(from)을 다른 요일(to) 당번과 바꾸자고 제안
-api.post('/week/swap', async (req, res) => {
+api.post('/week/swap', wrap(async (req, res) => {
   const { fromDow, toDow, reason = '' } = req.body ?? {}
   const gid = req.user.group_id
   const start = weekStart()
@@ -75,10 +87,10 @@ api.post('/week/swap', async (req, res) => {
   )
   broadcast(gid, { type: 'week' })
   res.json(swap)
-})
+}))
 
 // 교환 수락: to_dow의 운전자만 가능. 두 요일의 운전자를 맞바꾼다.
-api.post('/swap/:id/accept', async (req, res) => {
+api.post('/swap/:id/accept', requireIntParam('id'), wrap(async (req, res) => {
   const gid = req.user.group_id
   const [swap] = await q(
     "SELECT * FROM swap_requests WHERE id = $1 AND group_id = $2 AND status = 'pending'",
@@ -112,11 +124,11 @@ api.post('/swap/:id/accept', async (req, res) => {
   }
   broadcast(gid, { type: 'week' })
   res.json({ ok: true })
-})
+}))
 
 // ---- 운행 세션: 위치 공유는 active 상태인 동안만 중계된다 ----
 
-api.get('/trips/active', async (req, res) => {
+api.get('/trips/active', wrap(async (req, res) => {
   const [trip] = await q(
     "SELECT * FROM trips WHERE group_id = $1 AND status = 'active' ORDER BY id DESC LIMIT 1",
     [req.user.group_id],
@@ -124,9 +136,9 @@ api.get('/trips/active', async (req, res) => {
   if (!trip) return res.json({ trip: null, events: [] })
   const events = await q('SELECT * FROM trip_events WHERE trip_id = $1 ORDER BY id', [trip.id])
   res.json({ trip, events })
-})
+}))
 
-api.post('/trips/start', async (req, res) => {
+api.post('/trips/start', wrap(async (req, res) => {
   const gid = req.user.group_id
   const [active] = await q("SELECT id FROM trips WHERE group_id = $1 AND status = 'active'", [gid])
   if (active) return res.status(409).json({ error: '이미 진행 중인 운행이 있어요' })
@@ -145,9 +157,9 @@ api.post('/trips/start', async (req, res) => {
   )
   broadcast(gid, { type: 'trip' })
   res.json(trip)
-})
+}))
 
-api.post('/trips/:id/event', async (req, res) => {
+api.post('/trips/:id/event', requireIntParam('id'), wrap(async (req, res) => {
   const [trip] = await q("SELECT * FROM trips WHERE id = $1 AND status = 'active'", [req.params.id])
   if (!trip || trip.driver_id !== req.user.id) return res.status(403).json({ error: '운행 중인 운전자만 기록할 수 있어요' })
   const label = String(req.body?.label ?? '').slice(0, 80)
@@ -155,12 +167,12 @@ api.post('/trips/:id/event', async (req, res) => {
   const [ev] = await q('INSERT INTO trip_events (trip_id, label) VALUES ($1,$2) RETURNING *', [trip.id, label])
   broadcast(trip.group_id, { type: 'trip' })
   res.json(ev)
-})
+}))
 
-api.post('/trips/:id/end', async (req, res) => {
+api.post('/trips/:id/end', requireIntParam('id'), wrap(async (req, res) => {
   const [trip] = await q("SELECT * FROM trips WHERE id = $1 AND status = 'active'", [req.params.id])
   if (!trip || trip.driver_id !== req.user.id) return res.status(403).json({ error: '운행 중인 운전자만 종료할 수 있어요' })
   await q("UPDATE trips SET status = 'ended', ended_at = now() WHERE id = $1", [trip.id])
   broadcast(trip.group_id, { type: 'trip' })
   res.json({ ok: true })
-})
+}))

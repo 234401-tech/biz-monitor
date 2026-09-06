@@ -1,0 +1,28 @@
+<!--
+  같이타요 — Caddy 리버스 프록시 WinSW(v2.x) 서비스 설정
+  이 파일은 C:\gachitayo\svc\gachitayo-caddy.xml 로 배치되고,
+  같은 폴더의 gachitayo-caddy.exe(=WinSW 실행파일 복사본)와 짝을 이룬다.
+  실제 caddy.exe 바이너리는 C:\gachitayo\caddy\ 에 별도로 둔다(서비스 래퍼와는 다른 파일).
+-->
+<service>
+  <id>gachitayo-caddy</id>
+  <name>Gachitayo Caddy</name>
+  <description>같이타요 카풀 앱 앞단 Caddy(HTTPS, 정적 파일, 리버스 프록시)</description>
+
+  <executable>C:\gachitayo\caddy\caddy.exe</executable>
+  <arguments>run --environ --config C:\gachitayo\caddy\Caddyfile</arguments>
+
+  <workingdirectory>C:\gachitayo\caddy</workingdirectory>
+
+  <logpath>C:\gachitayo\svc\logs</logpath>
+  <logmode>roll-by-size</logmode>
+  <sizeThreshold>10240</sizeThreshold>
+  <keepFiles>8</keepFiles>
+
+  <onfailure action="restart" delay="10 sec"/>
+  <onfailure action="restart" delay="30 sec"/>
+  <resetfailure>1 hour</resetfailure>
+
+  <startmode>Automatic</startmode>
+  <stoptimeout>15 sec</stoptimeout>
+</service>

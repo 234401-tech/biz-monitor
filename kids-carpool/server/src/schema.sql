@@ -35,8 +35,8 @@ CREATE TABLE IF NOT EXISTS swap_requests (
   id           serial PRIMARY KEY,
   group_id     int NOT NULL REFERENCES groups(id),
   week_start   date NOT NULL,
-  from_dow     int NOT NULL,
-  to_dow       int NOT NULL,
+  from_dow     int NOT NULL CHECK (from_dow BETWEEN 1 AND 5),
+  to_dow       int NOT NULL CHECK (to_dow BETWEEN 1 AND 5),
   requester_id int NOT NULL REFERENCES users(id),
   reason       text NOT NULL DEFAULT '',
   status       text NOT NULL DEFAULT 'pending', -- pending | accepted | cancelled
